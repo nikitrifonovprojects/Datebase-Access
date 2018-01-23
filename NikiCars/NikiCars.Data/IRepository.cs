@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace NikiCars.Data
 {
-    interface IRepository<T> : IDisposable
+    public interface IRepository<T> : IDisposable
     {
         T GetByID(int id);
 

@@ -1,37 +1,57 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NikiCars.Data;
+﻿using System.Collections.Generic;
 using NikiCars.Data.Models;
+using NikiCars.Data;
 
 namespace NikiCars.Services
 {
     public abstract class BaseService<T> : IService<T> where T : IIdentifiable
     {
+        protected IRepository<T> repository;
+
+        public BaseService(IRepository<T> repo)
+        {
+            this.repository = repo;
+        }
+
         public void Delete(T item)
         {
-            throw new NotImplementedException();
+            this.repository.Delete(item);
         }
 
         public List<T> GetAll(int pageNum, int pageSize)
         {
-            throw new NotImplementedException();
+            return this.repository.GetAll(pageNum, pageSize);
         }
 
         public T GetById(int id)
         {
-            throw new NotImplementedException();
+            return this.repository.GetByID(id);
         }
 
         public T Save(T item)
         {
-            if (item.ID != 0)
+            if (item.ID == 0)
             {
-
+                return Create(item);
             }
-            throw new NotImplementedException();
+
+            return Update(item);
+        }
+
+        protected T Update(T item)
+        {
+            this.repository.Update(item);
+            return item;
+        }
+
+        protected T Create(T item)
+        {
+            return this.repository.Create(item);
+        }
+        
+        public void Dispose()
+        {
+            this.repository.Dispose();
         }
     }
 }

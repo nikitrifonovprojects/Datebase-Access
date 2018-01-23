@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using NikiCars.Data;
 using NikiCars.Data.Models;
+using NikiCars.Services;
 
 namespace NikiCars.Console
 {
@@ -13,6 +14,24 @@ namespace NikiCars.Console
     {
         static void Main()
         {
+
+
+            //DependencyContainer.RegisterDependencies();
+            //var repo = DependencyContainer.Resolve<IRepository<CarCoupe>>();
+            //var service = DependencyContainer.Resolve<IService<CarCoupe>>();
+
+            //var car = new CarMake();
+            //car.Name = "Acura";
+            //car.Country = "USA";
+
+            //using (var service = DependencyContainer.Resolve<IService<CarMake>>())
+            //{
+            //    var make = service.GetById(11);
+            //    var show = service.GetAll(0, 5);
+            //    var update = service.Save(car);
+
+            //}
+
             //var carCoupe = new CarCoupe();
             //carCoupe.Name = "seven";
 
