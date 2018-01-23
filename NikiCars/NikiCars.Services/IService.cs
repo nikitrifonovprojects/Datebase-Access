@@ -13,5 +13,7 @@ namespace NikiCars.Services
         List<T> GetAll(int pageNum, int pageSize);
 
         T GetById(int id);
+
+        int Count();
     }
 }

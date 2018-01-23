@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using NikiCars.Data.Models;
 using NikiCars.Data;
+using System.Linq;
 
 namespace NikiCars.Services
 {
-    public abstract class BaseService<T> : IService<T> where T : IIdentifiable
+    public class BaseService<T> : IService<T> where T : IIdentifiable
     {
-        protected IRepository<T> repository;
+        private IRepository<T> repository;
 
         public BaseService(IRepository<T> repo)
         {
@@ -38,17 +39,22 @@ namespace NikiCars.Services
             return Update(item);
         }
 
-        protected T Update(T item)
+        private T Update(T item)
         {
             this.repository.Update(item);
             return item;
         }
 
-        protected T Create(T item)
+        private T Create(T item)
         {
             return this.repository.Create(item);
         }
-        
+
+        public int Count()
+        {
+            return this.repository.Count();
+        }
+
         public void Dispose()
         {
             this.repository.Dispose();

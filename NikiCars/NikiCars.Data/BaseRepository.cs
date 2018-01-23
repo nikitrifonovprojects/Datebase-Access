@@ -180,6 +180,17 @@ namespace NikiCars.Data
             command.ExecuteNonQuery();
         }
 
+        public int Count()
+        {
+            SqlCommand command = new SqlCommand("SELECT COUNT(*) AS [Count] FROM " + GetTableName())
+            {
+                CommandType = CommandType.Text,
+                Connection = connection
+            };
+
+            return Convert.ToInt32(command.ExecuteScalar());
+        }
+
         public void Dispose()
         {
             this.connection.Dispose();

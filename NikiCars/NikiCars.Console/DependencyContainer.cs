@@ -12,14 +12,8 @@ namespace NikiCars.Console
         public static void RegisterDependencies()
         {
             container = new UnityContainer();
-            container.RegisterType<IRepository<CarCoupe>, CarCoupeRepository>();
-            container.RegisterType<IService<CarCoupe>, CarCoupeService>();
 
-            container.RegisterType<IRepository<CarMake>, CarMakeRepository>();
-            container.RegisterType<IService<CarMake>, CarMakeService>();
-
-            container.RegisterType<IRepository<CarModel>, CarModelRepository>();
-            container.RegisterType<IService<CarModel>, CarModelService>();
+            container.RegisterType(typeof(IService<>), typeof(BaseService<>));
         }
 
         public static T Resolve<T>()

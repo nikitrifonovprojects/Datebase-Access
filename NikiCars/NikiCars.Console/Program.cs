@@ -16,21 +16,22 @@ namespace NikiCars.Console
         {
 
 
-            //DependencyContainer.RegisterDependencies();
+            DependencyContainer.RegisterDependencies();
             //var repo = DependencyContainer.Resolve<IRepository<CarCoupe>>();
             //var service = DependencyContainer.Resolve<IService<CarCoupe>>();
 
-            //var car = new CarMake();
-            //car.Name = "Acura";
-            //car.Country = "USA";
+            var car = new CarMake();
+            car.Name = "Acura";
+            car.Country = "USA";
 
-            //using (var service = DependencyContainer.Resolve<IService<CarMake>>())
-            //{
-            //    var make = service.GetById(11);
-            //    var show = service.GetAll(0, 5);
-            //    var update = service.Save(car);
-
-            //}
+            using (var service = DependencyContainer.Resolve<IService<CarMake>>())
+            {
+                //car = service.Save(car);
+                //var make = service.GetById(12);
+                //var show = service.GetAll(0, 5);
+                var ass = service.Count();
+                System.Console.WriteLine(ass);
+            }
 
             //var carCoupe = new CarCoupe();
             //carCoupe.Name = "seven";
