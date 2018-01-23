@@ -1,8 +1,8 @@
 ﻿namespace NikiCars.Data.Models
 {
-    public class GearBoxType
+    public class GearBoxType : IIdentifiable
     {
-        public int GearboxTypeID { get; set; }
+        public int ID { get; set; }
 
         public string Type { get; set; }
     }

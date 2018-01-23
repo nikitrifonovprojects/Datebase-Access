@@ -1,8 +1,8 @@
 ﻿namespace NikiCars.Data.Models
 {
-    public class Extra
+    public class Extra : IIdentifiable
     {
-        public int CarExtraID { get; set; }
+        public int ID { get; set; }
 
         public string Name { get; set; }
     }

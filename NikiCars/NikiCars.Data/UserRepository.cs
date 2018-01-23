@@ -14,7 +14,7 @@ namespace NikiCars.Data
             return new Dictionary<string, SqlParameter>
             {
                 {"Address", new SqlParameter() { Value = item.Address } },
-                {"UserID", new SqlParameter() { Value = item.UserID.ToString() } },
+                {"UserID", new SqlParameter() { Value = item.ID.ToString() } },
                 {"Name", new SqlParameter() { Value = item.Name } },
                 {"Email", new SqlParameter() { Value = item.Email } },
                 {"LoginName", new SqlParameter() { Value = item.LoginName } },
@@ -32,7 +32,7 @@ namespace NikiCars.Data
 
         protected override string GetPrimaryKeyValue(User item)
         {
-            return item.UserID.ToString();
+            return item.ID.ToString();
         }
 
         protected override string GetPrimaryKeyName()
@@ -47,13 +47,13 @@ namespace NikiCars.Data
 
         protected override void MapPrimaryKey(User item, SqlDataReader reader)
         {
-            item.UserID = Convert.ToInt32(reader[PRIMARY_KEY]);
+            item.ID = Convert.ToInt32(reader[PRIMARY_KEY]);
         }
 
         protected override User MapProperties(SqlDataReader reader)
         {
             User user = new User();
-            user.UserID = Convert.ToInt32(reader["UserID"]);
+            user.ID = Convert.ToInt32(reader["UserID"]);
             user.Address = Convert.ToString(reader["Address"]);
             user.Name = Convert.ToString(reader["Name"]);
             user.Email = Convert.ToString(reader["Email"]);

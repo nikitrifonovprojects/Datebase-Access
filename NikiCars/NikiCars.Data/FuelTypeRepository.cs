@@ -22,7 +22,7 @@ namespace NikiCars.Data
 
         protected override string GetPrimaryKeyValue(FuelType item)
         {
-            return item.FuelTypeID.ToString();
+            return item.ID.ToString();
         }
 
         protected override string GetPrimaryKeyName()
@@ -37,13 +37,13 @@ namespace NikiCars.Data
 
         protected override void MapPrimaryKey(FuelType item, SqlDataReader reader)
         {
-            item.FuelTypeID = Convert.ToInt32(reader[PRIMARY_KEY]);
+            item.ID = Convert.ToInt32(reader[PRIMARY_KEY]);
         }
 
         protected override FuelType MapProperties(SqlDataReader reader)
         {
             FuelType fuelType = new FuelType();
-            fuelType.FuelTypeID = Convert.ToInt32(reader[PRIMARY_KEY]);
+            fuelType.ID = Convert.ToInt32(reader[PRIMARY_KEY]);
             fuelType.Name = Convert.ToString(reader["Name"]);
 
             return fuelType;

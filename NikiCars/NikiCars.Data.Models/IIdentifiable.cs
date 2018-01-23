@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NikiCars.Services
+namespace NikiCars.Data.Models
 {
-    public class CarCoupeService
+    public interface IIdentifiable
     {
+        int ID { get; set; }
     }
 }

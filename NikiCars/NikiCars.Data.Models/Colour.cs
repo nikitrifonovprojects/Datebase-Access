@@ -1,8 +1,8 @@
 ﻿namespace NikiCars.Data.Models
 {
-    public class Colour
+    public class Colour : IIdentifiable
     {
-        public int ColourID { get; set; }
+        public int ID { get; set; }
 
         public string Name { get; set; }
     }

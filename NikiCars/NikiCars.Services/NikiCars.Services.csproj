@@ -31,6 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -40,13 +41,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CarCoupeService.cs" />
+    <Compile Include="BaseService.cs" />
+    <Compile Include="IService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NikiCars.Data.Models\NikiCars.Data.Models.csproj">
       <Project>{d28f0078-f301-4062-b405-45cd6d39fb2b}</Project>
       <Name>NikiCars.Data.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NikiCars.Data\NikiCars.Data.csproj">
+      <Project>{76488678-5c35-4b36-a81b-baf0a532b26f}</Project>
+      <Name>NikiCars.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

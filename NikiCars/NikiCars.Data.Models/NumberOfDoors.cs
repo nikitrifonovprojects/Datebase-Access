@@ -1,8 +1,8 @@
 ﻿namespace NikiCars.Data.Models
 {
-    public class NumberOfDoors
+    public class NumberOfDoors : IIdentifiable
     {
-        public int NumberOfDoorsID { get; set; }
+        public int ID { get; set; }
 
         public string DoorCount { get; set; }
     }

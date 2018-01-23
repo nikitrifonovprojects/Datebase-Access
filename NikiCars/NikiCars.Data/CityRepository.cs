@@ -20,7 +20,7 @@ namespace NikiCars.Data
 
         protected override string GetPrimaryKeyValue(City item)
         {
-            return item.CityID.ToString();
+            return item.ID.ToString();
         }
 
         protected override string GetPrimaryKeyName()
@@ -35,13 +35,13 @@ namespace NikiCars.Data
 
         protected override void MapPrimaryKey(City item, SqlDataReader reader)
         {
-            item.CityID = Convert.ToInt32(reader[PRIMARY_KEY]);
+            item.ID = Convert.ToInt32(reader[PRIMARY_KEY]);
         }
 
         protected override City MapProperties(SqlDataReader reader)
         {
             City city = new City();
-            city.CityID = Convert.ToInt32(reader[PRIMARY_KEY]);
+            city.ID = Convert.ToInt32(reader[PRIMARY_KEY]);
             city.Name = Convert.ToString(reader["Name"]);
             city.CountyID = Convert.ToInt32(reader["CountryID"]);
 

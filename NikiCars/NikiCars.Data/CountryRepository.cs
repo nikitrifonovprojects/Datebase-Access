@@ -19,7 +19,7 @@ namespace NikiCars.Data
 
         protected override string GetPrimaryKeyValue(Country item)
         {
-            return item.CountyID.ToString();
+            return item.ID.ToString();
         }
 
         protected override string GetPrimaryKeyName()
@@ -34,13 +34,13 @@ namespace NikiCars.Data
 
         protected override void MapPrimaryKey(Country item, SqlDataReader reader)
         {
-            item.CountyID = Convert.ToInt32(reader[PRIMARY_KEY]);
+            item.ID = Convert.ToInt32(reader[PRIMARY_KEY]);
         }
 
         protected override Country MapProperties(SqlDataReader reader)
         {
             Country country = new Country();
-            country.CountyID = Convert.ToInt32(reader[PRIMARY_KEY]);
+            country.ID = Convert.ToInt32(reader[PRIMARY_KEY]);
             country.Name = Convert.ToString(reader["Name"]);
 
             return country;

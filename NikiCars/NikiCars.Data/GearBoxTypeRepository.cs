@@ -22,7 +22,7 @@ namespace NikiCars.Data
 
         protected override string GetPrimaryKeyValue(GearBoxType item)
         {
-            return item.GearboxTypeID.ToString();
+            return item.ID.ToString();
         }
 
         protected override string GetPrimaryKeyName()
@@ -37,13 +37,13 @@ namespace NikiCars.Data
 
         protected override void MapPrimaryKey(GearBoxType item, SqlDataReader reader)
         {
-            item.GearboxTypeID = Convert.ToInt32(reader[PRIMARY_KEY]);
+            item.ID = Convert.ToInt32(reader[PRIMARY_KEY]);
         }
 
         protected override GearBoxType MapProperties(SqlDataReader reader)
         {
             GearBoxType gearBoxType = new GearBoxType();
-            gearBoxType.GearboxTypeID = Convert.ToInt32(reader[PRIMARY_KEY]);
+            gearBoxType.ID = Convert.ToInt32(reader[PRIMARY_KEY]);
             gearBoxType.Type = Convert.ToString(reader["Type"]);
 
             return gearBoxType;

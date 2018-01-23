@@ -52,6 +52,7 @@
     <Compile Include="Extra.cs" />
     <Compile Include="FuelType.cs" />
     <Compile Include="GearBoxType.cs" />
+    <Compile Include="IIdentifiable.cs" />
     <Compile Include="NumberOfDoors.cs" />
     <Compile Include="Picture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

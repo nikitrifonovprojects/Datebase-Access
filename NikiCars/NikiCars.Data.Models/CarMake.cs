@@ -2,10 +2,9 @@
 
 namespace NikiCars.Data.Models
 {
-    public class CarMake
+    public class CarMake :IIdentifiable
     {
-        [Required]
-        public int CarMakeID { get; set; }
+        public int ID { get; set; }
 
         public string Name { get; set; }
 

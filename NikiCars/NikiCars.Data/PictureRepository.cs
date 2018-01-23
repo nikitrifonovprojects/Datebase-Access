@@ -22,7 +22,7 @@ namespace NikiCars.Data
 
         protected override string GetPrimaryKeyValue(Picture item)
         {
-            return item.PictureID.ToString();
+            return item.ID.ToString();
         }
 
         protected override string GetPrimaryKeyName()
@@ -37,13 +37,13 @@ namespace NikiCars.Data
 
         protected override void MapPrimaryKey(Picture item, SqlDataReader reader)
         {
-            item.PictureID = Convert.ToInt32(reader[PRIMARY_KEY]);
+            item.ID = Convert.ToInt32(reader[PRIMARY_KEY]);
         }
 
         protected override Picture MapProperties(SqlDataReader reader)
         {
             Picture picture = new Picture();
-            picture.PictureID = Convert.ToInt32(reader[PRIMARY_KEY]);
+            picture.ID = Convert.ToInt32(reader[PRIMARY_KEY]);
             picture.PictureFile = Encoding.ASCII.GetBytes(reader["PictureFile"].ToString());     
             picture.CarID = Convert.ToInt32(reader["CarID"]);
 

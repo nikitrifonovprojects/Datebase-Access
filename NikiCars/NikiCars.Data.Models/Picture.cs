@@ -1,8 +1,8 @@
 ﻿namespace NikiCars.Data.Models
 {
-    public class Picture
+    public class Picture : IIdentifiable
     {
-        public int PictureID { get; set; }
+        public int ID { get; set; }
 
         public byte[] PictureFile { get; set; }
 

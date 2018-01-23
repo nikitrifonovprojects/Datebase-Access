@@ -1,8 +1,8 @@
 ﻿namespace NikiCars.Data.Models
 {
-    public class FuelType
+    public class FuelType : IIdentifiable
     {
-        public int FuelTypeID { get; set; }
+        public int ID { get; set; }
 
         public string  Name { get; set; }
     }

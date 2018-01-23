@@ -19,7 +19,7 @@ namespace NikiCars.Data
 
         protected override string GetPrimaryKeyValue(Extra item)
         {
-            return item.CarExtraID.ToString();
+            return item.ID.ToString();
         }
 
         protected override string GetPrimaryKeyName()
@@ -34,13 +34,13 @@ namespace NikiCars.Data
 
         protected override void MapPrimaryKey(Extra item, SqlDataReader reader)
         {
-            item.CarExtraID = Convert.ToInt32(reader[PRIMARY_KEY]);
+            item.ID = Convert.ToInt32(reader[PRIMARY_KEY]);
         }
 
         protected override Extra MapProperties(SqlDataReader reader)
         {
             Extra extra = new Extra();
-            extra.CarExtraID = Convert.ToInt32(reader[PRIMARY_KEY]);
+            extra.ID = Convert.ToInt32(reader[PRIMARY_KEY]);
             extra.Name = Convert.ToString(reader["Name"]);
 
             return extra;
