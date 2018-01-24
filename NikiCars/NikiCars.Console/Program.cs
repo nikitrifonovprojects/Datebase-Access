@@ -17,8 +17,6 @@ namespace NikiCars.Console
 
 
             DependencyContainer.RegisterDependencies();
-            //var repo = DependencyContainer.Resolve<IRepository<CarCoupe>>();
-            //var service = DependencyContainer.Resolve<IService<CarCoupe>>();
 
             var car = new CarMake();
             car.Name = "Acura";
