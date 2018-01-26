@@ -4,6 +4,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NikiCars.Console.Commands;
+using NikiCars.Console.Input;
 using NikiCars.Data;
 using NikiCars.Data.Models;
 using NikiCars.Services;
@@ -14,22 +16,29 @@ namespace NikiCars.Console
     {
         static void Main()
         {
-
-
             DependencyContainer.RegisterDependencies();
+            string input = "{add} {CarMake} {Name = Buggy, Country = Canada}";
+            string input1 = "{add} {CarCoupe} {Name = Boat}";
 
-            var car = new CarMake();
-            car.Name = "Acura";
-            car.Country = "USA";
+            var doStuff = new Invoker();
+            doStuff.AddCommand(input);
+            doStuff.AddCommand(input1);
 
-            using (var service = DependencyContainer.Resolve<IService<CarMake>>())
-            {
-                //car = service.Save(car);
-                //var make = service.GetById(12);
-                //var show = service.GetAll(0, 5);
-                var ass = service.Count();
-                System.Console.WriteLine(ass);
-            }
+            doStuff.ExecuteAllCommands();
+
+
+            //var car = new CarMake();
+            //car.Name = "Acura";
+            //car.Country = "USA";
+
+            //using (var service = DependencyContainer.Resolve<IService<CarMake>>())
+            //{
+            //    car = service.Save(car);
+            //    var make = service.GetById(12);
+            //    var show = service.GetAll(0, 5);
+            //    var ass = service.Count();
+            //    System.Console.WriteLine(ass);
+            //}
 
             //var carCoupe = new CarCoupe();
             //carCoupe.Name = "seven";

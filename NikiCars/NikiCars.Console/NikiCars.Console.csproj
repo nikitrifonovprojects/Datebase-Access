@@ -68,7 +68,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\BaseCommand.cs" />
+    <Compile Include="Commands\BindModelCarCoupe.cs" />
+    <Compile Include="Commands\BindModelCarMake.cs" />
+    <Compile Include="Commands\CarCommands.cs" />
+    <Compile Include="Commands\CreateCarCoupe.cs" />
+    <Compile Include="Commands\CreateCarMake.cs" />
+    <Compile Include="Commands\Invoker.cs" />
     <Compile Include="DependencyContainer.cs" />
+    <Compile Include="Input\CommandContext.cs" />
+    <Compile Include="Input\Parser.cs" />
+    <Compile Include="Interfaces\IBindModel.cs" />
+    <Compile Include="Interfaces\ICommand.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -90,5 +101,6 @@
       <Name>NikiCars.Services</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
