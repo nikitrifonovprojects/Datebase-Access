@@ -1,6 +1,10 @@
 ﻿using System.Linq;
 using System.Reflection;
+using NikiCars.Console.Commands;
+using NikiCars.Console.Input;
+using NikiCars.Console.Interfaces;
 using NikiCars.Data;
+using NikiCars.Data.Models;
 using NikiCars.Services;
 using Unity;
 
@@ -24,6 +28,11 @@ namespace NikiCars.Console
                 
                 container.RegisterType(inheritedFrom, type);
             }
+
+            container.RegisterType<IParser, Parser>();
+            container.RegisterType<Invoker, Invoker>();
+            container.RegisterType<IModelBinder<CarCoupe>, CarCoupeModelBinder>();
+            container.RegisterType<IModelBinder<CarMake>, CarMakeModelBinder>();
         }
 
         public static T Resolve<T>()

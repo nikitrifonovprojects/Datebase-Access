@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using NikiCars.Console.Interfaces;
 
 namespace NikiCars.Console.Input
 {
-    public class Parser
+    public class Parser : IParser
     {
         private char[] pattern = new char[] { '}', '{', ' ', '=', ',' };
 
@@ -26,14 +28,29 @@ namespace NikiCars.Console.Input
             return context;
         }
 
-        public CommandContext ParseCommand(string input)
-        {
-            CommandContext context = new CommandContext();
-            context.Properties = new Dictionary<string, string>();
-            context.RawInput = input;
+        //public CommandContext ParseCommand(string input)
+        //{
+        //    CommandContext context = new CommandContext();
+        //    context.Properties = new Dictionary<string, string>();
+        //    context.RawInput = input;
+        //    StringBuilder stringBuilder = new StringBuilder();
 
-
-            return context;
-        }
+        //    int count = 0;
+        //    while (count < input.Length)
+        //    {
+        //        if (input[count] == '{')
+        //        {
+        //            count++;
+        //            while (input[count] != '}')
+        //            {
+        //                stringBuilder.Append(input[count]);
+        //                count++;
+        //            }
+        //        }
+        //        count++;
+        //    }
+        //    var b = stringBuilder.ToString();
+        //    return context;
+        //}
     }
 }

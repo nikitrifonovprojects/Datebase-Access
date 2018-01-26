@@ -1,4 +1,5 @@
 ﻿using NikiCars.Console.Input;
+using NikiCars.Console.Interfaces;
 using NikiCars.Data.Models;
 using NikiCars.Services;
 
@@ -6,22 +7,20 @@ namespace NikiCars.Console.Commands
 {
     public class CreateCarMake : BaseCommand<CarMake>
     {
-
-        public CreateCarMake(CommandContext context, IService<CarMake> service) 
-            : base(context, service)
+        public CreateCarMake(CommandContext context, IService<CarMake> service, IModelBinder<CarMake> binder) 
+            : base(context, service, binder)
         {
-            
         }
 
-        protected override CarMake BindModel()
+        protected override ICommandResult ExecuteAction(CarMake item)
         {
-            return new BindModelCarMake().ModelBinder(this.context.Properties);
-        }
+            CarMake result = this.service.Save(item);
+            if (result == null)
+            {
+                return this.Error($"CarMake: {item} creation failed", item);
+            }
 
-        public override void Execute()
-        {
-            CarMake carMake = BindModel();
-            this.service.Save(carMake);
+            return this.Success($"CarMake: {result} creation success", result);
         }
     }
 }

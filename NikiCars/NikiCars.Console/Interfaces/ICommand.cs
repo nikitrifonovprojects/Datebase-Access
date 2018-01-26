@@ -8,6 +8,6 @@ namespace NikiCars.Console.Interfaces
 {
     public interface ICommand : IDisposable
     {
-        void Execute();
+        string Execute();
     }
 }

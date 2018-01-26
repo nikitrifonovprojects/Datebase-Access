@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using NikiCars.Console.Commands;
 using NikiCars.Console.Input;
+using NikiCars.Console.Interfaces;
 using NikiCars.Data;
 using NikiCars.Data.Models;
 using NikiCars.Services;
@@ -17,15 +18,16 @@ namespace NikiCars.Console
         static void Main()
         {
             DependencyContainer.RegisterDependencies();
-            string input = "{add} {CarMake} {Name = Buggy, Country = Canada}";
-            string input1 = "{add} {CarCoupe} {Name = Boat}";
+            //string input = "{add} {CarMake} {Name = Buggy, Country = Canada}";
+            //string input1 = "{add} {CarCoupe} {Name = Boat}";
+            string input2 = "{get} {CarCoupe} {ID = 0}";
 
-            var doStuff = new Invoker();
-            doStuff.AddCommand(input);
-            doStuff.AddCommand(input1);
+            var invoker = DependencyContainer.Resolve<Invoker>();
+            string result = invoker.ExecuteCommand(input2);
+            System.Console.WriteLine(result);
 
-            doStuff.ExecuteAllCommands();
-
+            //var par = new Parser();
+            //par.ParseCommand(input);
 
             //var car = new CarMake();
             //car.Name = "Acura";
