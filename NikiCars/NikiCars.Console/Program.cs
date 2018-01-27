@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 using NikiCars.Console.Commands;
 using NikiCars.Console.Input;
 using NikiCars.Console.Interfaces;
+using NikiCars.Console.Validation;
 using NikiCars.Data;
 using NikiCars.Data.Models;
 using NikiCars.Services;
@@ -18,12 +20,19 @@ namespace NikiCars.Console
         static void Main()
         {
             DependencyContainer.RegisterDependencies();
-            //Command string will be in format: command,type,propertiy=value,property=value ....., escape char witll be ^
+            //Command string will be in format: command,type,propertiy=value,property=value ....., escape char will be ^
 
-            string command = "get,CarCoupe,ID=8,Name=a^,ss^=";
+            string command = "get,CarCoupe,ID=^,8";
             var parser = new Parser();
             parser.ParseCommand(command);
 
+            //var car = new Car();
+            //var user = new User();
+
+            //var isValid = ValidationHelper.ValidateEntity(user);
+            //var isValids = ValidationHelper.ValidateEntity(car);
+
+           
             //string input = "add,CarMake,Name=Lada,Country=Russia";
             //string input1 = "add,CarCoupe,Name=Crane";
             //string input2 = "get,CarCoupe,ID=8";
