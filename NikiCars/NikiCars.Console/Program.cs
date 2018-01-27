@@ -18,13 +18,19 @@ namespace NikiCars.Console
         static void Main()
         {
             DependencyContainer.RegisterDependencies();
-            string input = "{add} {CarMake} {Name = Lada, Country = Russia}";
-            string input1 = "{add} {CarCoupe} {Name = Crane}";
-            string input2 = "{get} {CarCoupe} {ID = 8}";
+            //Command string will be in format: command,type,propertiy=value,property=value ....., escape char witll be ^
 
-            var invoker = DependencyContainer.Resolve<Invoker>();
-            string result = invoker.ExecuteCommand(input2);
-            System.Console.WriteLine(result);
+            string command = "get,CarCoupe,ID=8,Name=a^,ss^=";
+            var parser = new Parser();
+            parser.ParseCommand(command);
+
+            //string input = "add,CarMake,Name=Lada,Country=Russia";
+            //string input1 = "add,CarCoupe,Name=Crane";
+            //string input2 = "get,CarCoupe,ID=8";
+
+            //var invoker = DependencyContainer.Resolve<Invoker>();
+            //string result = invoker.ExecuteCommand(input2);
+            //System.Console.WriteLine(result);
 
             //var par = new Parser();
             //par.ParseCommand(input);

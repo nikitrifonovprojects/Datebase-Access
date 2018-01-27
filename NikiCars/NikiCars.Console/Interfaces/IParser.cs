@@ -9,6 +9,6 @@ namespace NikiCars.Console.Interfaces
 {
     public interface IParser
     {
-        CommandContext Parse(string input);
+        CommandContext ParseCommand(string input);
     }
 }

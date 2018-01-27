@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Text;
 using NikiCars.Console.Interfaces;
 
@@ -8,49 +6,82 @@ namespace NikiCars.Console.Input
 {
     public class Parser : IParser
     {
-        private char[] pattern = new char[] { '}', '{', ' ', '=', ',' };
-
-        public CommandContext Parse(string input)
+        public CommandContext ParseCommand(string input)
         {
             CommandContext context = new CommandContext();
             context.Properties = new Dictionary<string, string>();
             context.RawInput = input;
-            var str = input.Split(this.pattern, StringSplitOptions.RemoveEmptyEntries).ToList();
+            StringBuilder stringBuilder = new StringBuilder();
 
-            context.CommandText = str[0] + str[1];
-            str.RemoveRange(0, 2);
+            bool commandIsAdded = false;
+            bool itemTypeIsAdded = false;
+            bool propNameIsAdded = false;
+            bool propValueIsAdded = false;
 
-            for (int i = 0; i < str.Count; i += 2)
+            int count = 0;
+            List<string> result = new List<string>();
+            while (count < input.Length)
             {
-                context.Properties.Add(str[i], str[i + 1]);
+                if (input[count] == '^')
+                {
+                    count++;
+                    
+                    if (count <= input.Length - 2)
+                    {
+                        stringBuilder.Append(input[count]);
+                        count++;
+                    }
+                }
+
+                if (input[count] == ',' || input[count] == '=' || count == input.Length - 1) 
+                {
+                    if (!commandIsAdded)
+                    {
+                        stringBuilder.Append(' ');
+                        result.Add(stringBuilder.ToString());
+                        stringBuilder.Clear();
+                        commandIsAdded = true;
+                    }
+                    else if (!itemTypeIsAdded)
+                    {
+                        result.Add(stringBuilder.ToString());
+                        stringBuilder.Clear();
+                        itemTypeIsAdded = true;
+                    }
+                    else if (!propNameIsAdded)
+                    {
+                        result.Add(stringBuilder.ToString());
+                        stringBuilder.Clear();
+                        propNameIsAdded = true;
+                    }
+                    else if (!propValueIsAdded)
+                    {
+                        if (count == input.Length - 1)
+                        {
+                            stringBuilder.Append(input[count]);
+                        }
+                        result.Add(stringBuilder.ToString());
+                        stringBuilder.Clear();
+                        propNameIsAdded = false;
+                    }
+                }
+                else
+                {
+                    stringBuilder.Append(input[count]);
+                }
+
+                count++;
+            }
+
+            context.CommandText = result[0] + result[1];
+            result.RemoveRange(0, 2);
+
+            for (int i = 0; i < result.Count; i += 2)
+            {
+                context.Properties.Add(result[i], result[i + 1]);
             }
 
             return context;
         }
-
-        //public CommandContext ParseCommand(string input)
-        //{
-        //    CommandContext context = new CommandContext();
-        //    context.Properties = new Dictionary<string, string>();
-        //    context.RawInput = input;
-        //    StringBuilder stringBuilder = new StringBuilder();
-
-        //    int count = 0;
-        //    while (count < input.Length)
-        //    {
-        //        if (input[count] == '{')
-        //        {
-        //            count++;
-        //            while (input[count] != '}')
-        //            {
-        //                stringBuilder.Append(input[count]);
-        //                count++;
-        //            }
-        //        }
-        //        count++;
-        //    }
-        //    var b = stringBuilder.ToString();
-        //    return context;
-        //}
     }
 }

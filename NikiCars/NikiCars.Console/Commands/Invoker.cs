@@ -16,17 +16,17 @@ namespace NikiCars.Console.Commands
 
         public string ExecuteCommand(string input)
         {
-            var context = this.parser.Parse(input);
+            var context = this.parser.ParseCommand(input);
             ICommand command;
             switch (context.CommandText)
             {
-                case "addCarCoupe":
+                case "add CarCoupe":
                     command = new CreateCarCoupe(context, DependencyContainer.Resolve<IService<CarCoupe>>(), DependencyContainer.Resolve<IModelBinder<CarCoupe>>());
                     break;
-                case "addCarMake":
+                case "add CarMake":
                     command = new CreateCarMake(context, DependencyContainer.Resolve<IService<CarMake>>(), DependencyContainer.Resolve<IModelBinder<CarMake>>());
                     break;
-                case "getCarCoupe":
+                case "get CarCoupe":
                     command = new FindCarCoupe(context, DependencyContainer.Resolve<IService<CarCoupe>>(), DependencyContainer.Resolve<IModelBinder<CarCoupe>>());
                     break;
                 default:
