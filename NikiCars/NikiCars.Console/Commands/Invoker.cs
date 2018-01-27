@@ -1,5 +1,4 @@
 ﻿using System;
-using NikiCars.Console.Input;
 using NikiCars.Console.Interfaces;
 using NikiCars.Data.Models;
 using NikiCars.Services;

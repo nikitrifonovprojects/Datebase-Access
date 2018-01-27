@@ -18,9 +18,9 @@ namespace NikiCars.Console
         static void Main()
         {
             DependencyContainer.RegisterDependencies();
-            //string input = "{add} {CarMake} {Name = Buggy, Country = Canada}";
-            //string input1 = "{add} {CarCoupe} {Name = Boat}";
-            string input2 = "{get} {CarCoupe} {ID = 0}";
+            string input = "{add} {CarMake} {Name = Lada, Country = Russia}";
+            string input1 = "{add} {CarCoupe} {Name = Crane}";
+            string input2 = "{get} {CarCoupe} {ID = 8}";
 
             var invoker = DependencyContainer.Resolve<Invoker>();
             string result = invoker.ExecuteCommand(input2);

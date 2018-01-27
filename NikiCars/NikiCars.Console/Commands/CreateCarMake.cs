@@ -17,10 +17,10 @@ namespace NikiCars.Console.Commands
             CarMake result = this.service.Save(item);
             if (result == null)
             {
-                return this.Error($"CarMake: {item} creation failed", item);
+                return this.Error($"CarMake: {item} creation failed");
             }
 
-            return this.Success($"CarMake: {result} creation success", result);
+            return this.Success(result);
         }
     }
 }

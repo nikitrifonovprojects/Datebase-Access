@@ -17,10 +17,10 @@ namespace NikiCars.Console.Commands
             CarCoupe result = this.service.GetById(item.ID);
             if (result == null)
             {
-                return this.Error($"CarCoupe with ID: {item.ID} not found", item);
+                return this.Error($"CarCoupe with ID: {item.ID} not found");
             }
             
-            return this.Success($"CarCoupe with ID: {item.ID} was found", result);
+            return this.Success(result);
         }
     }
 }

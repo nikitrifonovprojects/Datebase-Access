@@ -36,14 +36,24 @@ namespace NikiCars.Console.Commands
 
         protected abstract ICommandResult ExecuteAction(T item);
 
-        protected ICommandResult Error<T2>(string obj, T2 item)
+        protected ICommandResult Error<T2>(T2 item)
         {
-            return new ErrorResult<T2>(obj, item);
+            return new ErrorResult<T2>(item);
         }
 
-        protected ICommandResult Success<T2>(string obj, T2 item)
+        protected ICommandResult Error<T2>()
         {
-            return new SuccessResult<T2>(obj, item);
+            return new ErrorResult<T2>();
+        }
+
+        protected ICommandResult Success<T2>()
+        {
+            return new SuccessResult<T2>();
+        }
+
+        protected ICommandResult Success<T2>(T2 item)
+        {
+            return new SuccessResult<T2>(item);
         }
     }
 }

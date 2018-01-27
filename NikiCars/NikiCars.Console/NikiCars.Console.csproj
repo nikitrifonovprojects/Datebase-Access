@@ -85,6 +85,7 @@
     <Compile Include="Interfaces\IModelBinder.cs" />
     <Compile Include="Interfaces\ICommand.cs" />
     <Compile Include="Interfaces\IParser.cs" />
+    <Compile Include="Output\BaseCommandResult.cs" />
     <Compile Include="Output\ErrorResult.cs" />
     <Compile Include="Output\SuccessResult.cs" />
     <Compile Include="Program.cs" />

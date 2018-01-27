@@ -17,10 +17,10 @@ namespace NikiCars.Console.Commands
             CarCoupe result = this.service.Save(item);
             if (result == null)
             {
-                return this.Error($"CarCoupe: {item} creation failed", item);
+                return this.Error($"CarCoupe: {item} creation failed");
             }
 
-            return this.Success($"CarCoupe: {result} creation success", result);
+            return this.Success(result);
         }
     }
 }
