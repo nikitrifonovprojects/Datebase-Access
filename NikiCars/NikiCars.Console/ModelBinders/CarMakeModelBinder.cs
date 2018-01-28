@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using NikiCars.Console.Interfaces;
 using NikiCars.Data.Models;
 
-namespace NikiCars.Console.Commands
+namespace NikiCars.Console.ModelBinders
 {
     public class CarMakeModelBinder : IModelBinder<CarMake>
     {

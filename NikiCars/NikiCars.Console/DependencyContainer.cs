@@ -3,6 +3,7 @@ using System.Reflection;
 using NikiCars.Console.Commands;
 using NikiCars.Console.Input;
 using NikiCars.Console.Interfaces;
+using NikiCars.Console.ModelBinders;
 using NikiCars.Data;
 using NikiCars.Data.Models;
 using NikiCars.Services;

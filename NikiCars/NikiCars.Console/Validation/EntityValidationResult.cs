@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text;
 
 namespace NikiCars.Console.Validation
 {
@@ -7,7 +8,7 @@ namespace NikiCars.Console.Validation
     {
         public IList<ValidationResult> Errors { get; private set; }
 
-        public bool HasEroor
+        public bool HasError
         {
             get
             {
@@ -18,6 +19,18 @@ namespace NikiCars.Console.Validation
         public EntityValidationResult(IList<ValidationResult> errors = null)
         {
             this.Errors = errors ?? new List<ValidationResult>();
+        }
+
+        public override string ToString()
+        {
+            StringBuilder builder = new StringBuilder();
+
+            foreach (var item in this.Errors)
+            {
+                builder.AppendFormat("The validation failed due to: {0}", item.ToString());
+            }
+
+            return builder.ToString();
         }
     }
 }

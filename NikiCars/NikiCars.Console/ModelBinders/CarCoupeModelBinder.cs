@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using NikiCars.Console.Interfaces;
 using NikiCars.Data.Models;
 
-namespace NikiCars.Console.Commands
+namespace NikiCars.Console.ModelBinders
 {
     public class CarCoupeModelBinder : IModelBinder<CarCoupe>
     {
         public CarCoupe BindModel(Dictionary<string, string> properties)
         {
             CarCoupe model = new CarCoupe();
-            
+
             if (properties.ContainsKey("Name"))
             {
                 model.Name = properties["Name"];

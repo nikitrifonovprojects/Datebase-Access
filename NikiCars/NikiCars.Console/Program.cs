@@ -20,22 +20,15 @@ namespace NikiCars.Console
         static void Main()
         {
             DependencyContainer.RegisterDependencies();
-            //Command string will be in format: command,type,propertiy=value,property=value ....., escape char will be ^
+            //Command string will be in format: command,type,property=value,property=value ....., escape char will be ^
 
             string command = "get,CarCoupe,ID=^,8";
             var parser = new Parser();
-            parser.ParseCommand(command);
+            var res = parser.ParseCommand(command);
 
-            //var car = new Car();
-            //var user = new User();
-
-            //var isValid = ValidationHelper.ValidateEntity(user);
-            //var isValids = ValidationHelper.ValidateEntity(car);
-
-           
-            //string input = "add,CarMake,Name=Lada,Country=Russia";
+            string input = "add,CarMake,Name=Lada,Country=Russia";
             //string input1 = "add,CarCoupe,Name=Crane";
-            //string input2 = "get,CarCoupe,ID=8";
+            //string input2 = "get,CarCoupe,ID=0";
 
             //var invoker = DependencyContainer.Resolve<Invoker>();
             //string result = invoker.ExecuteCommand(input2);

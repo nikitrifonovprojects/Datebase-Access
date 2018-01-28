@@ -73,8 +73,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\BaseCommand.cs" />
-    <Compile Include="Commands\CarCoupeModelBinder.cs" />
-    <Compile Include="Commands\CarMakeModelBinder.cs" />
     <Compile Include="Commands\CreateCarCoupe.cs" />
     <Compile Include="Commands\CreateCarMake.cs" />
     <Compile Include="Commands\FindCarCoupe.cs" />
@@ -86,6 +84,8 @@
     <Compile Include="Interfaces\IModelBinder.cs" />
     <Compile Include="Interfaces\ICommand.cs" />
     <Compile Include="Interfaces\IParser.cs" />
+    <Compile Include="ModelBinders\CarCoupeModelBinder.cs" />
+    <Compile Include="ModelBinders\CarMakeModelBinder.cs" />
     <Compile Include="Output\BaseCommandResult.cs" />
     <Compile Include="Output\ErrorResult.cs" />
     <Compile Include="Output\SuccessResult.cs" />

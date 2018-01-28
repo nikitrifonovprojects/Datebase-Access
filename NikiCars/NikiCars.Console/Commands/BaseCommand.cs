@@ -6,7 +6,7 @@ using NikiCars.Services;
 
 namespace NikiCars.Console.Commands
 {
-    public abstract class BaseCommand<T> : ICommand where T : IIdentifiable
+    public abstract class BaseCommand<T> : ICommand where T : class, IIdentifiable
     {
         protected IService<T> service;
         protected CommandContext context;

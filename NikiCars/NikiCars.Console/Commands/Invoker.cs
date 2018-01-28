@@ -1,5 +1,6 @@
 ﻿using System;
 using NikiCars.Console.Interfaces;
+using NikiCars.Console.Validation;
 using NikiCars.Data.Models;
 using NikiCars.Services;
 
@@ -17,6 +18,13 @@ namespace NikiCars.Console.Commands
         public string ExecuteCommand(string input)
         {
             var context = this.parser.ParseCommand(input);
+            var IsValid = ValidationHelper.ValidateEntity(context);
+
+            if (IsValid.HasError)
+            {
+                return IsValid.ToString();
+            }
+
             ICommand command;
             switch (context.CommandText)
             {
