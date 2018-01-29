@@ -8,29 +8,37 @@ namespace NikiCars.Console.Output
 {
     public abstract class BaseCommandResult<T> : ICommandResult
     {
+        private const string STATUS = "Status: ";
+        private const string DATA = "Data: ";
         protected T item;
+        private JsonSerializerSettings settings;
 
         public BaseCommandResult()
         {
-
+            this.settings = new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() };
+            this.settings.Converters.Add(new StringEnumConverter());
         }
 
-        public BaseCommandResult(T item)
+        public BaseCommandResult(T item) 
+            : this()
         {
             this.item = item;
         }
 
-        protected abstract string StatusMessage();
+        protected abstract string GetStatus();
 
         public string ExecuteResult()
         {
-            var settings = new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() };
-            settings.Converters.Add(new StringEnumConverter());
-            var json = JsonConvert.SerializeObject(this.item, Formatting.None, settings);
-
             StringBuilder builder = new StringBuilder();
-            builder.AppendLine(StatusMessage());
-            builder.Append(json);
+            builder.Append(STATUS);
+            builder.AppendLine(GetStatus());
+
+            if (this.item != null)
+            {
+                var json = JsonConvert.SerializeObject(this.item, Formatting.None, this.settings);
+                builder.Append(DATA);
+                builder.Append(json);
+            }
 
             return builder.ToString();
         }

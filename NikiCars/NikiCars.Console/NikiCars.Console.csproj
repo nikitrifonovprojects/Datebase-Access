@@ -77,6 +77,8 @@
     <Compile Include="Commands\CreateCarMake.cs" />
     <Compile Include="Commands\FindCarCoupe.cs" />
     <Compile Include="Commands\Invoker.cs" />
+    <Compile Include="Commands\NotFoundCommand.cs" />
+    <Compile Include="Commands\ServerErrorCommand.cs" />
     <Compile Include="DependencyContainer.cs" />
     <Compile Include="Input\CommandContext.cs" />
     <Compile Include="Input\Parser.cs" />
@@ -84,16 +86,20 @@
     <Compile Include="Interfaces\IModelBinder.cs" />
     <Compile Include="Interfaces\ICommand.cs" />
     <Compile Include="Interfaces\IParser.cs" />
-    <Compile Include="ModelBinders\CarCoupeModelBinder.cs" />
-    <Compile Include="ModelBinders\CarMakeModelBinder.cs" />
+    <Compile Include="ModelBinders\DefaultModelBinder.cs" />
+    <Compile Include="ModelBinders\StringModelBinder.cs" />
     <Compile Include="Output\BaseCommandResult.cs" />
     <Compile Include="Output\ErrorResult.cs" />
+    <Compile Include="Output\NotFoundResult.cs" />
+    <Compile Include="Output\ServerErrorResult.cs" />
     <Compile Include="Output\SuccessResult.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Routing\CommandRouteAttribute.cs" />
     <Compile Include="Validation\EntityValidationResult.cs" />
     <Compile Include="Validation\EntityValidator.cs" />
-    <Compile Include="Validation\ValidationHelper.cs" />
+    <Compile Include="Validation\IValidator.cs" />
+    <Compile Include="Validation\Validator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -1,8 +1,8 @@
 ﻿namespace NikiCars.Console.Validation
 {
-    public class ValidationHelper
+    public class Validator : IValidator
     {
-        public static EntityValidationResult ValidateEntity<T>(T obj) where T : class
+        public EntityValidationResult ValidateEntity<T>(T obj) where T : class
         {
             return new EntityValidator<T>().Validate(obj);
         }

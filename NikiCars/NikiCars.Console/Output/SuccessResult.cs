@@ -2,7 +2,7 @@
 {
     public class SuccessResult<T> : BaseCommandResult<T>
     {
-        private const string STATUS_SUCCESS = "Status: Success -";
+        private const string STATUS_SUCCESS = "Success";
 
         public SuccessResult()
             : base()
@@ -16,7 +16,7 @@
             
         }
 
-        protected override string StatusMessage()
+        protected override string GetStatus()
         {
             return STATUS_SUCCESS;
         }

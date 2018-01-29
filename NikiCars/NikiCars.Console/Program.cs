@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using NikiCars.Console.Commands;
 using NikiCars.Console.Input;
 using NikiCars.Console.Interfaces;
+using NikiCars.Console.ModelBinders;
 using NikiCars.Console.Validation;
 using NikiCars.Data;
 using NikiCars.Data.Models;
@@ -20,18 +21,25 @@ namespace NikiCars.Console
         static void Main()
         {
             DependencyContainer.RegisterDependencies();
-            //Command string will be in format: command,type,property=value,property=value ....., escape char will be ^
+            //Command string will be in format: command,property=value,property=value ....., escape char will be ^
 
-            string command = "get,CarCoupe,ID=^,8";
-            var parser = new Parser();
-            var res = parser.ParseCommand(command);
+            //var prop = new Dictionary<string, string>();
+            //prop.Add("Name", "ass");
+            //prop.Add("Country", "Usa");
 
-            string input = "add,CarMake,Name=Lada,Country=Russia";
-            //string input1 = "add,CarCoupe,Name=Crane";
-            //string input2 = "get,CarCoupe,ID=0";
+            //var ass = new DefaultModelBinder<CarMake>();
+            //var res = ass.BindModel(prop);
+
+            //string command = "get,CarCoupe,ID=^,8";
+            //var parser = new Parser();
+            //var res = parser.ParseCommand(command);
+
+            //string input = "add CarMake,Name=Niva,Country=Russia";
+            //string input1 = "add CarCoupe,Name=Hummer";
+            //string input2 = "get CarCoupe,ID=1";
 
             //var invoker = DependencyContainer.Resolve<Invoker>();
-            //string result = invoker.ExecuteCommand(input2);
+            //string result = invoker.ExecuteCommand(input);
             //System.Console.WriteLine(result);
 
             //var par = new Parser();

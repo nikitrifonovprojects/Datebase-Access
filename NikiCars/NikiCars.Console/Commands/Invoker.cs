@@ -1,8 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using NikiCars.Console.Input;
 using NikiCars.Console.Interfaces;
-using NikiCars.Console.Validation;
-using NikiCars.Data.Models;
-using NikiCars.Services;
+using Unity.Resolution;
 
 namespace NikiCars.Console.Commands
 {
@@ -17,31 +17,41 @@ namespace NikiCars.Console.Commands
 
         public string ExecuteCommand(string input)
         {
-            var context = this.parser.ParseCommand(input);
-            var IsValid = ValidationHelper.ValidateEntity(context);
-
-            if (IsValid.HasError)
+            CommandContext context = new CommandContext();
+            context.Properties = new Dictionary<string, string>();
+            try
             {
-                return IsValid.ToString();
+                context = this.parser.ParseCommand(input);
+                
+                if (context.CommandText == null)
+                {
+                    throw new ArgumentException(nameof(context.CommandText));
+                }
+                else
+                {
+                    if (DependencyContainer.IsRegistered(typeof(ICommand), context.CommandText))
+                    {
+                        using (var command = DependencyContainer.Resolve<ICommand>(context.CommandText, new DependencyOverride(typeof(CommandContext), context)))
+                        {
+                            return command.Execute();
+                        }
+                    }
+                    else
+                    {
+                        using (var command = DependencyContainer.Resolve<NotFoundCommand>(new DependencyOverride(typeof(CommandContext), context)))
+                        {
+                            return command.Execute();
+                        }
+                    }
+                }
             }
-
-            ICommand command;
-            switch (context.CommandText)
+            catch (Exception)
             {
-                case "add CarCoupe":
-                    command = new CreateCarCoupe(context, DependencyContainer.Resolve<IService<CarCoupe>>(), DependencyContainer.Resolve<IModelBinder<CarCoupe>>());
-                    break;
-                case "add CarMake":
-                    command = new CreateCarMake(context, DependencyContainer.Resolve<IService<CarMake>>(), DependencyContainer.Resolve<IModelBinder<CarMake>>());
-                    break;
-                case "get CarCoupe":
-                    command = new FindCarCoupe(context, DependencyContainer.Resolve<IService<CarCoupe>>(), DependencyContainer.Resolve<IModelBinder<CarCoupe>>());
-                    break;
-                default:
-                    throw new ArgumentException("Invalid Command");
+                using (var command = DependencyContainer.Resolve<ServerErrorCommand>(new DependencyOverride(typeof(CommandContext), context)))
+                {
+                    return command.Execute();
+                }
             }
-
-            return command.Execute();
         }
     }
 }

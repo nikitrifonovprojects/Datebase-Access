@@ -9,11 +9,17 @@ namespace NikiCars.Console.Input
         public CommandContext ParseCommand(string input)
         {
             CommandContext context = new CommandContext();
+            context.Properties = new Dictionary<string, string>();
             context.RawInput = input;
+
+            if (!IsValidInput(input))
+            {
+                return context;
+            }
+
             StringBuilder stringBuilder = new StringBuilder();
 
             bool commandIsAdded = false;
-            bool itemTypeIsAdded = false;
             bool propNameIsAdded = false;
             bool propValueIsAdded = false;
 
@@ -40,16 +46,9 @@ namespace NikiCars.Console.Input
                     }
                     if (!commandIsAdded)
                     {
-                        stringBuilder.Append(' ');
                         context.CommandText = stringBuilder.ToString();
                         stringBuilder.Clear();
                         commandIsAdded = true;
-                    }
-                    else if (!itemTypeIsAdded)
-                    {
-                        context.CommandText += stringBuilder.ToString();
-                        stringBuilder.Clear();
-                        itemTypeIsAdded = true;
                     }
                     else if (!propNameIsAdded)
                     {
@@ -74,8 +73,6 @@ namespace NikiCars.Console.Input
 
             if (result.Count > 1)
             {
-                context.Properties = new Dictionary<string, string>();
-
                 for (int i = 0; i < result.Count; i+=2)
                 {
                     context.Properties.Add(result[i], result[i + 1]);
@@ -83,6 +80,11 @@ namespace NikiCars.Console.Input
             }
 
             return context;
+        }
+
+        private bool IsValidInput(string input)
+        {
+            return !string.IsNullOrEmpty(input);
         }
     }
 }

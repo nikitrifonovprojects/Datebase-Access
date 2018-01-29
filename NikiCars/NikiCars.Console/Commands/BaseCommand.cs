@@ -1,33 +1,33 @@
 ﻿using NikiCars.Console.Input;
 using NikiCars.Console.Interfaces;
 using NikiCars.Console.Output;
-using NikiCars.Data.Models;
-using NikiCars.Services;
+using NikiCars.Console.Validation;
 
 namespace NikiCars.Console.Commands
 {
-    public abstract class BaseCommand<T> : ICommand where T : class, IIdentifiable
+    public abstract class BaseCommand<T> : ICommand where T : class
     {
-        protected IService<T> service;
         protected CommandContext context;
         private IModelBinder<T> binder;
+        private IValidator validator;
 
-        public BaseCommand(CommandContext context, IService<T> service, IModelBinder<T> binder)
+        public BaseCommand(CommandContext context, IModelBinder<T> binder, IValidator validation)
         {
-            this.service = service;
             this.context = context;
             this.binder = binder;
+            this.validator = validation;
         }
 
-        public void Dispose()
+        public virtual void Dispose()
         {
-            this.service.Dispose();
+            
         }
 
         public string Execute()
         {
             T item = this.binder.BindModel(this.context.Properties);
-            
+            this.context.ModelState = this.validator.ValidateEntity(item);
+
             ICommandResult commandResult = ExecuteAction(item);
             string result = commandResult.ExecuteResult();
 
@@ -54,6 +54,16 @@ namespace NikiCars.Console.Commands
         protected ICommandResult Success<T2>(T2 item)
         {
             return new SuccessResult<T2>(item);
+        }
+
+        protected ICommandResult NotFound<T2>()
+        {
+            return new NotFoundResult<T2>();
+        }
+
+        protected ICommandResult ServerError<T2>()
+        {
+            return new ServerErrorResult<T2>();
         }
     }
 }

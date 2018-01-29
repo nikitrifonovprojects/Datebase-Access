@@ -2,7 +2,7 @@
 {
     public class ErrorResult<T> : BaseCommandResult<T>
     {
-        private const string STATUS_ERROR = "Status: Fail -";
+        private const string STATUS_ERROR = "Error";
 
         public ErrorResult() 
             : base()
@@ -16,7 +16,7 @@
             
         }
 
-        protected override string StatusMessage()
+        protected override string GetStatus()
         {
             return STATUS_ERROR;
         }

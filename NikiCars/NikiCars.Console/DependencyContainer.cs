@@ -1,13 +1,19 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Reflection;
 using NikiCars.Console.Commands;
 using NikiCars.Console.Input;
 using NikiCars.Console.Interfaces;
 using NikiCars.Console.ModelBinders;
+using NikiCars.Console.Routing;
+using NikiCars.Console.Validation;
 using NikiCars.Data;
 using NikiCars.Data.Models;
 using NikiCars.Services;
 using Unity;
+using Unity.Injection;
+using Unity.RegistrationByConvention;
+using Unity.Resolution;
 
 namespace NikiCars.Console
 {
@@ -20,8 +26,8 @@ namespace NikiCars.Console
             container = new UnityContainer();
             container.RegisterType(typeof(IService<>), typeof(BaseService<>));
             
-            var assembly = Assembly.GetAssembly(typeof(IRepository<>));
-            var types = assembly.GetExportedTypes().Where(t => !t.IsAbstract && t.IsClass && t.GetInterfaces().Any(c => c.IsGenericType && typeof(IRepository<>).IsAssignableFrom(c.GetGenericTypeDefinition())));
+            var repositoryAssembly = Assembly.GetAssembly(typeof(IRepository<>));
+            var types = repositoryAssembly.GetExportedTypes().Where(t => !t.IsAbstract && t.IsClass && t.GetInterfaces().Any(c => c.IsGenericType && typeof(IRepository<>).IsAssignableFrom(c.GetGenericTypeDefinition())));
 
             foreach (var type in types)
             {
@@ -31,9 +37,41 @@ namespace NikiCars.Console
             }
 
             container.RegisterType<IParser, Parser>();
-            container.RegisterType<Invoker, Invoker>();
-            container.RegisterType<IModelBinder<CarCoupe>, CarCoupeModelBinder>();
-            container.RegisterType<IModelBinder<CarMake>, CarMakeModelBinder>();
+            //container.RegisterType<IModelBinder<string>, StringModelBinder>();
+
+            container.RegisterType(typeof(IModelBinder<>), typeof(DefaultModelBinder<>));
+
+            container.RegisterType<IValidator, Validator>();
+            
+            var assem = Assembly.GetAssembly(typeof(ICommand));
+            var commandTypes = assem.GetExportedTypes().Where(x => typeof(ICommand).IsAssignableFrom(x) && !x.IsAbstract && x.IsClass && x.IsDefined(typeof(CommandRouteAttribute)));
+
+            foreach (var type in commandTypes)
+            {
+                var attributeValue = type.GetCustomAttributesData().First().ConstructorArguments.Select(z => z.Value).First().ToString();
+                container.RegisterType(typeof(ICommand), type, attributeValue);
+            }
+            
+        }
+
+        public static bool IsRegistered(Type type, string name)
+        {
+            return container.IsRegistered(type, name);
+        }
+
+        public static T Resolve<T>(string name, params ResolverOverride[] overrides)
+        {
+            return container.Resolve<T>(name, overrides);
+        }
+
+        public static T Resolve<T>(string name)
+        {
+             return container.Resolve<T>(name);
+        }
+
+        public static T Resolve<T>(params ResolverOverride[] overrides)
+        {
+            return container.Resolve<T>(overrides);
         }
 
         public static T Resolve<T>()

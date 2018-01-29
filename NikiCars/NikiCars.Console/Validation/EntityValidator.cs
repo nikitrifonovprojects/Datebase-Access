@@ -9,7 +9,7 @@ namespace NikiCars.Console.Validation
         {
             var validationResults = new List<ValidationResult>();
             var validationContext = new ValidationContext(obj, null, null);
-            var isValid = Validator.TryValidateObject(obj, validationContext, validationResults, true);
+            var isValid = System.ComponentModel.DataAnnotations.Validator.TryValidateObject(obj, validationContext, validationResults, true);
 
             return new EntityValidationResult(validationResults);
         }
