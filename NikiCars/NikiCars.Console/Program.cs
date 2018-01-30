@@ -23,11 +23,12 @@ namespace NikiCars.Console
             DependencyContainer.RegisterDependencies();
             //Command string will be in format: command,property=value,property=value ....., escape char will be ^
 
+            var stri = "user=niki,command=add Car,property=honda";
             //var prop = new Dictionary<string, string>();
-            //prop.Add("Name", "ass");
-            //prop.Add("Country", "Usa");
+            //prop.Add("Varta", "asss");
+            //prop.Add("IsDamaged", "true");
 
-            //var ass = new DefaultModelBinder<CarMake>();
+            //var ass = new DefaultModelBinder<Car>();
             //var res = ass.BindModel(prop);
 
             //string command = "get,CarCoupe,ID=^,8";

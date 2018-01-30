@@ -87,7 +87,6 @@
     <Compile Include="Interfaces\ICommand.cs" />
     <Compile Include="Interfaces\IParser.cs" />
     <Compile Include="ModelBinders\DefaultModelBinder.cs" />
-    <Compile Include="ModelBinders\StringModelBinder.cs" />
     <Compile Include="Output\BaseCommandResult.cs" />
     <Compile Include="Output\ErrorResult.cs" />
     <Compile Include="Output\NotFoundResult.cs" />

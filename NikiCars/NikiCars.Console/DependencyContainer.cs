@@ -1,18 +1,14 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
-using NikiCars.Console.Commands;
 using NikiCars.Console.Input;
 using NikiCars.Console.Interfaces;
 using NikiCars.Console.ModelBinders;
 using NikiCars.Console.Routing;
 using NikiCars.Console.Validation;
 using NikiCars.Data;
-using NikiCars.Data.Models;
 using NikiCars.Services;
 using Unity;
-using Unity.Injection;
-using Unity.RegistrationByConvention;
 using Unity.Resolution;
 
 namespace NikiCars.Console
@@ -37,7 +33,6 @@ namespace NikiCars.Console
             }
 
             container.RegisterType<IParser, Parser>();
-            //container.RegisterType<IModelBinder<string>, StringModelBinder>();
 
             container.RegisterType(typeof(IModelBinder<>), typeof(DefaultModelBinder<>));
 
