@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using NikiCars.Console.Commands;
 using NikiCars.Console.Input;
 using NikiCars.Console.Interfaces;
@@ -21,21 +22,23 @@ namespace NikiCars.Console
         static void Main()
         {
             DependencyContainer.RegisterDependencies();
-            //Command string will be in format: command,property=value,property=value ....., escape char will be ^
+            //Command string will be in format: "command: add CarCoupe;data:{json}"
 
-            var stri = "user=niki,command=add Car,property=honda";
-            //var prop = new Dictionary<string, string>();
-            //prop.Add("Varta", "asss");
-            //prop.Add("IsDamaged", "true");
+            var prop = new Dictionary<string, string>();
+            prop.Add("Varta", "asss");
+            prop.Add("IsDamaged", "true");
+            var json = JsonConvert.SerializeObject(prop);
+
+            var stri = $"command: add CarCoupe;data:{json}";
 
             //var ass = new DefaultModelBinder<Car>();
             //var res = ass.BindModel(prop);
 
             //string command = "get,CarCoupe,ID=^,8";
-            //var parser = new Parser();
-            //var res = parser.ParseCommand(command);
+            var parser = new Parser();
+            var res = parser.ParseCommand(stri);
 
-            //string input = "add CarMake,Name=Niva,Country=Russia";
+            string input = "add CarMake,Name=Niva,Country=Russia";
             //string input1 = "add CarCoupe,Name=Hummer";
             //string input2 = "get CarCoupe,ID=1";
 

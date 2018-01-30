@@ -73,8 +73,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\BaseCommand.cs" />
-    <Compile Include="Commands\CreateCarCoupe.cs" />
-    <Compile Include="Commands\CreateCarMake.cs" />
+    <Compile Include="Commands\CreateCarCoupeCommand.cs" />
+    <Compile Include="Commands\CreateCarMakeCommand.cs" />
     <Compile Include="Commands\FindCarCoupe.cs" />
     <Compile Include="Commands\Invoker.cs" />
     <Compile Include="Commands\NotFoundCommand.cs" />

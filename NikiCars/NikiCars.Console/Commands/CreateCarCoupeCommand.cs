@@ -7,28 +7,28 @@ using NikiCars.Services;
 
 namespace NikiCars.Console.Commands
 {
-    [CommandRoute("add CarMake")]
-    public class CreateCarMake : BaseCommand<CarMake>
+    [CommandRoute("add CarCoupe")]
+    public class CreateCarCoupeCommand : BaseCommand<CarCoupe>
     {
-        private IService<CarMake> service;
+        private IService<CarCoupe> service;
 
-        public CreateCarMake(CommandContext context, IService<CarMake> service, IModelBinder<CarMake> binder, IValidator validation) 
+        public CreateCarCoupeCommand(CommandContext context, IService<CarCoupe> service, IModelBinder<CarCoupe> binder, IValidator validation)
             : base(context, binder, validation)
         {
             this.service = service;
         }
 
-        protected override ICommandResult ExecuteAction(CarMake item)
+        protected override ICommandResult ExecuteAction(CarCoupe item)
         {
             if (this.context.ModelState.HasError)
             {
                 return this.Error(this.context.ModelState.ToString());
             }
 
-            CarMake result = this.service.Save(item);
+            CarCoupe result = this.service.Save(item);
             if (result == null)
             {
-                return this.Error($"CarMake: {item} creation failed");
+                return this.Error($"CarCoupe: {item} creation failed");
             }
 
             return this.Success(result);

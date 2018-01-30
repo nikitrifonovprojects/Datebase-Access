@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using NikiCars.Console.Validation;
+using NikiCars.Data.Models;
 
 namespace NikiCars.Console.Input
 {
