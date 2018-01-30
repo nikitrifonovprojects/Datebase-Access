@@ -1,5 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Text;
+﻿using System;
+using System.Collections.Generic;
+using Newtonsoft.Json;
 using NikiCars.Console.Interfaces;
 
 namespace NikiCars.Console.Input
@@ -17,69 +18,44 @@ namespace NikiCars.Console.Input
                 return context;
             }
 
-            StringBuilder stringBuilder = new StringBuilder();
-
-            bool commandIsAdded = false;
-            bool propNameIsAdded = false;
-            bool propValueIsAdded = false;
-
-            int count = 0;
-            List<string> result = new List<string>();
-            while (count < input.Length)
+            var parameters = input.Split(new char[] { ';' });
+            for (int i = 0; i < parameters.Length; i++)
             {
-                if (input[count] == '^')
-                {
-                    count++;
+                int index = parameters[i].IndexOf(':');
+                string param = parameters[i].Substring(0, index);
 
-                    if (count <= input.Length - 2)
-                    {
-                        stringBuilder.Append(input[count]);
-                        count++;
-                    }
-                }
-
-                if (input[count] == ',' || input[count] == '=' || count == input.Length - 1)
+                switch (param)
                 {
-                    if (count == input.Length - 1)
-                    {
-                        stringBuilder.Append(input[count]);
-                    }
-                    if (!commandIsAdded)
-                    {
-                        context.CommandText = stringBuilder.ToString();
-                        stringBuilder.Clear();
-                        commandIsAdded = true;
-                    }
-                    else if (!propNameIsAdded)
-                    {
-                        result.Add(stringBuilder.ToString());
-                        stringBuilder.Clear();
-                        propNameIsAdded = true;
-                    }
-                    else if (!propValueIsAdded)
-                    {
-                        result.Add(stringBuilder.ToString());
-                        stringBuilder.Clear();
-                        propNameIsAdded = false;
-                    }
-                }
-                else
-                {
-                    stringBuilder.Append(input[count]);
-                }
-
-                count++;
-            }
-
-            if (result.Count > 1)
-            {
-                for (int i = 0; i < result.Count; i+=2)
-                {
-                    context.Properties.Add(result[i], result[i + 1]);
+                    case "command":
+                        ParseCommand(parameters[i].Substring(index + 1), context);
+                        break;
+                    case "data":
+                        ParseData(parameters[i].Substring(index + 1), context);
+                        break;
+                    case "token":
+                        ParseToken(parameters[i].Substring(index + 1), context);
+                        break;
+                    default:
+                        throw new ArgumentException("parameter not supported");
                 }
             }
 
             return context;
+        }
+
+        private void ParseToken(string v, CommandContext context)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void ParseData(string value, CommandContext context)
+        {
+            context.Properties = JsonConvert.DeserializeObject<Dictionary<string, string>>(value.Trim());
+        }
+
+        private void ParseCommand(string value, CommandContext context)
+        {
+            context.CommandText = value.Trim();
         }
 
         private bool IsValidInput(string input)
