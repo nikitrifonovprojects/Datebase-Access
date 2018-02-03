@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 using NikiCars.Console.Interfaces;
 
@@ -7,6 +6,13 @@ namespace NikiCars.Console.Input
 {
     public class Parser : IParser
     {
+        private IAuthenticationManager manager;
+
+        public Parser(IAuthenticationManager manager)
+        {
+            this.manager = manager;
+        }
+
         public CommandContext ParseCommand(string input)
         {
             CommandContext context = new CommandContext();
@@ -18,44 +24,55 @@ namespace NikiCars.Console.Input
                 return context;
             }
 
+            Dictionary<string, string> inputParameters = new Dictionary<string, string>();
+
             var parameters = input.Split(new char[] { ';' });
             for (int i = 0; i < parameters.Length; i++)
             {
                 int index = parameters[i].IndexOf(':');
                 string param = parameters[i].Substring(0, index);
+                string value = parameters[i].Substring(index + 1);
 
-                switch (param)
-                {
-                    case "command":
-                        ParseCommand(parameters[i].Substring(index + 1), context);
-                        break;
-                    case "data":
-                        ParseData(parameters[i].Substring(index + 1), context);
-                        break;
-                    case "token":
-                        ParseToken(parameters[i].Substring(index + 1), context);
-                        break;
-                    default:
-                        throw new ArgumentException("parameter not supported");
-                }
+                inputParameters.Add(param, value);
             }
+
+            Execute(inputParameters, context);
 
             return context;
         }
 
-        private void ParseToken(string v, CommandContext context)
+        private void Execute(Dictionary<string, string> inputParameters, CommandContext context)
         {
-            throw new NotImplementedException();
+            ParseCommand(inputParameters, context);
+            ParseData(inputParameters, context);
+            ParseToken(inputParameters, context);
         }
 
-        private void ParseData(string value, CommandContext context)
+        private void ParseToken(Dictionary<string, string> inputParameters, CommandContext context)
         {
-            context.Properties = JsonConvert.DeserializeObject<Dictionary<string, string>>(value.Trim());
+            string value = string.Empty;
+            if (inputParameters.ContainsKey("token"))
+            {
+                value = inputParameters["token"];
+            }
+
+            context.CommandUser = this.manager.GetCommandUser(value);
         }
 
-        private void ParseCommand(string value, CommandContext context)
+        private void ParseData(Dictionary<string, string> inputParameters, CommandContext context)
         {
-            context.CommandText = value.Trim();
+            if (inputParameters.ContainsKey("data"))
+            {
+                context.Properties = JsonConvert.DeserializeObject<Dictionary<string, string>>(inputParameters["data"].Trim());
+            }
+        }
+
+        private void ParseCommand(Dictionary<string, string> inputParameters, CommandContext context)
+        {
+            if (inputParameters.ContainsKey("command"))
+            {
+                context.CommandText = inputParameters["command"].Trim();
+            }
         }
 
         private bool IsValidInput(string input)
