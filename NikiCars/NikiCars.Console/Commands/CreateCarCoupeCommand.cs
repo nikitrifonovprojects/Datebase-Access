@@ -1,4 +1,5 @@
-﻿using NikiCars.Console.Input;
+﻿using System;
+using NikiCars.Console.Input;
 using NikiCars.Console.Interfaces;
 using NikiCars.Console.Routing;
 using NikiCars.Console.Validation;
@@ -25,12 +26,14 @@ namespace NikiCars.Console.Commands
                 return this.Error(this.context.ModelState.ToString());
             }
 
-            CarCoupe result = this.service.Save(item);
-            if (result == null)
+            if (!this.context.CommandUser.IsAuthenticated)
             {
-                return this.Error($"CarCoupe: {item} creation failed");
+                return this.AuthenticationError("User is not authenticated");
             }
 
+            item.UserID = Convert.ToInt32(this.context.CommandUser.ID);
+            CarCoupe result = this.service.Save(item);
+            
             return this.Success(result);
         }
 

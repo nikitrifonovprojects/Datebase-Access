@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
+using NikiCars.Console.Authentication;
 using NikiCars.Console.Input;
 using NikiCars.Console.Interfaces;
 using NikiCars.Console.ModelBinders;
@@ -20,8 +21,13 @@ namespace NikiCars.Console
         public static void RegisterDependencies()
         {
             container = new UnityContainer();
+            container.RegisterType<IAuthenticationManager, AuthenticationManager>();
+
             container.RegisterType(typeof(IService<>), typeof(BaseService<>));
-            
+            container.RegisterType<IUserService, UserService>();
+
+            container.RegisterType<IUserRepository, UserRepository>();
+
             var repositoryAssembly = Assembly.GetAssembly(typeof(IRepository<>));
             var types = repositoryAssembly.GetExportedTypes().Where(t => !t.IsAbstract && t.IsClass && t.GetInterfaces().Any(c => c.IsGenericType && typeof(IRepository<>).IsAssignableFrom(c.GetGenericTypeDefinition())));
 
@@ -37,7 +43,9 @@ namespace NikiCars.Console
             container.RegisterType(typeof(IModelBinder<>), typeof(DefaultModelBinder<>));
 
             container.RegisterType<IValidator, Validator>();
-            
+
+            container.RegisterType<ICommandUser, CommandUser>();
+
             var assem = Assembly.GetAssembly(typeof(ICommand));
             var commandTypes = assem.GetExportedTypes().Where(x => typeof(ICommand).IsAssignableFrom(x) && !x.IsAbstract && x.IsClass && x.IsDefined(typeof(CommandRouteAttribute)));
 

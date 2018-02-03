@@ -9,15 +9,16 @@ namespace NikiCars.Data
 {
     public abstract class BaseRepository<T> : IRepository<T>
     {
-        private SqlConnection connection;
         private string createCommandText;
         private string deleteCommandText;
         private string updateCommandText;
 
+        protected SqlConnection Connection { get; private set; }
+
         public BaseRepository()
         {
-            this.connection = new SqlConnection(ConfigurationManager.AppSettings["ConnectionString"]);
-            this.connection.Open();
+            this.Connection = new SqlConnection(ConfigurationManager.AppSettings["ConnectionString"]);
+            this.Connection.Open();
         }
 
         protected abstract string GetTableName();
@@ -60,7 +61,7 @@ namespace NikiCars.Data
             SqlCommand command = new SqlCommand(this.createCommandText)
             {
                 CommandType = CommandType.Text,
-                Connection = connection
+                Connection = Connection
             };
 
             foreach (var param in parameters)
@@ -88,7 +89,7 @@ namespace NikiCars.Data
             SqlCommand command = new SqlCommand(this.deleteCommandText)
             {
                 CommandType = CommandType.Text,
-                Connection = connection
+                Connection = Connection
             };
 
             command.Parameters.AddWithValue("@param1", GetPrimaryKeyValue(item));
@@ -102,7 +103,7 @@ namespace NikiCars.Data
             SqlCommand command = new SqlCommand("SELECT * FROM " + GetTableName() + " ORDER BY " + GetPrimaryKeyName() + " OFFSET @param1 ROWS FETCH NEXT @param2 ROWS ONLY")
             {
                 CommandType = CommandType.Text,
-                Connection = connection
+                Connection = Connection
             };
 
             command.Parameters.AddWithValue("@param1", pageNumber * pageSize);
@@ -124,7 +125,7 @@ namespace NikiCars.Data
             SqlCommand command = new SqlCommand("SELECT * FROM " + GetTableName() + " WHERE " + GetPrimaryKeyName() + " = @param1")
             {
                 CommandType = CommandType.Text,
-                Connection = connection
+                Connection = Connection
             };
 
             command.Parameters.AddWithValue("@param1", id);
@@ -167,7 +168,7 @@ namespace NikiCars.Data
             SqlCommand command = new SqlCommand(this.updateCommandText)
             {
                 CommandType = CommandType.Text,
-                Connection = connection
+                Connection = Connection
             };
 
             foreach (var param in parameters)
@@ -185,7 +186,7 @@ namespace NikiCars.Data
             SqlCommand command = new SqlCommand("SELECT COUNT(*) AS [Count] FROM " + GetTableName())
             {
                 CommandType = CommandType.Text,
-                Connection = connection
+                Connection = Connection
             };
 
             return Convert.ToInt32(command.ExecuteScalar());
@@ -193,7 +194,7 @@ namespace NikiCars.Data
 
         public void Dispose()
         {
-            this.connection.Dispose();
+            this.Connection.Dispose();
         }
     }
 }

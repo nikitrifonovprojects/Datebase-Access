@@ -25,11 +25,12 @@ namespace NikiCars.Console.Commands
                 return this.Error(this.context.ModelState.ToString());
             }
 
-            CarMake result = this.service.Save(item);
-            if (result == null)
+            if (!this.context.CommandUser.IsAuthenticated)
             {
-                return this.Error($"CarMake: {item} creation failed");
+                return this.AuthenticationError("User is not authenticated");
             }
+
+            CarMake result = this.service.Save(item);
 
             return this.Success(result);
         }

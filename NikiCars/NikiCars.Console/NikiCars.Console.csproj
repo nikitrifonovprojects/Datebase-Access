@@ -72,21 +72,34 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Authentication\AuthenticationManager.cs" />
+    <Compile Include="Authentication\CommandUser.cs" />
+    <Compile Include="Authentication\Token.cs" />
+    <Compile Include="CommandClient\CommandClient.cs" />
+    <Compile Include="CommandClient\CommandRequestData.cs" />
+    <Compile Include="CommandClient\CommandResponceData.cs" />
     <Compile Include="Commands\BaseCommand.cs" />
     <Compile Include="Commands\CreateCarCoupeCommand.cs" />
     <Compile Include="Commands\CreateCarMakeCommand.cs" />
-    <Compile Include="Commands\FindCarCoupe.cs" />
+    <Compile Include="Commands\CreateUserCommand.cs" />
+    <Compile Include="Commands\EditCommand.cs" />
+    <Compile Include="Commands\FindCarCoupeCommand.cs" />
     <Compile Include="Commands\Invoker.cs" />
+    <Compile Include="Commands\LoginCommand.cs" />
     <Compile Include="Commands\NotFoundCommand.cs" />
     <Compile Include="Commands\ServerErrorCommand.cs" />
     <Compile Include="DependencyContainer.cs" />
     <Compile Include="Input\CommandContext.cs" />
     <Compile Include="Input\Parser.cs" />
+    <Compile Include="Interfaces\IAuthenticationManager.cs" />
     <Compile Include="Interfaces\ICommandResult.cs" />
+    <Compile Include="Interfaces\ICommandUser.cs" />
     <Compile Include="Interfaces\IModelBinder.cs" />
     <Compile Include="Interfaces\ICommand.cs" />
     <Compile Include="Interfaces\IParser.cs" />
     <Compile Include="ModelBinders\DefaultModelBinder.cs" />
+    <Compile Include="Output\AuthenticationErrorResult.cs" />
+    <Compile Include="Output\AuthorizationErrorResult.cs" />
     <Compile Include="Output\BaseCommandResult.cs" />
     <Compile Include="Output\ErrorResult.cs" />
     <Compile Include="Output\NotFoundResult.cs" />

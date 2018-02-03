@@ -65,5 +65,25 @@ namespace NikiCars.Console.Commands
         {
             return new ServerErrorResult<T2>();
         }
+
+        protected ICommandResult AuthorizationError<T2>()
+        {
+            return new AuthorizationErrorResult<T2>();
+        }
+
+        protected ICommandResult AuthorizationError<T2>(T2 item)
+        {
+            return new AuthorizationErrorResult<T2>(item);
+        }
+
+        protected ICommandResult AuthenticationError<T2>()
+        {
+            return new AuthenticationErrorResult<T2>();
+        }
+
+        protected ICommandResult AuthenticationError<T2>(T2 item)
+        {
+            return new AuthenticationErrorResult<T2>(item);
+        }
     }
 }

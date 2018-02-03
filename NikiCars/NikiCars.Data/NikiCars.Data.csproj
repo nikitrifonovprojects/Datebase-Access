@@ -59,6 +59,7 @@
     <Compile Include="FuelTypeRepository.cs" />
     <Compile Include="GearBoxTypeRepository.cs" />
     <Compile Include="IRepository.cs" />
+    <Compile Include="IUserRepository.cs" />
     <Compile Include="NumberOfDoorsRepository.cs" />
     <Compile Include="PictureRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
