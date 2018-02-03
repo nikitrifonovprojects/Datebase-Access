@@ -36,6 +36,11 @@ namespace NikiCars.Console.CommandClients
                 responce.Data = null;
             }
 
+            if (responce.Status == "Authentication error")
+            {
+                ClearToken();
+            }
+
             return responce;
         }
 
