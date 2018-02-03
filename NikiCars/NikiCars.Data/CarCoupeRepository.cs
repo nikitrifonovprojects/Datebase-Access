@@ -23,7 +23,8 @@ namespace NikiCars.Data
         {
             return new Dictionary<string, SqlParameter>
             {
-                { "Name", new SqlParameter() { Value = item.Name } }
+                { "Name", new SqlParameter() { Value = item.Name } },
+                { "UserID", new SqlParameter() { Value = item.UserID } }
             };
         }
 
@@ -42,6 +43,7 @@ namespace NikiCars.Data
             CarCoupe carCoupe = new CarCoupe();
             carCoupe.ID = Convert.ToInt32(reader[PRIMARY_KEY]);
             carCoupe.Name = Convert.ToString(reader["Name"]);
+            carCoupe.UserID = Convert.ToInt32(reader["UserID"]);
 
             return carCoupe;
         }

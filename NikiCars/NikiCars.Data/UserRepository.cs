@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using NikiCars.Data.Models;
 
 namespace NikiCars.Data
 {
-    public class UserRepository : BaseRepository<User>
+    public class UserRepository :  BaseRepository<User>, IUserRepository
     {
         private const string PRIMARY_KEY = "UserID";
 
@@ -14,7 +15,6 @@ namespace NikiCars.Data
             return new Dictionary<string, SqlParameter>
             {
                 {"Address", new SqlParameter() { Value = item.Address } },
-                {"UserID", new SqlParameter() { Value = item.ID.ToString() } },
                 {"Name", new SqlParameter() { Value = item.Name } },
                 {"Email", new SqlParameter() { Value = item.Email } },
                 {"LoginName", new SqlParameter() { Value = item.LoginName } },
@@ -67,6 +67,75 @@ namespace NikiCars.Data
             user.PageName = Convert.ToString(reader["PageName"]);
             user.IsOfficialImporter = Convert.ToBoolean(reader["IsOfficialImporter"]);
             user.IsOrganisation = Convert.ToBoolean(reader["IsOrganisation"]);
+
+            return user;
+        }
+
+        public User GetUserByName(string loginName)
+        {
+            SqlCommand command = new SqlCommand("SELECT * FROM Users WHERE LoginName = @param1")
+            {
+                CommandType = CommandType.Text,
+                Connection = Connection
+            };
+
+            command.Parameters.AddWithValue("@param1", loginName);
+
+            User user = null;
+
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    user = MapProperties(reader);
+                }
+            }
+
+            return user;
+        }
+
+        public User GetUserByEmail(string email)
+        {
+            SqlCommand command = new SqlCommand("SELECT * FROM Users WHERE Email = @param1")
+            {
+                CommandType = CommandType.Text,
+                Connection = Connection
+            };
+
+            command.Parameters.AddWithValue("@param1", email);
+
+            User user = null;
+
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    user = MapProperties(reader);
+                }
+            }
+
+            return user;
+        }
+
+        public User GetUserByMobilePhone(string phone)
+        {
+            SqlCommand command = new SqlCommand("SELECT * FROM Users WHERE MobilePhone = @param1")
+            {
+                CommandType = CommandType.Text,
+                Connection = Connection
+            };
+
+            command.Parameters.AddWithValue("@param1", phone);
+
+            User user = null;
+
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    user = MapProperties(reader);
+                }
+            }
 
             return user;
         }

@@ -9,5 +9,7 @@ namespace NikiCars.Data.Models
         [Required]
         [StringLength(15)]
         public string Name { get; set; }
+
+        public int UserID { get; set; }
     }
 }
