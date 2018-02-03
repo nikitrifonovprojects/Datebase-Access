@@ -29,7 +29,7 @@ namespace NikiCars.Data
                 {"IsUsed", new SqlParameter() { Value = item.IsUsed.ToString() } },
                 {"IsForParts", new SqlParameter() { Value = item.IsForParts.ToString() } },
                 {"IsDamaged", new SqlParameter() { Value = item.IsDamaged.ToString() } },
-                {"Title", new SqlParameter() { Value = item.Title } },
+                {"Title", new SqlParameter() { Value = (object)item.Title ?? DBNull.Value } },
                 {"DateCreated", new SqlParameter() { Value = item.DateCreated.ToString() } },
                 {"UserID", new SqlParameter() { Value = item.UserID.ToString() } }
             };

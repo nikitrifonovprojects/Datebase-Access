@@ -6,7 +6,7 @@ using NikiCars.Data.Models;
 
 namespace NikiCars.Data
 {
-    public class UserRepository :  BaseRepository<User>, IUserRepository
+    public class UserRepository : BaseRepository<User>, IUserRepository
     {
         private const string PRIMARY_KEY = "UserID";
 
@@ -14,17 +14,17 @@ namespace NikiCars.Data
         {
             return new Dictionary<string, SqlParameter>
             {
-                {"Address", new SqlParameter() { Value = item.Address } },
+                {"Address", new SqlParameter() { Value = (object)item.Address ?? DBNull.Value } },
                 {"Name", new SqlParameter() { Value = item.Name } },
                 {"Email", new SqlParameter() { Value = item.Email } },
                 {"LoginName", new SqlParameter() { Value = item.LoginName } },
                 {"Password", new SqlParameter() { Value = item.Password } },
                 {"MobilePhone", new SqlParameter() { Value = item.MobilePhone } },
                 {"CityID", new SqlParameter() { Value = item.CityID.ToString() } },
-                {"Type", new SqlParameter() { Value = item.Type } },
-                {"Bulstat", new SqlParameter() { Value = item.Bulstat } },
-                {"Website", new SqlParameter() { Value = item.Website } },
-                {"PageName", new SqlParameter() { Value = item.PageName } },
+                {"Type", new SqlParameter() { Value = (object)item.Type ?? DBNull.Value } },
+                {"Bulstat", new SqlParameter() { Value = (object)item.Bulstat ?? DBNull.Value } },
+                {"Website", new SqlParameter() { Value = (object)item.Website ?? DBNull.Value } },
+                {"PageName", new SqlParameter() { Value = (object)item.PageName ?? DBNull.Value } },
                 {"IsOrganisation", new SqlParameter() { Value = item.IsOrganisation.ToString() } },
                 {"IsOfficialImporter", new SqlParameter() { Value = item.IsOfficialImporter.ToString() } }
             };
