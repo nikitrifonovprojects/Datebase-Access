@@ -1,15 +1,13 @@
-﻿using System.Text;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
+using NikiCars.Console.CommandClients;
 using NikiCars.Console.Interfaces;
 
 namespace NikiCars.Console.Output
 {
     public abstract class BaseCommandResult<T> : ICommandResult
     {
-        private const string STATUS = "Status: ";
-        private const string DATA = "Data: ";
         protected T item;
         private JsonSerializerSettings settings;
 
@@ -29,18 +27,11 @@ namespace NikiCars.Console.Output
 
         public string ExecuteResult()
         {
-            StringBuilder builder = new StringBuilder();
-            builder.Append(STATUS);
-            builder.AppendLine(GetStatus());
+            CommandResponceData commandResponceData = new CommandResponceData();
+            commandResponceData.Status = GetStatus();
+            commandResponceData.Data = this.item;
 
-            if (this.item != null)
-            {
-                var json = JsonConvert.SerializeObject(this.item, Formatting.None, this.settings);
-                builder.Append(DATA);
-                builder.Append(json);
-            }
-
-            return builder.ToString();
+            return JsonConvert.SerializeObject(commandResponceData);
         }
     }
 }

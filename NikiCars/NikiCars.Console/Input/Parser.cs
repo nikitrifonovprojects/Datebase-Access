@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
+using NikiCars.Console.CommandClients;
 using NikiCars.Console.Interfaces;
 
 namespace NikiCars.Console.Input
@@ -24,54 +25,44 @@ namespace NikiCars.Console.Input
                 return context;
             }
 
-            Dictionary<string, string> inputParameters = new Dictionary<string, string>();
+            CommandRequestData command = JsonConvert.DeserializeObject<CommandRequestData>(input);
 
-            var parameters = input.Split(new char[] { ';' });
-            for (int i = 0; i < parameters.Length; i++)
-            {
-                int index = parameters[i].IndexOf(':');
-                string param = parameters[i].Substring(0, index);
-                string value = parameters[i].Substring(index + 1);
-
-                inputParameters.Add(param, value);
-            }
-
-            Execute(inputParameters, context);
+            Execute(command, context);
 
             return context;
         }
 
-        private void Execute(Dictionary<string, string> inputParameters, CommandContext context)
+        private void Execute(CommandRequestData command, CommandContext context)
         {
-            ParseCommand(inputParameters, context);
-            ParseData(inputParameters, context);
-            ParseToken(inputParameters, context);
+            ParseCommand(command, context);
+            ParseData(command, context);
+            ParseToken(command, context);
         }
 
-        private void ParseToken(Dictionary<string, string> inputParameters, CommandContext context)
+        private void ParseToken(CommandRequestData command, CommandContext context)
         {
             string value = string.Empty;
-            if (inputParameters.ContainsKey("token"))
+            if (command.Token != null)
             {
-                value = inputParameters["token"];
+                value = command.Token;
             }
 
             context.CommandUser = this.manager.GetCommandUser(value);
         }
 
-        private void ParseData(Dictionary<string, string> inputParameters, CommandContext context)
+        private void ParseData(CommandRequestData command, CommandContext context)
         {
-            if (inputParameters.ContainsKey("data"))
+            if (command.Data != null)
             {
-                context.Properties = JsonConvert.DeserializeObject<Dictionary<string, string>>(inputParameters["data"].Trim());
+                context.Properties = command.Data;
             }
         }
 
-        private void ParseCommand(Dictionary<string, string> inputParameters, CommandContext context)
+        private void ParseCommand(CommandRequestData command, CommandContext context)
         {
-            if (inputParameters.ContainsKey("command"))
+            if (!string.IsNullOrEmpty(command.Command))
             {
-                context.CommandText = inputParameters["command"].Trim();
+                context.CommandText = command.Command;
             }
         }
 

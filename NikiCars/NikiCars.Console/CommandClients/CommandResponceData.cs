@@ -1,8 +1,8 @@
-﻿namespace NikiCars.Console.CommandClient
+﻿namespace NikiCars.Console.CommandClients
 {
     public class CommandResponceData
     {
-        public string Data { get; set; }
+        public object Data { get; set; }
 
         public string Status { get; set; }
     }

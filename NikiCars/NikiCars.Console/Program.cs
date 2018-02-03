@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using NikiCars.Console.Authentication;
+using NikiCars.Console.CommandClients;
 using NikiCars.Console.Commands;
 using NikiCars.Console.Input;
 using NikiCars.Console.Interfaces;
@@ -24,20 +25,13 @@ namespace NikiCars.Console
         {
             DependencyContainer.RegisterDependencies();
             //Command string will be in format: "command: add CarCoupe;data:{json}"
+            string command = "login User";
+            User user = new User();
+            user.Password = "123456";
+            user.LoginName = "Pesho11";
 
-            var prop = new Dictionary<string, string>();
-            //prop.Add("Name", "Kon");
-            //prop.Add("LoginName", "Pesho11");
-            //prop.Add("Password", "123456");
-            //prop.Add("MobilePhone", "0877895512");
-            //prop.Add("CityID", "1");
-            //prop.Add("IsOrganisation", "false");
-            //prop.Add("IsOfficialImporter", "false");
-            //prop.Add("Address", "null");
-            //prop.Add("Type", "null");
-            //prop.Add("Bulstat", "null");
-            //prop.Add("Website", "null");
-            //prop.Add("PageName", "null");
+            var client = new CommandClient(DependencyContainer.Resolve<Invoker>());
+            var result = client.SendRequest(command, user);
 
             //prop.Add("LoginName", "Pesho11");
             //prop.Add("Password", "123456");
@@ -51,7 +45,7 @@ namespace NikiCars.Console
 
             //int count = result.IndexOf(@"Data: ");
             //var token = result.Substring(count + 7);
-            
+
             ////var ass = new DefaultModelBinder<Car>();
             ////var res = ass.BindModel(prop);
 

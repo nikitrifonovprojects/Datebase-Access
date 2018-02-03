@@ -11,7 +11,7 @@ namespace NikiCars.Console.Authentication
         {
             Token token = new Token();
             token.Guid = Guid.NewGuid().ToString();
-            token.Expiration = DateTime.Now.AddHours(6);
+            token.Expiration = DateTime.Now.AddHours(1);
             token.UserData = commandUser.UserData;
             token.UserId = commandUser.ID;
             token.UserName = commandUser.Username;
