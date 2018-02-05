@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using NikiCars.Console.Input;
-using NikiCars.Console.Interfaces;
+using NikiCars.Command.Interfaces;
 using Unity.Resolution;
 
 namespace NikiCars.Console.Commands
@@ -33,7 +32,6 @@ namespace NikiCars.Console.Commands
                     {
                         using (var command = DependencyContainer.Resolve<ICommand>(context.CommandText, new DependencyOverride(typeof(CommandContext), context)))
                         {
-                            var result = command.Execute();
                             return command.Execute();
                         }
                     }
@@ -41,7 +39,6 @@ namespace NikiCars.Console.Commands
                     {
                         using (var command = DependencyContainer.Resolve<NotFoundCommand>(new DependencyOverride(typeof(CommandContext), context)))
                         {
-                            var result = command.Execute();
                             return command.Execute();
                         }
                     }
@@ -51,7 +48,6 @@ namespace NikiCars.Console.Commands
             {
                 using (var command = DependencyContainer.Resolve<ServerErrorCommand>(new DependencyOverride(typeof(CommandContext), context)))
                 {
-                    var result = command.Execute();
                     return command.Execute();
                 }
             }

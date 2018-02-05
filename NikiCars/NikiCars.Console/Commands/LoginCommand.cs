@@ -1,8 +1,7 @@
-﻿using NikiCars.Console.Authentication;
-using NikiCars.Console.Input;
-using NikiCars.Console.Interfaces;
+﻿using NikiCars.Command.Interfaces;
+using NikiCars.Command.Validation;
+using NikiCars.Console.Authentication;
 using NikiCars.Console.Routing;
-using NikiCars.Console.Validation;
 using NikiCars.Data.Models;
 using NikiCars.Services;
 
@@ -24,6 +23,7 @@ namespace NikiCars.Console.Commands
         protected override ICommandResult ExecuteAction(User item)
         {
             User user = null;
+
             if (item.LoginName != null)
             {
                 user = this.service.GetUserByLoginName(item.LoginName, item.Password);
@@ -53,7 +53,7 @@ namespace NikiCars.Console.Commands
             commandUser.IsAuthenticated = true;
             commandUser.Username = item.Name;
             commandUser.UserData = item;
-            commandUser.UserRoles.Add("roles");
+            commandUser.UserRoles.Add("User");
 
             return commandUser;
         }

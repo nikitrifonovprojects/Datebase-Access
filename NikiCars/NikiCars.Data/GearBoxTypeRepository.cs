@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using NikiCars.Command.Interfaces;
 using NikiCars.Data.Models;
 
 namespace NikiCars.Data
@@ -11,6 +9,11 @@ namespace NikiCars.Data
     public class GearBoxTypeRepository : BaseRepository<GearBoxType>
     {
         private const string PRIMARY_KEY = "GearboxTypeID";
+
+        public GearBoxTypeRepository(IConfig config) 
+            : base(config)
+        {
+        }
 
         protected override Dictionary<string, SqlParameter> GetCreateParameters(GearBoxType item)
         {

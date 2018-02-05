@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using NikiCars.Command.Interfaces;
 using NikiCars.Data.Models;
 
 namespace NikiCars.Data
@@ -8,6 +9,11 @@ namespace NikiCars.Data
     public class CarCoupeRepository : BaseRepository<CarCoupe>
     {
         private const string PRIMARY_KEY = "CarCoupeID";
+
+        public CarCoupeRepository(IConfig config) 
+            : base(config)
+        {
+        }
 
         protected override string GetTableName()
         {

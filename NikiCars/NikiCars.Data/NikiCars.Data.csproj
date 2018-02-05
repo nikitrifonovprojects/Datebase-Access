@@ -69,6 +69,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\NikiCars.Command.Interfaces\NikiCars.Command.Interfaces.csproj">
+      <Project>{CE437A78-8594-4C7D-B618-43B57287117F}</Project>
+      <Name>NikiCars.Command.Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NikiCars.Data.Models\NikiCars.Data.Models.csproj">
       <Project>{d28f0078-f301-4062-b405-45cd6d39fb2b}</Project>
       <Name>NikiCars.Data.Models</Name>

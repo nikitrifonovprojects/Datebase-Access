@@ -6,17 +6,19 @@ namespace NikiCars.Services
     public class UserService : BaseService<User>, IUserService
     {
         private IUserRepository userRepository;
+        private ICryptographyService cryptography;
 
-        public UserService(IUserRepository repo) 
+        public UserService(IUserRepository repo, ICryptographyService cryptography) 
             : base(repo)
         {
             this.userRepository = repo;
+            this.cryptography = cryptography;
         }
 
         public User GetUserByEmail(string email, string password)
         {
             User user =  this.userRepository.GetUserByEmail(email);
-            if (user.Password == password)
+            if (user != null && this.cryptography.ValidatePassword(password, user.Password))
             {
                 return user;
             }
@@ -27,7 +29,7 @@ namespace NikiCars.Services
         public User GetUserByLoginName(string name, string password)
         {
             User user = this.userRepository.GetUserByName(name);
-            if (user.Password == password)
+            if (user != null && this.cryptography.ValidatePassword(password, user.Password))
             {
                 return user;
             }

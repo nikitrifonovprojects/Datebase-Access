@@ -1,7 +1,7 @@
 ﻿using NikiCars.Console.Input;
-using NikiCars.Console.Interfaces;
+using NikiCars.Command.Interfaces;
 using NikiCars.Console.Routing;
-using NikiCars.Console.Validation;
+using NikiCars.Command.Validation;
 using NikiCars.Data.Models;
 using NikiCars.Services;
 

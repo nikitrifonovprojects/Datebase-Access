@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
+using NikiCars.Command.Interfaces;
+using NikiCars.Command.Validation;
 using NikiCars.Console.Authentication;
 using NikiCars.Console.Input;
-using NikiCars.Console.Interfaces;
 using NikiCars.Console.ModelBinders;
 using NikiCars.Console.Routing;
-using NikiCars.Console.Validation;
+using NikiCars.Console.Utility;
 using NikiCars.Data;
 using NikiCars.Services;
 using Unity;
@@ -21,10 +22,12 @@ namespace NikiCars.Console
         public static void RegisterDependencies()
         {
             container = new UnityContainer();
+            container.RegisterType<IConfig, Config>();
             container.RegisterType<IAuthenticationManager, AuthenticationManager>();
 
             container.RegisterType(typeof(IService<>), typeof(BaseService<>));
             container.RegisterType<IUserService, UserService>();
+            container.RegisterType<ICryptographyService, CryptographyService>();
 
             container.RegisterType<IUserRepository, UserRepository>();
 
@@ -46,8 +49,9 @@ namespace NikiCars.Console
 
             container.RegisterType<ICommandUser, CommandUser>();
 
-            var assem = Assembly.GetAssembly(typeof(ICommand));
-            var commandTypes = assem.GetExportedTypes().Where(x => typeof(ICommand).IsAssignableFrom(x) && !x.IsAbstract && x.IsClass && x.IsDefined(typeof(CommandRouteAttribute)));
+            //var assem = Assembly.GetAssembly(typeof(ICommand));
+            //var commandTypes = assem.GetExportedTypes().Where(x => typeof(ICommand).IsAssignableFrom(x) && !x.IsAbstract && x.IsClass && x.IsDefined(typeof(CommandRouteAttribute)));
+            var commandTypes = AppDomain.CurrentDomain.GetAssemblies().SelectMany(s => s.GetTypes()).Where(x => typeof(ICommand).IsAssignableFrom(x) && !x.IsAbstract && x.IsClass && x.IsDefined(typeof(CommandRouteAttribute)));
 
             foreach (var type in commandTypes)
             {

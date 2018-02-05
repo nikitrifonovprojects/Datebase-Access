@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using NikiCars.Command.Interfaces;
 using NikiCars.Data.Models;
 
 namespace NikiCars.Data
@@ -9,6 +10,11 @@ namespace NikiCars.Data
     public class UserRepository : BaseRepository<User>, IUserRepository
     {
         private const string PRIMARY_KEY = "UserID";
+
+        public UserRepository(IConfig config) 
+            : base(config)
+        {
+        }
 
         protected override Dictionary<string, SqlParameter> GetCreateParameters(User item)
         {

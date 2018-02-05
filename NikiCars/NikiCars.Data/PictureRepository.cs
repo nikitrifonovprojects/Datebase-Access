@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Text;
+using NikiCars.Command.Interfaces;
 using NikiCars.Data.Models;
 
 namespace NikiCars.Data
@@ -10,6 +11,11 @@ namespace NikiCars.Data
     public class PictureRepository : BaseRepository<Picture>
     {
         private const string PRIMARY_KEY = "PictureID";
+
+        public PictureRepository(IConfig config) 
+            : base(config)
+        {
+        }
 
         protected override Dictionary<string, SqlParameter> GetCreateParameters(Picture item)
         {

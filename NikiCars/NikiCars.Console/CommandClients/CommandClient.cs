@@ -30,12 +30,6 @@ namespace NikiCars.Console.CommandClients
 
             CommandResponceData responce = JsonConvert.DeserializeObject<CommandResponceData>(commandResult);
 
-            if (command == "login User" && responce.Status == "Success")
-            {
-                SetToken(Convert.ToString(responce.Data));
-                responce.Data = null;
-            }
-
             if (responce.Status == "Authentication error")
             {
                 ClearToken();
@@ -44,12 +38,12 @@ namespace NikiCars.Console.CommandClients
             return responce;
         }
 
-        private void SetToken(string token)
+        public void SetToken(string token)
         {
             this.token = token;
         }
 
-        private void ClearToken()
+        public void ClearToken()
         {
             this.token = null;
         }

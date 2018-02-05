@@ -42,8 +42,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseService.cs" />
+    <Compile Include="ICryptographyService.cs" />
     <Compile Include="IService.cs" />
     <Compile Include="IUserService.cs" />
+    <Compile Include="CryptographyService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserService.cs" />
   </ItemGroup>

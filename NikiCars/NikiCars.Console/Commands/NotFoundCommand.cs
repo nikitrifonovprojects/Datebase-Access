@@ -1,6 +1,5 @@
-﻿using NikiCars.Console.Input;
-using NikiCars.Console.Interfaces;
-using NikiCars.Console.Validation;
+﻿using NikiCars.Command.Interfaces;
+using NikiCars.Command.Validation;
 
 namespace NikiCars.Console.Commands
 {

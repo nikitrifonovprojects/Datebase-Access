@@ -35,6 +35,12 @@
     <Reference Include="CommonServiceLocator, Version=2.0.2.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\packages\Unity.5.5.6\lib\net45\CommonServiceLocator.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.IdentityModel.Logging, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Logging.5.2.0\lib\net451\Microsoft.IdentityModel.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Tokens, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Tokens.5.2.0\lib\net451\Microsoft.IdentityModel.Tokens.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -43,6 +49,10 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.5.2.0\lib\net451\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -74,7 +84,6 @@
   <ItemGroup>
     <Compile Include="Authentication\AuthenticationManager.cs" />
     <Compile Include="Authentication\CommandUser.cs" />
-    <Compile Include="Authentication\Token.cs" />
     <Compile Include="CommandClients\CommandClient.cs" />
     <Compile Include="CommandClients\CommandRequestData.cs" />
     <Compile Include="CommandClients\CommandResponceData.cs" />
@@ -89,14 +98,7 @@
     <Compile Include="Commands\NotFoundCommand.cs" />
     <Compile Include="Commands\ServerErrorCommand.cs" />
     <Compile Include="DependencyContainer.cs" />
-    <Compile Include="Input\CommandContext.cs" />
     <Compile Include="Input\Parser.cs" />
-    <Compile Include="Interfaces\IAuthenticationManager.cs" />
-    <Compile Include="Interfaces\ICommandResult.cs" />
-    <Compile Include="Interfaces\ICommandUser.cs" />
-    <Compile Include="Interfaces\IModelBinder.cs" />
-    <Compile Include="Interfaces\ICommand.cs" />
-    <Compile Include="Interfaces\IParser.cs" />
     <Compile Include="ModelBinders\DefaultModelBinder.cs" />
     <Compile Include="Output\AuthenticationErrorResult.cs" />
     <Compile Include="Output\AuthorizationErrorResult.cs" />
@@ -108,16 +110,23 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Routing\CommandRouteAttribute.cs" />
-    <Compile Include="Validation\EntityValidationResult.cs" />
-    <Compile Include="Validation\EntityValidator.cs" />
-    <Compile Include="Validation\IValidator.cs" />
-    <Compile Include="Validation\Validator.cs" />
+    <Compile Include="Utility\Config.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\NikiCars.Command.Interfaces\NikiCars.Command.Interfaces.csproj">
+      <Project>{ce437a78-8594-4c7d-b618-43b57287117f}</Project>
+      <Name>NikiCars.Command.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NikiCars.Command.Validation\NikiCars.Command.Validation.csproj">
+      <Project>{eadb2aa0-eb75-4119-bf04-cd59c7baac38}</Project>
+      <Name>NikiCars.Command.Validation</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NikiCars.Data.Models\NikiCars.Data.Models.csproj">
       <Project>{d28f0078-f301-4062-b405-45cd6d39fb2b}</Project>
       <Name>NikiCars.Data.Models</Name>
@@ -131,6 +140,8 @@
       <Name>NikiCars.Services</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

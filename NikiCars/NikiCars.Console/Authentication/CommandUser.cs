@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
-using NikiCars.Console.Interfaces;
+﻿using System.Collections.Generic;
+using NikiCars.Command.Interfaces;
 
 namespace NikiCars.Console.Authentication
 {

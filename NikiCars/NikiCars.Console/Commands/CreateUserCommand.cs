@@ -1,7 +1,7 @@
-﻿using NikiCars.Console.Input;
-using NikiCars.Console.Interfaces;
+﻿using NikiCars.Command.Interfaces;
+using NikiCars.Console.Input;
 using NikiCars.Console.Routing;
-using NikiCars.Console.Validation;
+using NikiCars.Command.Validation;
 using NikiCars.Data.Models;
 using NikiCars.Services;
 
@@ -11,11 +11,13 @@ namespace NikiCars.Console.Commands
     public class CreateUserCommand : BaseCommand<User>
     {
         private IUserService service;
+        private ICryptographyService cryptography;
 
-        public CreateUserCommand(CommandContext context, IUserService service, IModelBinder<User> binder, IValidator validation) 
+        public CreateUserCommand(CommandContext context, IUserService service, IModelBinder<User> binder, IValidator validation, ICryptographyService cryptography) 
             : base(context, binder, validation)
         {
             this.service = service;
+            this.cryptography = cryptography;
         }
 
         protected override ICommandResult ExecuteAction(User item)
@@ -40,6 +42,7 @@ namespace NikiCars.Console.Commands
                 return this.Error($"MobilePhone {item.MobilePhone} already exists");
             }
 
+            item.Password = this.cryptography.HashPassword(item.Password);
             User result = this.service.Save(item);
 
             return this.Success(result);

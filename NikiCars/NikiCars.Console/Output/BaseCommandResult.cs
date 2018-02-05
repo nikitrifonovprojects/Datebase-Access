@@ -2,7 +2,7 @@
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using NikiCars.Console.CommandClients;
-using NikiCars.Console.Interfaces;
+using NikiCars.Command.Interfaces;
 
 namespace NikiCars.Console.Output
 {

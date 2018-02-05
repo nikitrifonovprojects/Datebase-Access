@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Text;
+using NikiCars.Command.Interfaces;
 
 namespace NikiCars.Data
 {
@@ -15,9 +16,9 @@ namespace NikiCars.Data
 
         protected SqlConnection Connection { get; private set; }
 
-        public BaseRepository()
+        public BaseRepository(IConfig config)
         {
-            this.Connection = new SqlConnection(ConfigurationManager.AppSettings["ConnectionString"]);
+            this.Connection = new SqlConnection(config.ConnectionString);
             this.Connection.Open();
         }
 
