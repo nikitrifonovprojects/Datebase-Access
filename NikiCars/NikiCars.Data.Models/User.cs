@@ -31,6 +31,9 @@ namespace NikiCars.Data.Models
         [Required]
         public int CityID { get; set; }
 
+        [Required]
+        public int RoleID { get; set; }
+
         public string Address { get; set; }
 
         public string Type { get; set; }

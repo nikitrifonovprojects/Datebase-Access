@@ -27,6 +27,7 @@ namespace NikiCars.Data
                 {"Password", new SqlParameter() { Value = item.Password } },
                 {"MobilePhone", new SqlParameter() { Value = item.MobilePhone } },
                 {"CityID", new SqlParameter() { Value = item.CityID.ToString() } },
+                {"RoleID", new SqlParameter() { Value = item.RoleID.ToString() } },
                 {"Type", new SqlParameter() { Value = (object)item.Type ?? DBNull.Value } },
                 {"Bulstat", new SqlParameter() { Value = (object)item.Bulstat ?? DBNull.Value } },
                 {"Website", new SqlParameter() { Value = (object)item.Website ?? DBNull.Value } },
@@ -67,6 +68,7 @@ namespace NikiCars.Data
             user.Password = Convert.ToString(reader["Password"]);
             user.MobilePhone = Convert.ToString(reader["MobilePhone"]);
             user.CityID = Convert.ToInt32(reader["CityID"]);
+            user.RoleID = Convert.ToInt32(reader["RoleID"]);
             user.Type = Convert.ToString(reader["Type"]);
             user.Bulstat = Convert.ToString(reader["Bulstat"]);
             user.Website = Convert.ToString(reader["Website"]);
