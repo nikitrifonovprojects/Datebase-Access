@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace NikiCars.Data.Models
 {
-    public class UserRoles : IIdentifiable
+    public class UserRole : IIdentifiable
     {
         public int ID { get; set; }
 
@@ -13,5 +14,7 @@ namespace NikiCars.Data.Models
         [Required]
         [StringLength(20)]
         public string RoleDescription { get; set; }
+
+        public List<User> Users { get; set; }
     }
 }

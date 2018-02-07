@@ -6,16 +6,16 @@ using NikiCars.Data.Models;
 
 namespace NikiCars.Data
 {
-    public class UserRolesRepository : BaseRepository<UserRoles>
+    public class UserRoleRepository : BaseRepository<UserRole>
     {
         private const string PRIMARY_KEY = "RoleID";
 
-        public UserRolesRepository(IConfig config) 
+        public UserRoleRepository(IConfig config) 
             : base(config)
         {
         }
 
-        protected override Dictionary<string, SqlParameter> GetCreateParameters(UserRoles item)
+        protected override Dictionary<string, SqlParameter> GetCreateParameters(UserRole item)
         {
             return new Dictionary<string, SqlParameter>
             {
@@ -29,7 +29,7 @@ namespace NikiCars.Data
             return PRIMARY_KEY;
         }
 
-        protected override string GetPrimaryKeyValue(UserRoles item)
+        protected override string GetPrimaryKeyValue(UserRole item)
         {
             return item.ID.ToString();
         }
@@ -39,14 +39,19 @@ namespace NikiCars.Data
             return "UserRoles";
         }
 
-        protected override void MapPrimaryKey(UserRoles item, SqlDataReader reader)
+        protected override void MapPrimaryKey(UserRole item, SqlDataReader reader)
         {
             item.ID = Convert.ToInt32(reader[PRIMARY_KEY]);
         }
 
-        protected override UserRoles MapProperties(SqlDataReader reader)
+        protected override UserRole MapProperties(SqlDataReader reader)
         {
-            UserRoles userRoles = new UserRoles();
+            return StaticMapProperties(reader);
+        }
+
+        internal static UserRole StaticMapProperties(SqlDataReader reader)
+        {
+            UserRole userRoles = new UserRole();
             userRoles.ID = Convert.ToInt32(reader[PRIMARY_KEY]);
             userRoles.RoleName = Convert.ToString(reader["RoleName"]);
             userRoles.RoleDescription = Convert.ToString(reader["RoleDescription"]);
