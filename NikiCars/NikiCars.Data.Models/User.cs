@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace NikiCars.Data.Models
 {
@@ -40,6 +41,8 @@ namespace NikiCars.Data.Models
         public string Website { get; set; }
 
         public string PageName { get; set; }
+
+        public List<UserRole> Roles { get; set; } 
 
         [Required]
         public bool IsOrganisation { get; set; }

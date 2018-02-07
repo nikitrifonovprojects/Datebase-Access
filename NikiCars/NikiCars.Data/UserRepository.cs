@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using NikiCars.Command.Interfaces;
+using NikiCars.Data.Includes;
 using NikiCars.Data.Models;
 
 namespace NikiCars.Data
@@ -11,7 +12,7 @@ namespace NikiCars.Data
     {
         private const string PRIMARY_KEY = "UserID";
 
-        public UserRepository(IConfig config) 
+        public UserRepository(IConfig config)
             : base(config)
         {
         }
@@ -77,7 +78,7 @@ namespace NikiCars.Data
             return user;
         }
 
-        public User GetUserByName(string loginName)
+        public User GetUserByName(string loginName, List<UserIncludes> list = null)
         {
             SqlCommand command = new SqlCommand("SELECT * FROM Users WHERE LoginName = @param1")
             {
@@ -97,10 +98,12 @@ namespace NikiCars.Data
                 }
             }
 
+            ProcessIncludes(user, list);
+
             return user;
         }
 
-        public User GetUserByEmail(string email)
+        public User GetUserByEmail(string email, List<UserIncludes> list = null)
         {
             SqlCommand command = new SqlCommand("SELECT * FROM Users WHERE Email = @param1")
             {
@@ -144,6 +147,48 @@ namespace NikiCars.Data
             }
 
             return user;
+        }
+
+        private void ProcessIncludes(User user, List<UserIncludes> list)
+        {
+            if (user != null && list != null)
+            {
+                if (list.Contains(UserIncludes.UserRoles))
+                {
+                    user.Roles = GetUserRoles(user.ID);
+                }
+            }
+        }
+
+        private List<UserRole> GetUserRoles(int userId)
+        {
+            SqlCommand command = new SqlCommand("SELECT usr.RoleID, usr.RoleName, usr.RoleDescription" +
+                                                " FROM UserRoles usr" +
+                                                " INNER JOIN Users_UserRoles ur" +
+                                                " ON ur.RoleID = usr.RoleID" +
+                                                " INNER JOIN  Users u" +
+                                                " ON u.UserID = ur.UserID" +
+                                                " WHERE u.UserID = @param1")
+            {
+                CommandType = CommandType.Text,
+                Connection = Connection
+            };
+
+            command.Parameters.AddWithValue("@param1", userId);
+            command.ExecuteNonQuery();
+
+            List<UserRole> list = new List<UserRole>();
+
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    var role = UserRoleRepository.StaticMapProperties(reader);
+                    list.Add(role);
+                }
+            }
+
+            return list;
         }
     }
 }

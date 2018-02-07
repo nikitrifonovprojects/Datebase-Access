@@ -1,4 +1,6 @@
-﻿using NikiCars.Data;
+﻿using System.Collections.Generic;
+using NikiCars.Data;
+using NikiCars.Data.Includes;
 using NikiCars.Data.Models;
 
 namespace NikiCars.Services
@@ -15,9 +17,9 @@ namespace NikiCars.Services
             this.cryptography = cryptography;
         }
 
-        public User GetUserByEmail(string email, string password)
+        public User GetUserByEmail(string email, string password, List<UserIncludes> list = null)
         {
-            User user =  this.userRepository.GetUserByEmail(email);
+            User user =  this.userRepository.GetUserByEmail(email, list);
             if (user != null && this.cryptography.ValidatePassword(password, user.Password))
             {
                 return user;
@@ -26,9 +28,9 @@ namespace NikiCars.Services
             return user;
         }
 
-        public User GetUserByLoginName(string name, string password)
+        public User GetUserByLoginName(string name, string password, List<UserIncludes> list = null)
         {
-            User user = this.userRepository.GetUserByName(name);
+            User user = this.userRepository.GetUserByName(name, list);
             if (user != null && this.cryptography.ValidatePassword(password, user.Password))
             {
                 return user;

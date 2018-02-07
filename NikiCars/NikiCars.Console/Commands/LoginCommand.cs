@@ -1,7 +1,10 @@
-﻿using NikiCars.Command.Interfaces;
+﻿using System.Collections.Generic;
+using System.Linq;
+using NikiCars.Command.Interfaces;
 using NikiCars.Command.Validation;
 using NikiCars.Console.Authentication;
 using NikiCars.Console.Routing;
+using NikiCars.Data.Includes;
 using NikiCars.Data.Models;
 using NikiCars.Services;
 
@@ -26,7 +29,7 @@ namespace NikiCars.Console.Commands
 
             if (item.LoginName != null)
             {
-                user = this.service.GetUserByLoginName(item.LoginName, item.Password);
+                user = this.service.GetUserByLoginName(item.LoginName, item.Password, new List<UserIncludes>() { UserIncludes.UserRoles } );
                 if (user == null)
                 {
                     return this.Error($"User not found");
@@ -34,13 +37,13 @@ namespace NikiCars.Console.Commands
             }
             else if (item.Email != null)
             {
-                user = this.service.GetUserByEmail(item.Email, item.Password);
+                user = this.service.GetUserByEmail(item.Email, item.Password, new List<UserIncludes>() { UserIncludes.UserRoles } );
                 if (user == null)
                 {
                     return this.Error($"User not found");
                 }
             }
-
+            
             string token = this.manager.CreateTokenString(CreateCommandUser(user));
 
             return this.Success(token);
@@ -53,7 +56,7 @@ namespace NikiCars.Console.Commands
             commandUser.IsAuthenticated = true;
             commandUser.Username = item.Name;
             commandUser.UserData = item;
-            commandUser.UserRoles.Add("User");
+            commandUser.UserRoles.AddRange(item.Roles.Select(x => x.RoleName));
 
             return commandUser;
         }

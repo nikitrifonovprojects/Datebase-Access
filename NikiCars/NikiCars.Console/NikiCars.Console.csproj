@@ -97,6 +97,7 @@
     <Compile Include="Commands\LoginCommand.cs" />
     <Compile Include="Commands\NotFoundCommand.cs" />
     <Compile Include="Commands\ServerErrorCommand.cs" />
+    <Compile Include="Constants\RoleConstants.cs" />
     <Compile Include="DependencyContainer.cs" />
     <Compile Include="Input\Parser.cs" />
     <Compile Include="ModelBinders\DefaultModelBinder.cs" />
@@ -143,5 +144,6 @@
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -30,30 +30,29 @@ namespace NikiCars.Console
         static void Main()
         {
             DependencyContainer.RegisterDependencies();
-            string command = "login User";
-            User user = new User();
-            user.Password = "gogotorulzz11";
-            user.LoginName = "Gogoto";
+            //string command = "login User";
+            //User user = new User();
+            //user.Password = "gogotorulzz11";
+            //user.LoginName = "Gogoto";
 
             var client = new CommandClient(DependencyContainer.Resolve<Invoker>());
-            var result = client.SendRequest(command, user);
+            //var result = client.SendRequest(command, user);
 
-            User usera = new User();
-            //usera.Address = "Stamboliiski";
+            //User usera = new User();
+            //usera.Address = "Odrin";
             //usera.CityID = 1;
-            //usera.Email = "aasdd@gnam.xom";
+            //usera.Email = "nik@gnam.xom";
             //usera.IsOfficialImporter = false;
             //usera.IsOrganisation = false;
-            //usera.LoginName = "Gogoto";
-            //usera.MobilePhone = "07726188893";
-            //usera.Name = "Gogo";
-            //usera.Password = "gogotorulzz11";
-            //usera.Type = "usera";
+            //usera.LoginName = "Niki";
+            //usera.MobilePhone = "07726184593";
+            //usera.Name = "Nikolay";
+            //usera.Password = "asmahsgt32";
 
             //string newCommand = "register User";
             //var res = client.SendRequest(newCommand, usera);
 
-            //int a = 1;
+            int a = 1;
         }
     }
 }

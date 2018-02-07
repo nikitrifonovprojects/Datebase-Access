@@ -30,13 +30,17 @@ namespace NikiCars.Console
             container.RegisterType<ICryptographyService, CryptographyService>();
 
             container.RegisterType<IUserRepository, UserRepository>();
-
-            var repositoryAssembly = Assembly.GetAssembly(typeof(IRepository<>));
-            var types = repositoryAssembly.GetExportedTypes().Where(t => !t.IsAbstract && t.IsClass && t.GetInterfaces().Any(c => c.IsGenericType && typeof(IRepository<>).IsAssignableFrom(c.GetGenericTypeDefinition())));
+            
+            var types = AppDomain.CurrentDomain.GetAssemblies()
+                .SelectMany(s => s.GetExportedTypes())
+                .Where(t => !t.IsAbstract && t.IsClass && t.GetInterfaces()
+                .Any(c => c.IsGenericType && typeof(IRepository<>)
+                .IsAssignableFrom(c.GetGenericTypeDefinition())));
 
             foreach (var type in types)
             {
-                var inheritedFrom = type.GetInterfaces().First(x => x.IsGenericType && typeof(IRepository<>).IsAssignableFrom(x.GetGenericTypeDefinition()));
+                var inheritedFrom = type.GetInterfaces()
+                    .First(x => x.IsGenericType && typeof(IRepository<>).IsAssignableFrom(x.GetGenericTypeDefinition()));
                 
                 container.RegisterType(inheritedFrom, type);
             }
@@ -48,14 +52,18 @@ namespace NikiCars.Console
             container.RegisterType<IValidator, Validator>();
 
             container.RegisterType<ICommandUser, CommandUser>();
-
-            //var assem = Assembly.GetAssembly(typeof(ICommand));
-            //var commandTypes = assem.GetExportedTypes().Where(x => typeof(ICommand).IsAssignableFrom(x) && !x.IsAbstract && x.IsClass && x.IsDefined(typeof(CommandRouteAttribute)));
-            var commandTypes = AppDomain.CurrentDomain.GetAssemblies().SelectMany(s => s.GetTypes()).Where(x => typeof(ICommand).IsAssignableFrom(x) && !x.IsAbstract && x.IsClass && x.IsDefined(typeof(CommandRouteAttribute)));
+            
+            var commandTypes = AppDomain.CurrentDomain.GetAssemblies()
+                .SelectMany(s => s.GetExportedTypes())
+                .Where(x => typeof(ICommand).IsAssignableFrom(x) && !x.IsAbstract && x.IsClass && x.IsDefined(typeof(CommandRouteAttribute)));
 
             foreach (var type in commandTypes)
             {
-                var attributeValue = type.GetCustomAttributesData().First().ConstructorArguments.Select(z => z.Value).First().ToString();
+                var attributeValue = type.GetCustomAttributesData()
+                    .First()
+                    .ConstructorArguments.Select(z => z.Value)
+                    .First().ToString();
+
                 container.RegisterType(typeof(ICommand), type, attributeValue);
             }
             

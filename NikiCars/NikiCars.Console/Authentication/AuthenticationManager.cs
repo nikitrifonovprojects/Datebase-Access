@@ -73,6 +73,11 @@ namespace NikiCars.Console.Authentication
 
         private ClaimsPrincipal ValidateToken(string tokenString)
         {
+            if (string.IsNullOrEmpty(tokenString))
+            {
+                return null;
+            }
+
             ClaimsPrincipal result;
             TokenValidationParameters tokenValidationParameters = new TokenValidationParameters()
             {
@@ -92,7 +97,7 @@ namespace NikiCars.Console.Authentication
             {
                 result = null;
             }
-            
+
             return result;
         }
     }
