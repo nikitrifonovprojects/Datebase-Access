@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
-using NikiCars.Console.CommandClients;
 using NikiCars.Command.Interfaces;
+using NikiCars.Common;
 
 namespace NikiCars.Console.Input
 {

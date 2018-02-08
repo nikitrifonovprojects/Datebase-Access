@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
-using NikiCars.Console.CommandClients;
 using NikiCars.Command.Interfaces;
+using NikiCars.Common;
 
 namespace NikiCars.Console.Output
 {

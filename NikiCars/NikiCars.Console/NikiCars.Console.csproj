@@ -84,9 +84,6 @@
   <ItemGroup>
     <Compile Include="Authentication\AuthenticationManager.cs" />
     <Compile Include="Authentication\CommandUser.cs" />
-    <Compile Include="CommandClients\CommandClient.cs" />
-    <Compile Include="CommandClients\CommandRequest.cs" />
-    <Compile Include="CommandClients\CommandResponce.cs" />
     <Compile Include="Commands\BaseCommand.cs" />
     <Compile Include="Commands\CreateCarCoupeCommand.cs" />
     <Compile Include="Commands\CreateCarMakeCommand.cs" />
@@ -130,6 +127,10 @@
     <ProjectReference Include="..\NikiCars.Command.Validation\NikiCars.Command.Validation.csproj">
       <Project>{eadb2aa0-eb75-4119-bf04-cd59c7baac38}</Project>
       <Name>NikiCars.Command.Validation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NikiCars.Common\NikiCars.Common.csproj">
+      <Project>{BA39C19F-9826-499A-BE04-07B287601985}</Project>
+      <Name>NikiCars.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\NikiCars.Data.Interfaces\NikiCars.Data.Interfaces.csproj">
       <Project>{D7CFA203-D0F9-41B9-B853-7738CAE791A2}</Project>

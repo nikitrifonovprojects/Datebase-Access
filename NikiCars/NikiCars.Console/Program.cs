@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 using Microsoft.Win32;
 using Newtonsoft.Json;
 using NikiCars.Console.Authentication;
-using NikiCars.Console.CommandClients;
 using NikiCars.Console.Commands;
 using NikiCars.Console.Input;
 using NikiCars.Command.Interfaces;

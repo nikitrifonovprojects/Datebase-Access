@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace NikiCars.Console.CommandClients
+namespace NikiCars.Common
 {
     public class CommandRequest
     {
