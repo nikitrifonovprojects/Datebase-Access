@@ -17,9 +17,9 @@ namespace NikiCars.Console.CommandClients
             this.invoker = invoker;
         }
 
-        public CommandResponceData SendRequest<TIn>(string command, TIn item)
+        public CommandResponce SendRequest<TIn>(string command, TIn item)
         {
-            CommandRequestData commandRequestData = new CommandRequestData();
+            CommandRequest commandRequestData = new CommandRequest();
             commandRequestData.Command = command;
             commandRequestData.Data = CreateProperties(item);
             commandRequestData.Token = this.token;
@@ -28,7 +28,7 @@ namespace NikiCars.Console.CommandClients
 
             string commandResult = this.invoker.ExecuteCommand(input);
 
-            CommandResponceData responce = JsonConvert.DeserializeObject<CommandResponceData>(commandResult);
+            CommandResponce responce = JsonConvert.DeserializeObject<CommandResponce>(commandResult);
 
             if (responce.Status == "Authentication error")
             {

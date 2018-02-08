@@ -25,21 +25,21 @@ namespace NikiCars.Console.Input
                 return context;
             }
 
-            CommandRequestData command = JsonConvert.DeserializeObject<CommandRequestData>(input);
+            CommandRequest command = JsonConvert.DeserializeObject<CommandRequest>(input);
 
             Execute(command, context);
 
             return context;
         }
 
-        private void Execute(CommandRequestData command, CommandContext context)
+        private void Execute(CommandRequest command, CommandContext context)
         {
             ParseCommand(command, context);
             ParseData(command, context);
             ParseToken(command, context);
         }
 
-        private void ParseToken(CommandRequestData command, CommandContext context)
+        private void ParseToken(CommandRequest command, CommandContext context)
         {
             string value = string.Empty;
             if (command.Token != null)
@@ -50,7 +50,7 @@ namespace NikiCars.Console.Input
             context.CommandUser = this.manager.GetCommandUser(value);
         }
 
-        private void ParseData(CommandRequestData command, CommandContext context)
+        private void ParseData(CommandRequest command, CommandContext context)
         {
             if (command.Data != null)
             {
@@ -58,7 +58,7 @@ namespace NikiCars.Console.Input
             }
         }
 
-        private void ParseCommand(CommandRequestData command, CommandContext context)
+        private void ParseCommand(CommandRequest command, CommandContext context)
         {
             if (!string.IsNullOrEmpty(command.Command))
             {

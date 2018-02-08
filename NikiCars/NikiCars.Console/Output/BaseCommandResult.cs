@@ -27,7 +27,7 @@ namespace NikiCars.Console.Output
 
         public string ExecuteResult()
         {
-            CommandResponceData commandResponceData = new CommandResponceData();
+            CommandResponce commandResponceData = new CommandResponce();
             commandResponceData.Status = GetStatus();
             commandResponceData.Data = this.item;
 

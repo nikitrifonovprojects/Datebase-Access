@@ -1,6 +1,6 @@
 ﻿namespace NikiCars.Console.CommandClients
 {
-    public class CommandResponceData
+    public class CommandResponce
     {
         public object Data { get; set; }
 

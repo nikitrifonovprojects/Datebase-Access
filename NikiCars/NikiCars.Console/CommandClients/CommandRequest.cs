@@ -2,7 +2,7 @@
 
 namespace NikiCars.Console.CommandClients
 {
-    public class CommandRequestData
+    public class CommandRequest
     {
         public string Command { get; set; }
 

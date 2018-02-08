@@ -85,8 +85,8 @@
     <Compile Include="Authentication\AuthenticationManager.cs" />
     <Compile Include="Authentication\CommandUser.cs" />
     <Compile Include="CommandClients\CommandClient.cs" />
-    <Compile Include="CommandClients\CommandRequestData.cs" />
-    <Compile Include="CommandClients\CommandResponceData.cs" />
+    <Compile Include="CommandClients\CommandRequest.cs" />
+    <Compile Include="CommandClients\CommandResponce.cs" />
     <Compile Include="Commands\BaseCommand.cs" />
     <Compile Include="Commands\CreateCarCoupeCommand.cs" />
     <Compile Include="Commands\CreateCarMakeCommand.cs" />
