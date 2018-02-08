@@ -4,9 +4,9 @@ using NikiCars.Command.Interfaces;
 using NikiCars.Command.Validation;
 using NikiCars.Console.Authentication;
 using NikiCars.Console.Routing;
-using NikiCars.Data.Includes;
 using NikiCars.Data.Models;
-using NikiCars.Services;
+using NikiCars.Data.Models.Includes;
+using NikiCars.Services.Interfaces;
 
 namespace NikiCars.Console.Commands
 {

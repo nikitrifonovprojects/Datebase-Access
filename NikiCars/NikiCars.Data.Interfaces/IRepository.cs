@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace NikiCars.Data
+namespace NikiCars.Data.Interfaces
 {
     public interface IRepository<T> : IDisposable
     {

@@ -59,9 +59,6 @@
     <Compile Include="ExtraRepository.cs" />
     <Compile Include="FuelTypeRepository.cs" />
     <Compile Include="GearBoxTypeRepository.cs" />
-    <Compile Include="Includes\UserIncludes.cs" />
-    <Compile Include="IRepository.cs" />
-    <Compile Include="IUserRepository.cs" />
     <Compile Include="NumberOfDoorsRepository.cs" />
     <Compile Include="PictureRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -75,6 +72,10 @@
     <ProjectReference Include="..\NikiCars.Command.Interfaces\NikiCars.Command.Interfaces.csproj">
       <Project>{CE437A78-8594-4C7D-B618-43B57287117F}</Project>
       <Name>NikiCars.Command.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NikiCars.Data.Interfaces\NikiCars.Data.Interfaces.csproj">
+      <Project>{d7cfa203-d0f9-41b9-b853-7738cae791a2}</Project>
+      <Name>NikiCars.Data.Interfaces</Name>
     </ProjectReference>
     <ProjectReference Include="..\NikiCars.Data.Models\NikiCars.Data.Models.csproj">
       <Project>{d28f0078-f301-4062-b405-45cd6d39fb2b}</Project>

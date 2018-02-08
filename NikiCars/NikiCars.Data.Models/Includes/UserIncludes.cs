@@ -1,4 +1,4 @@
-﻿namespace NikiCars.Data.Includes
+﻿namespace NikiCars.Data.Models.Includes
 {
     public enum UserIncludes
     {

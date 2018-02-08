@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using NikiCars.Data.Models;
 
-namespace NikiCars.Services
+namespace NikiCars.Services.Interfaces
 {
     public interface IService<T> : IDisposable where T : IIdentifiable
     {

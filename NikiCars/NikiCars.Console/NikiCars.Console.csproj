@@ -131,6 +131,10 @@
       <Project>{eadb2aa0-eb75-4119-bf04-cd59c7baac38}</Project>
       <Name>NikiCars.Command.Validation</Name>
     </ProjectReference>
+    <ProjectReference Include="..\NikiCars.Data.Interfaces\NikiCars.Data.Interfaces.csproj">
+      <Project>{D7CFA203-D0F9-41B9-B853-7738CAE791A2}</Project>
+      <Name>NikiCars.Data.Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NikiCars.Data.Models\NikiCars.Data.Models.csproj">
       <Project>{d28f0078-f301-4062-b405-45cd6d39fb2b}</Project>
       <Name>NikiCars.Data.Models</Name>
@@ -138,6 +142,10 @@
     <ProjectReference Include="..\NikiCars.Data\NikiCars.Data.csproj">
       <Project>{76488678-5C35-4B36-A81B-BAF0A532B26F}</Project>
       <Name>NikiCars.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NikiCars.Services.Interfaces\NikiCars.Services.Interfaces.csproj">
+      <Project>{cf9f2650-6ebb-46ab-8f57-b1496cd04215}</Project>
+      <Name>NikiCars.Services.Interfaces</Name>
     </ProjectReference>
     <ProjectReference Include="..\NikiCars.Services\NikiCars.Services.csproj">
       <Project>{342DD602-4970-4185-A99F-82E6F57E8455}</Project>

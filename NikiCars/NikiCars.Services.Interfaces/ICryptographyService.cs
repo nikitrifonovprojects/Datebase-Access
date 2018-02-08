@@ -1,4 +1,4 @@
-﻿namespace NikiCars.Services
+﻿namespace NikiCars.Services.Interfaces
 {
     public interface ICryptographyService
     {

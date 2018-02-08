@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using NikiCars.Data.Includes;
 using NikiCars.Data.Models;
+using NikiCars.Data.Models.Includes;
 
-namespace NikiCars.Data
+namespace NikiCars.Data.Interfaces
 {
     public interface IUserRepository : IRepository<User>
     {

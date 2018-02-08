@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Security.Cryptography;
 using System.Text;
+using NikiCars.Services.Interfaces;
 
 namespace NikiCars.Services
 {

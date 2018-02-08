@@ -4,6 +4,7 @@ using NikiCars.Console.Routing;
 using NikiCars.Command.Validation;
 using NikiCars.Data.Models;
 using NikiCars.Services;
+using NikiCars.Services.Interfaces;
 
 namespace NikiCars.Console.Commands
 {

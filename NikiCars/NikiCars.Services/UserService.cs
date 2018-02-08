@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
-using NikiCars.Data;
-using NikiCars.Data.Includes;
+using NikiCars.Data.Interfaces;
 using NikiCars.Data.Models;
+using NikiCars.Data.Models.Includes;
+using NikiCars.Services.Interfaces;
 
 namespace NikiCars.Services
 {
