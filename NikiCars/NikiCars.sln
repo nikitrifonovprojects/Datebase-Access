@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NikiCars.Command.Client", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NikiCars.Common", "NikiCars.Common\NikiCars.Common.csproj", "{BA39C19F-9826-499A-BE04-07B287601985}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NikiCars.Authentication", "NikiCars.Authentication\NikiCars.Authentication.csproj", "{47665DB2-5194-4E58-A9D1-87508BFA8153}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,10 @@ Global
 		{BA39C19F-9826-499A-BE04-07B287601985}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA39C19F-9826-499A-BE04-07B287601985}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA39C19F-9826-499A-BE04-07B287601985}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47665DB2-5194-4E58-A9D1-87508BFA8153}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47665DB2-5194-4E58-A9D1-87508BFA8153}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47665DB2-5194-4E58-A9D1-87508BFA8153}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47665DB2-5194-4E58-A9D1-87508BFA8153}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

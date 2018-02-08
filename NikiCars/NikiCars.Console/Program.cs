@@ -1,30 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Configuration;
-using System.IO;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Win32;
-using Newtonsoft.Json;
-using NikiCars.Console.Authentication;
-using NikiCars.Console.Commands;
-using NikiCars.Console.Input;
-using NikiCars.Command.Interfaces;
-using NikiCars.Console.ModelBinders;
-using NikiCars.Console.Utility;
-using NikiCars.Command.Validation;
-using NikiCars.Data;
-using NikiCars.Data.Models;
-using NikiCars.Services;
-using System.Reflection;
-using NikiCars.Console.Routing;
-using System.Data.SqlClient;
-using System.Data;
-
-namespace NikiCars.Console
+﻿namespace NikiCars.Console
 {
     class Program
     {

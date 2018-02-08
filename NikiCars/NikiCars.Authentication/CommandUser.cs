@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using NikiCars.Command.Interfaces;
 
-namespace NikiCars.Console.Authentication
+namespace NikiCars.Authentication
 {
     public class CommandUser : ICommandUser
     {

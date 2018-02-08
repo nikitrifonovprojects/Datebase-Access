@@ -8,7 +8,7 @@ using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using NikiCars.Command.Interfaces;
 
-namespace NikiCars.Console.Authentication
+namespace NikiCars.Authentication
 {
     public class AuthenticationManager : IAuthenticationManager
     {

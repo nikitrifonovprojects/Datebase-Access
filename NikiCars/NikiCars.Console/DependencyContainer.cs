@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
+using NikiCars.Authentication;
 using NikiCars.Command.Interfaces;
 using NikiCars.Command.Validation;
-using NikiCars.Console.Authentication;
 using NikiCars.Console.Input;
 using NikiCars.Console.ModelBinders;
 using NikiCars.Console.Routing;
