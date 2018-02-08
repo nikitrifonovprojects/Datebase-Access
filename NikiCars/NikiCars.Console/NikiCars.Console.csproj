@@ -91,7 +91,9 @@
     <Compile Include="Commands\CreateCarCoupeCommand.cs" />
     <Compile Include="Commands\CreateCarMakeCommand.cs" />
     <Compile Include="Commands\CreateUserCommand.cs" />
-    <Compile Include="Commands\EditCommand.cs" />
+    <Compile Include="Commands\CreateUserRoleCommand.cs" />
+    <Compile Include="Commands\EditCarCoupeCommand.cs" />
+    <Compile Include="Commands\EditUserCommand.cs" />
     <Compile Include="Commands\FindCarCoupeCommand.cs" />
     <Compile Include="Commands\Invoker.cs" />
     <Compile Include="Commands\LoginCommand.cs" />

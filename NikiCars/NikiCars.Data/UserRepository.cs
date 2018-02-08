@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
+using System.Text;
+using System.Transactions;
 using NikiCars.Command.Interfaces;
 using NikiCars.Data.Includes;
 using NikiCars.Data.Models;
@@ -189,6 +192,66 @@ namespace NikiCars.Data
             }
 
             return list;
+        }
+
+        protected override User UpdateTableRelationships(User item)
+        {
+            if (item.Roles == null)
+            {
+                return item;
+            }
+
+            var roles = GetUserRoles(item.ID);
+            var idToRemove = roles.Select(a => a.ID).Except(item.Roles.Select(c => c.ID)).ToList();
+            var idToAdd = item.Roles.Select(a => a.ID).Except(roles.Select(c => c.ID)).ToList();
+
+            if (idToRemove.Count > 0 || idToAdd.Count > 0)
+            {
+                if (idToRemove.Count > 0)
+                {
+                    Dictionary<string, int> parameters = new Dictionary<string, int>();
+                    StringBuilder builder = new StringBuilder();
+                    for (int i = 0; i < idToRemove.Count; i++)
+                    {
+                        builder.Append($"@param{i + 2},");
+                        parameters.Add($"@param{i + 2}", idToRemove[i]);
+                    }
+
+                    string stringParam = builder.ToString().TrimEnd(new char[] { ',' });
+
+                    SqlCommand command = new SqlCommand("DELETE FROM Users_UserRoles WHERE UserID = @param1 AND RoleID IN (" + stringParam + ")")
+                    {
+                        CommandType = CommandType.Text,
+                        Connection = Connection
+                    };
+
+                    command.Parameters.AddWithValue("@param1", item.ID);
+                    foreach (var param in parameters)
+                    {
+                        command.Parameters.AddWithValue(param.Key, param.Value);
+                    }
+
+                    command.ExecuteNonQuery();
+                }
+
+                if (idToAdd.Count > 0)
+                {
+                    for (int i = 0; i < idToAdd.Count; i++)
+                    {
+                        SqlCommand command = new SqlCommand("INSERT INTO Users_UserRoles(UserID,RoleID) VALUES(@param1,@param2)")
+                        {
+                            CommandType = CommandType.Text,
+                            Connection = Connection
+                        };
+
+                        command.Parameters.AddWithValue("@param1", item.ID);
+                        command.Parameters.AddWithValue("@param2", idToAdd[i]);
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+
+            return item;
         }
     }
 }

@@ -9,7 +9,7 @@ namespace NikiCars.Services
         User GetUserByLoginName(string name, string password, List<UserIncludes> list = null);
 
         User GetUserByEmail(string email, string password, List<UserIncludes> list = null);
-       
+
         bool LoginNameExists(string loginName);
 
         bool EmailExists(string email);

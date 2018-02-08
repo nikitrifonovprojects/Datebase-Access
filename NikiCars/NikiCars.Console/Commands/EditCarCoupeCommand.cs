@@ -9,11 +9,11 @@ using NikiCars.Services;
 namespace NikiCars.Console.Commands
 {
     [CommandRoute("edit CarCoupe")]
-    public class EditCommand : BaseCommand<CarCoupe> 
+    public class EditCarCoupeCommand : BaseCommand<CarCoupe> 
     {
         private IService<CarCoupe> service;
 
-        public EditCommand(CommandContext context, IService<CarCoupe> service, IModelBinder<CarCoupe> binder, IValidator validation) 
+        public EditCarCoupeCommand(CommandContext context, IService<CarCoupe> service, IModelBinder<CarCoupe> binder, IValidator validation) 
             : base(context, binder, validation)
         {
             this.service = service;

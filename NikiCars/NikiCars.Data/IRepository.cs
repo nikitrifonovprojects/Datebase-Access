@@ -11,7 +11,7 @@ namespace NikiCars.Data
 
         T Create(T item);
 
-        void Update(T item);
+        T Update(T item);
 
         void Delete(T item);
 

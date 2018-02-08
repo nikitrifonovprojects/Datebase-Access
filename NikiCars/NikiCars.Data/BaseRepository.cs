@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Text;
+using System.Transactions;
 using NikiCars.Command.Interfaces;
 
 namespace NikiCars.Data
@@ -34,6 +35,11 @@ namespace NikiCars.Data
         protected abstract string GetPrimaryKeyValue(T item);
 
         protected abstract T MapProperties(SqlDataReader reader);
+
+        protected virtual T UpdateTableRelationships(T item)
+        {
+            return item;
+        }
 
 
         public T Create(T item)
@@ -145,14 +151,32 @@ namespace NikiCars.Data
             return item;
         }
 
-        public void Update(T item)
+        public T Update(T item)
+        {
+            try
+            {
+                using (TransactionScope scope = new TransactionScope())
+                {
+                    item = UpdateTableRelationships(item);
+                    item = UpdateItem(item);
+                    scope.Complete();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new ArgumentException(ex.Message);
+            }
+
+            return item;
+        }
+
+        private T UpdateItem(T item)
         {
             var parameters = GetCreateParameters(item);
 
             if (string.IsNullOrEmpty(this.updateCommandText))
             {
                 StringBuilder commandParams = new StringBuilder();
-
                 foreach (var param in parameters)
                 {
                     if (commandParams.Length > 0)
@@ -162,7 +186,7 @@ namespace NikiCars.Data
 
                     commandParams.Append(param.Key + " = " + "@" + param.Key);
                 }
-                
+
                 this.updateCommandText = "UPDATE " + GetTableName() + " SET " + commandParams + " WHERE " + GetPrimaryKeyName() + " = @param1";
             }
 
@@ -180,6 +204,8 @@ namespace NikiCars.Data
 
             command.Parameters.AddWithValue("@param1", GetPrimaryKeyValue(item));
             command.ExecuteNonQuery();
+
+            return item;
         }
 
         public int Count()

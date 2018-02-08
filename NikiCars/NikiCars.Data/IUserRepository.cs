@@ -11,6 +11,5 @@ namespace NikiCars.Data
         User GetUserByEmail(string email, List<UserIncludes> list = null);
 
         User GetUserByMobilePhone(string phone);
-        
     }
 }
