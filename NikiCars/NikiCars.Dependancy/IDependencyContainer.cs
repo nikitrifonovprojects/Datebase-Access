@@ -15,10 +15,10 @@ namespace NikiCars.Dependancy
 
         T Resolve<T>();
 
-        T Resolve<T>(params ResolverOverride[] overrides);
+        T Resolve<T>(params DependencyObject[] overrides);
 
         T Resolve<T>(string name);
 
-        T Resolve<T>(string name, params ResolverOverride[] overrides);
+        T Resolve<T>(string name, params DependencyObject[] overrides);
     }
 }

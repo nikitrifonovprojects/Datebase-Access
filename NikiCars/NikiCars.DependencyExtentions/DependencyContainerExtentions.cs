@@ -12,6 +12,7 @@ using NikiCars.Data.Interfaces;
 using NikiCars.Dependancy;
 using NikiCars.Services;
 using NikiCars.Services.Interfaces;
+using NikiCars.Utility;
 
 namespace DependencyExtentions
 {
@@ -19,7 +20,9 @@ namespace DependencyExtentions
     {
         public static IDependencyContainer AddDependencies(this IDependencyContainer container)
         {
-            //container.RegisterType<IConfig, Config>();
+            container.RegisterType<IDependencyContainer, DependencyContainer>();
+            container.RegisterType<IInvoker, Invoker>();
+            container.RegisterType<IConfig, Config>();
             container.RegisterType<IAuthenticationManager, AuthenticationManager>();
 
             container.RegisterType(typeof(IService<>), typeof(BaseService<>));

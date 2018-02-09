@@ -1,8 +1,7 @@
-﻿using System.Configuration;
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
 using NikiCars.Command.Interfaces;
 
-namespace NikiCars.Console.Utility
+namespace NikiCars.Utility
 {
     public class Config : IConfig
     {

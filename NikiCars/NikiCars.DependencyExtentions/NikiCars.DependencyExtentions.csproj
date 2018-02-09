@@ -80,6 +80,10 @@
       <Project>{342DD602-4970-4185-A99F-82E6F57E8455}</Project>
       <Name>NikiCars.Services</Name>
     </ProjectReference>
+    <ProjectReference Include="..\NikiCars.Utility\NikiCars.Utility.csproj">
+      <Project>{346A7ACB-2364-4F7F-B2FC-0AFA9AEF816C}</Project>
+      <Name>NikiCars.Utility</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

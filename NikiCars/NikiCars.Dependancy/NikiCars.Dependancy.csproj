@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DependencyContainer.cs" />
+    <Compile Include="DependencyObject.cs" />
     <Compile Include="IDependencyContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

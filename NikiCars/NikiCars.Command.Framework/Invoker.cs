@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using NikiCars.Command.Interfaces;
 using NikiCars.Dependancy;
-using Unity.Resolution;
 
 namespace NikiCars.Command.Framework
 {
-    public class Invoker
+    public class Invoker : IInvoker
     {
         private IParser parser;
         private IDependencyContainer container;
@@ -33,14 +32,14 @@ namespace NikiCars.Command.Framework
                 {
                     if (this.container.IsRegistered(typeof(ICommand), context.CommandText))
                     {
-                        using (var command = this.container.Resolve<ICommand>(context.CommandText, new DependencyOverride(typeof(CommandContext), context)))
+                        using (var command = this.container.Resolve<ICommand>(context.CommandText, new DependencyObject(typeof(CommandContext), context)))
                         {
                             return command.Execute();
                         }
                     }
                     else
                     {
-                        using (var command = this.container.Resolve<NotFoundCommand>(new DependencyOverride(typeof(CommandContext), context)))
+                        using (var command = this.container.Resolve<NotFoundCommand>(new DependencyObject(typeof(CommandContext), context)))
                         {
                             return command.Execute();
                         }
@@ -49,7 +48,7 @@ namespace NikiCars.Command.Framework
             }
             catch (Exception)
             {
-                using (var command = this.container.Resolve<ServerErrorCommand>(new DependencyOverride(typeof(CommandContext), context)))
+                using (var command = this.container.Resolve<ServerErrorCommand>(new DependencyObject(typeof(CommandContext), context)))
                 {
                     return command.Execute();
                 }

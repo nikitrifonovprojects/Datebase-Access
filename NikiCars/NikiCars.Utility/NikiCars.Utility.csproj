@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CE437A78-8594-4C7D-B618-43B57287117F}</ProjectGuid>
+    <ProjectGuid>{346A7ACB-2364-4F7F-B2FC-0AFA9AEF816C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NikiCars.Command.Interfaces</RootNamespace>
-    <AssemblyName>NikiCars.Command.Interfaces</AssemblyName>
+    <RootNamespace>NikiCars.Utility</RootNamespace>
+    <AssemblyName>NikiCars.Utility</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,6 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -40,21 +41,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommandContext.cs" />
-    <Compile Include="IAuthenticationManager.cs" />
-    <Compile Include="ICommand.cs" />
-    <Compile Include="ICommandResult.cs" />
-    <Compile Include="ICommandUser.cs" />
-    <Compile Include="IConfig.cs" />
-    <Compile Include="IInvoker.cs" />
-    <Compile Include="IModelBinder.cs" />
-    <Compile Include="IParser.cs" />
+    <Compile Include="Config.cs" />
+    <Compile Include="DeveloperConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NikiCars.Command.Validation\NikiCars.Command.Validation.csproj">
-      <Project>{eadb2aa0-eb75-4119-bf04-cd59c7baac38}</Project>
-      <Name>NikiCars.Command.Validation</Name>
+    <ProjectReference Include="..\NikiCars.Command.Interfaces\NikiCars.Command.Interfaces.csproj">
+      <Project>{CE437A78-8594-4C7D-B618-43B57287117F}</Project>
+      <Name>NikiCars.Command.Interfaces</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

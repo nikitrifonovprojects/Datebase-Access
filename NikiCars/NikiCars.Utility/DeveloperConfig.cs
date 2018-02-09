@@ -1,7 +1,7 @@
 ﻿using System.Configuration;
 using NikiCars.Command.Interfaces;
 
-namespace NikiCars.Console.Utility
+namespace NikiCars.Utility
 {
     public class DeveloperConfig : IConfig
     {

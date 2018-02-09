@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Unity;
 using Unity.Resolution;
 
@@ -28,9 +29,11 @@ namespace NikiCars.Dependancy
             return container.IsRegistered(type, name);
         }
 
-        public T Resolve<T>(string name, params ResolverOverride[] overrides)
+        public T Resolve<T>(string name, params DependencyObject[] overrides)
         {
-            return container.Resolve<T>(name, overrides);
+            var unityOverrieds = overrides.Select(x => new DependencyOverride(x.TypeToConstruct, x.DependencyValue))
+                .ToArray();
+            return container.Resolve<T>(name, unityOverrieds);
         }
 
         public T Resolve<T>(string name)
@@ -38,9 +41,11 @@ namespace NikiCars.Dependancy
              return container.Resolve<T>(name);
         }
 
-        public T Resolve<T>(params ResolverOverride[] overrides)
+        public T Resolve<T>(params DependencyObject[] overrides)
         {
-            return container.Resolve<T>(overrides);
+            var unityOverrieds = overrides.Select(x => new DependencyOverride(x.TypeToConstruct, x.DependencyValue))
+                .ToArray();
+            return container.Resolve<T>(unityOverrieds);
         }
 
         public T Resolve<T>()

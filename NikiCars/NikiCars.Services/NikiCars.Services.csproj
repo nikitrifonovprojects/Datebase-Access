@@ -52,15 +52,11 @@
       <Name>NikiCars.Data.Interfaces</Name>
     </ProjectReference>
     <ProjectReference Include="..\NikiCars.Data.Models\NikiCars.Data.Models.csproj">
-      <Project>{d28f0078-f301-4062-b405-45cd6d39fb2b}</Project>
+      <Project>{D28F0078-F301-4062-B405-45CD6D39FB2B}</Project>
       <Name>NikiCars.Data.Models</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NikiCars.Data\NikiCars.Data.csproj">
-      <Project>{76488678-5c35-4b36-a81b-baf0a532b26f}</Project>
-      <Name>NikiCars.Data</Name>
-    </ProjectReference>
     <ProjectReference Include="..\NikiCars.Services.Interfaces\NikiCars.Services.Interfaces.csproj">
-      <Project>{cf9f2650-6ebb-46ab-8f57-b1496cd04215}</Project>
+      <Project>{CF9F2650-6EBB-46AB-8F57-B1496CD04215}</Project>
       <Name>NikiCars.Services.Interfaces</Name>
     </ProjectReference>
   </ItemGroup>
