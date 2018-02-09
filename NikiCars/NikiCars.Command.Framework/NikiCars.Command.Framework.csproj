@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6ECFE429-3D3A-4767-84BF-59197E2F580D}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>NikiCars.Console</RootNamespace>
-    <AssemblyName>NikiCars.Console</AssemblyName>
+    <ProjectGuid>{63FCA2E4-17E0-4CAD-9379-8A1AB41E17B6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NikiCars.Command.Framework</RootNamespace>
+    <AssemblyName>NikiCars.Command.Framework</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -35,24 +33,11 @@
     <Reference Include="CommonServiceLocator, Version=2.0.2.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\packages\Unity.5.5.6\lib\net45\CommonServiceLocator.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.IdentityModel.Logging, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.IdentityModel.Logging.5.2.0\lib\net451\Microsoft.IdentityModel.Logging.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.IdentityModel.Tokens, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.IdentityModel.Tokens.5.2.0\lib\net451\Microsoft.IdentityModel.Tokens.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.5.2.0\lib\net451\System.IdentityModel.Tokens.Jwt.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -82,43 +67,23 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\CreateCarCoupeCommand.cs" />
-    <Compile Include="Commands\CreateCarMakeCommand.cs" />
-    <Compile Include="Commands\CreateUserCommand.cs" />
-    <Compile Include="Commands\CreateUserRoleCommand.cs" />
-    <Compile Include="Commands\EditCarCoupeCommand.cs" />
-    <Compile Include="Commands\EditUserCommand.cs" />
-    <Compile Include="Commands\FindCarCoupeCommand.cs" />
-    <Compile Include="Commands\LoginCommand.cs" />
-    <Compile Include="Constants\RoleConstants.cs" />
-    <Compile Include="DependencyExtensions\DependencyExtention.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="BaseCommand.cs" />
+    <Compile Include="DefaultModelBinder.cs" />
+    <Compile Include="Input\Parser.cs" />
+    <Compile Include="Invoker.cs" />
+    <Compile Include="NotFoundCommand.cs" />
+    <Compile Include="Output\AuthenticationErrorResult.cs" />
+    <Compile Include="Output\AuthorizationErrorResult.cs" />
+    <Compile Include="Output\BaseCommandResult.cs" />
+    <Compile Include="Output\ErrorResult.cs" />
+    <Compile Include="Output\NotFoundResult.cs" />
+    <Compile Include="Output\ServerErrorResult.cs" />
+    <Compile Include="Output\SuccessResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utility\Config.cs" />
-    <Compile Include="Utility\DeveloperConfig.cs" />
+    <Compile Include="Routing\CommandRouteAttribute.cs" />
+    <Compile Include="ServerErrorCommand.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Connected Services\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\NikiCars.Authentication\NikiCars.Authentication.csproj">
-      <Project>{47665DB2-5194-4E58-A9D1-87508BFA8153}</Project>
-      <Name>NikiCars.Authentication</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\NikiCars.Command.Client\NikiCars.Command.Client.csproj">
-      <Project>{3182E3AB-779D-4419-A1B6-617A3F724EA9}</Project>
-      <Name>NikiCars.Command.Client</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\NikiCars.Command.Framework\NikiCars.Command.Framework.csproj">
-      <Project>{63FCA2E4-17E0-4CAD-9379-8A1AB41E17B6}</Project>
-      <Name>NikiCars.Command.Framework</Name>
-    </ProjectReference>
     <ProjectReference Include="..\NikiCars.Command.Interfaces\NikiCars.Command.Interfaces.csproj">
       <Project>{CE437A78-8594-4C7D-B618-43B57287117F}</Project>
       <Name>NikiCars.Command.Interfaces</Name>
@@ -131,22 +96,14 @@
       <Project>{BA39C19F-9826-499A-BE04-07B287601985}</Project>
       <Name>NikiCars.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NikiCars.Data.Models\NikiCars.Data.Models.csproj">
-      <Project>{D28F0078-F301-4062-B405-45CD6D39FB2B}</Project>
-      <Name>NikiCars.Data.Models</Name>
-    </ProjectReference>
     <ProjectReference Include="..\NikiCars.Dependancy\NikiCars.Dependancy.csproj">
       <Project>{22146019-DD23-42C7-95AA-4B9BBED4EDB1}</Project>
       <Name>NikiCars.Dependancy</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NikiCars.DependencyExtentions\NikiCars.DependencyExtentions.csproj">
-      <Project>{c11adc3a-4002-445e-976f-7023d6de706c}</Project>
-      <Name>NikiCars.DependencyExtentions</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\NikiCars.Services.Interfaces\NikiCars.Services.Interfaces.csproj">
-      <Project>{CF9F2650-6EBB-46AB-8F57-B1496CD04215}</Project>
-      <Name>NikiCars.Services.Interfaces</Name>
-    </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

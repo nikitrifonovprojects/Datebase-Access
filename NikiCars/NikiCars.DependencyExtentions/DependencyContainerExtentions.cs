@@ -2,29 +2,24 @@
 using System.Linq;
 using System.Reflection;
 using NikiCars.Authentication;
+using NikiCars.Command.Framework;
+using NikiCars.Command.Framework.Input;
+using NikiCars.Command.Framework.Routing;
 using NikiCars.Command.Interfaces;
 using NikiCars.Command.Validation;
-using NikiCars.Console.Input;
-using NikiCars.Console.ModelBinders;
-using NikiCars.Console.Routing;
-using NikiCars.Console.Utility;
 using NikiCars.Data;
 using NikiCars.Data.Interfaces;
+using NikiCars.Dependancy;
 using NikiCars.Services;
 using NikiCars.Services.Interfaces;
-using Unity;
-using Unity.Resolution;
 
-namespace NikiCars.Console
+namespace DependencyExtentions
 {
-    public static class DependencyContainer
+    public static class DependencyContainerExtentions
     {
-        private static IUnityContainer container;
-
-        public static void RegisterDependencies()
+        public static IDependencyContainer AddDependencies(this IDependencyContainer container)
         {
-            container = new UnityContainer();
-            container.RegisterType<IConfig, Config>();
+            //container.RegisterType<IConfig, Config>();
             container.RegisterType<IAuthenticationManager, AuthenticationManager>();
 
             container.RegisterType(typeof(IService<>), typeof(BaseService<>));
@@ -32,7 +27,7 @@ namespace NikiCars.Console
             container.RegisterType<ICryptographyService, CryptographyService>();
 
             container.RegisterType<IUserRepository, UserRepository>();
-            
+
             var types = AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(s => s.GetExportedTypes())
                 .Where(t => !t.IsAbstract && t.IsClass && t.GetInterfaces()
@@ -43,18 +38,18 @@ namespace NikiCars.Console
             {
                 var inheritedFrom = type.GetInterfaces()
                     .First(x => x.IsGenericType && typeof(IRepository<>).IsAssignableFrom(x.GetGenericTypeDefinition()));
-                
+
                 container.RegisterType(inheritedFrom, type);
             }
+
+            container.RegisterType<IValidator, Validator>();
+
+            container.RegisterType<ICommandUser, CommandUser>();
 
             container.RegisterType<IParser, Parser>();
 
             container.RegisterType(typeof(IModelBinder<>), typeof(DefaultModelBinder<>));
 
-            container.RegisterType<IValidator, Validator>();
-
-            container.RegisterType<ICommandUser, CommandUser>();
-            
             var commandTypes = AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(s => s.GetExportedTypes())
                 .Where(x => typeof(ICommand).IsAssignableFrom(x) && !x.IsAbstract && x.IsClass && x.IsDefined(typeof(CommandRouteAttribute)));
@@ -68,32 +63,8 @@ namespace NikiCars.Console
 
                 container.RegisterType(typeof(ICommand), type, attributeValue);
             }
-            
-        }
 
-        public static bool IsRegistered(Type type, string name)
-        {
-            return container.IsRegistered(type, name);
-        }
-
-        public static T Resolve<T>(string name, params ResolverOverride[] overrides)
-        {
-            return container.Resolve<T>(name, overrides);
-        }
-
-        public static T Resolve<T>(string name)
-        {
-             return container.Resolve<T>(name);
-        }
-
-        public static T Resolve<T>(params ResolverOverride[] overrides)
-        {
-            return container.Resolve<T>(overrides);
-        }
-
-        public static T Resolve<T>()
-        {
-            return container.Resolve<T>();
+            return container;
         }
     }
 }

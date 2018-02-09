@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using NikiCars.Command.Interfaces;
 
-namespace NikiCars.Console.ModelBinders
+namespace NikiCars.Command.Framework
 {
     public class DefaultModelBinder<T> : IModelBinder<T>
     {

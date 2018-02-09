@@ -25,6 +25,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NikiCars.Common", "NikiCars
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NikiCars.Authentication", "NikiCars.Authentication\NikiCars.Authentication.csproj", "{47665DB2-5194-4E58-A9D1-87508BFA8153}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NikiCars.Command.Framework", "NikiCars.Command.Framework\NikiCars.Command.Framework.csproj", "{63FCA2E4-17E0-4CAD-9379-8A1AB41E17B6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NikiCars.Dependancy", "NikiCars.Dependancy\NikiCars.Dependancy.csproj", "{22146019-DD23-42C7-95AA-4B9BBED4EDB1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NikiCars.DependencyExtentions", "NikiCars.DependencyExtentions\NikiCars.DependencyExtentions.csproj", "{C11ADC3A-4002-445E-976F-7023D6DE706C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +81,18 @@ Global
 		{47665DB2-5194-4E58-A9D1-87508BFA8153}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{47665DB2-5194-4E58-A9D1-87508BFA8153}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{47665DB2-5194-4E58-A9D1-87508BFA8153}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63FCA2E4-17E0-4CAD-9379-8A1AB41E17B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63FCA2E4-17E0-4CAD-9379-8A1AB41E17B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63FCA2E4-17E0-4CAD-9379-8A1AB41E17B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63FCA2E4-17E0-4CAD-9379-8A1AB41E17B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22146019-DD23-42C7-95AA-4B9BBED4EDB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22146019-DD23-42C7-95AA-4B9BBED4EDB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22146019-DD23-42C7-95AA-4B9BBED4EDB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22146019-DD23-42C7-95AA-4B9BBED4EDB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C11ADC3A-4002-445E-976F-7023D6DE706C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C11ADC3A-4002-445E-976F-7023D6DE706C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C11ADC3A-4002-445E-976F-7023D6DE706C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C11ADC3A-4002-445E-976F-7023D6DE706C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

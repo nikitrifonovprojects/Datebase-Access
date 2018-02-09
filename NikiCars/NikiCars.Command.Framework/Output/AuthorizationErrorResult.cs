@@ -1,4 +1,4 @@
-﻿namespace NikiCars.Console.Output
+﻿namespace NikiCars.Command.Framework.Output
 {
     public class AuthorizationErrorResult<T> : BaseCommandResult<T>
     {

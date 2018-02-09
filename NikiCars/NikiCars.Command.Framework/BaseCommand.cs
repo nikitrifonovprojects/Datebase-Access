@@ -1,8 +1,8 @@
-﻿using NikiCars.Command.Interfaces;
+﻿using NikiCars.Command.Framework.Output;
+using NikiCars.Command.Interfaces;
 using NikiCars.Command.Validation;
-using NikiCars.Console.Output;
 
-namespace NikiCars.Console.Commands
+namespace NikiCars.Command.Framework
 {
     public abstract class BaseCommand<T> : ICommand where T : class
     {

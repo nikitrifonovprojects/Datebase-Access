@@ -1,7 +1,7 @@
 ﻿using System;
 
 
-namespace NikiCars.Console.Routing
+namespace NikiCars.Command.Framework.Routing
 {
     [AttributeUsage(AttributeTargets.Class)]
     public class CommandRouteAttribute : Attribute

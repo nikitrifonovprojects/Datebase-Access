@@ -1,17 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using NikiCars.Command.Interfaces;
+using NikiCars.Dependancy;
 using Unity.Resolution;
 
-namespace NikiCars.Console.Commands
+namespace NikiCars.Command.Framework
 {
     public class Invoker
     {
         private IParser parser;
+        private IDependencyContainer container;
 
-        public Invoker(IParser parser)
+        public Invoker(IParser parser, IDependencyContainer container)
         {
             this.parser = parser;
+            this.container = container;
         }
 
         public string ExecuteCommand(string input)
@@ -28,16 +31,16 @@ namespace NikiCars.Console.Commands
                 }
                 else
                 {
-                    if (DependencyContainer.IsRegistered(typeof(ICommand), context.CommandText))
+                    if (this.container.IsRegistered(typeof(ICommand), context.CommandText))
                     {
-                        using (var command = DependencyContainer.Resolve<ICommand>(context.CommandText, new DependencyOverride(typeof(CommandContext), context)))
+                        using (var command = this.container.Resolve<ICommand>(context.CommandText, new DependencyOverride(typeof(CommandContext), context)))
                         {
                             return command.Execute();
                         }
                     }
                     else
                     {
-                        using (var command = DependencyContainer.Resolve<NotFoundCommand>(new DependencyOverride(typeof(CommandContext), context)))
+                        using (var command = this.container.Resolve<NotFoundCommand>(new DependencyOverride(typeof(CommandContext), context)))
                         {
                             return command.Execute();
                         }
@@ -46,7 +49,7 @@ namespace NikiCars.Console.Commands
             }
             catch (Exception)
             {
-                using (var command = DependencyContainer.Resolve<ServerErrorCommand>(new DependencyOverride(typeof(CommandContext), context)))
+                using (var command = this.container.Resolve<ServerErrorCommand>(new DependencyOverride(typeof(CommandContext), context)))
                 {
                     return command.Execute();
                 }

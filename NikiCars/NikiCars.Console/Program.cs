@@ -1,17 +1,27 @@
-﻿namespace NikiCars.Console
+﻿using DependencyExtentions;
+using NikiCars.Command.Client;
+using NikiCars.Command.Framework;
+using NikiCars.Command.Framework.DependencyExtensions;
+using NikiCars.Command.Interfaces;
+using NikiCars.Data.Models;
+using NikiCars.Dependancy;
+
+namespace NikiCars.Console
 {
     class Program
     {
         static void Main()
         {
-            DependencyContainer.RegisterDependencies();
-            //string command = "login User";
-            //User user = new User();
-            //user.Password = "gogotorulzz11";
-            //user.LoginName = "Gogoto";
+            var container = new DependencyContainer();
+            container.AddDependencies();
+            container.AddConsoleDependencies();
+            string command = "login User";
+            User user = new User();
+            user.Password = "gogotorulzz11";
+            user.LoginName = "Gogoto";
 
-            //var client = new CommandClient(DependencyContainer.Resolve<Invoker>());
-            //var result = client.SendRequest(command, user);
+            var client = new CommandClient(new Invoker(container.Resolve<IParser>(), container));
+            var result = client.SendRequest(command, user);
 
             //UserRole role;
             //using (var repo = DependencyContainer.Resolve<IRepository<UserRole>>())

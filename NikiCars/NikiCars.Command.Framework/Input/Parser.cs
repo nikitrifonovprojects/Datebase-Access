@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using NikiCars.Command.Interfaces;
 using NikiCars.Common;
 
-namespace NikiCars.Console.Input
+namespace NikiCars.Command.Framework.Input
 {
     public class Parser : IParser
     {

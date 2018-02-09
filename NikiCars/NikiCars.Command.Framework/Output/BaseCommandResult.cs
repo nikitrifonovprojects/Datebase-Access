@@ -4,7 +4,7 @@ using Newtonsoft.Json.Serialization;
 using NikiCars.Command.Interfaces;
 using NikiCars.Common;
 
-namespace NikiCars.Console.Output
+namespace NikiCars.Command.Framework.Output
 {
     public abstract class BaseCommandResult<T> : ICommandResult
     {

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Newtonsoft.Json;
+using NikiCars.Command.Framework;
 using NikiCars.Common;
-using NikiCars.Console.Commands;
 
 namespace NikiCars.Command.Client
 {

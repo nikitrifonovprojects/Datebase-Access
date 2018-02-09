@@ -1,7 +1,7 @@
 ﻿using NikiCars.Command.Interfaces;
 using NikiCars.Command.Validation;
 
-namespace NikiCars.Console.Commands
+namespace NikiCars.Command.Framework
 {
     public class NotFoundCommand : BaseCommand<string>
     {
