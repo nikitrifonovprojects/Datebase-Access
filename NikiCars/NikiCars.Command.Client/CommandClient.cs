@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Newtonsoft.Json;
@@ -53,7 +52,7 @@ namespace NikiCars.Command.Client
         {
             return item.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public)
                     .Where(p => p.GetValue(item) != null)
-                    .ToDictionary(prop => prop.Name, prop => Convert.ToString(prop.GetValue(item)));
+                    .ToDictionary(prop => prop.Name, prop => JsonConvert.SerializeObject(prop.GetValue(item)));
         }
     }
 }

@@ -40,6 +40,17 @@ namespace NikiCars.Services
             return user;
         }
 
+        public User GetUserByID(int id, List<UserIncludes> list = null)
+        {
+            User user = this.userRepository.GetUserByID(id, list);
+            if (user != null)
+            {
+                return user;
+            }
+
+            return user;
+        }
+
         public bool LoginNameExists(string loginName)
         {
             return this.userRepository.GetUserByName(loginName) != null;

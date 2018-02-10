@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json;
 using NikiCars.Command.Interfaces;
 
 namespace NikiCars.Command.Framework
@@ -44,7 +45,7 @@ namespace NikiCars.Command.Framework
                     if (properties.ContainsKey(item))
                     {
                         var property = result.GetType().GetProperty(item);
-                        property.SetValue(result, Convert.ChangeType(properties[item], property.PropertyType));
+                        property.SetValue(result, JsonConvert.DeserializeObject(properties[item], property.PropertyType));
                     }
                 }
 

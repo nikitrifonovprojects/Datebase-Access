@@ -7,7 +7,7 @@ using NikiCars.Console.Constants;
 using NikiCars.Data.Models;
 using NikiCars.Services.Interfaces;
 
-namespace NikiCars.Console.Commands
+namespace NikiCars.Console.Commands.CarCoupeCommands
 {
     [CommandRoute("edit CarCoupe")]
     public class EditCarCoupeCommand : BaseCommand<CarCoupe> 

@@ -253,5 +253,30 @@ namespace NikiCars.Data
 
             return item;
         }
+
+        public User GetUserByID(int id, List<UserIncludes> list = null)
+        {
+            SqlCommand command = new SqlCommand("SELECT * FROM Users WHERE UserID = @param1")
+            {
+                CommandType = CommandType.Text,
+                Connection = Connection
+            };
+
+            command.Parameters.AddWithValue("@param1", id);
+
+            User user = null;
+
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    user = MapProperties(reader);
+                }
+            }
+
+            ProcessIncludes(user, list);
+
+            return user;
+        }
     }
 }

@@ -9,7 +9,7 @@ using NikiCars.Data.Models;
 using NikiCars.Data.Models.Includes;
 using NikiCars.Services.Interfaces;
 
-namespace NikiCars.Console.Commands
+namespace NikiCars.Console.Commands.LoginCommands
 {
     [CommandRoute("login User")]
     public class LoginCommand : BaseCommand<User>

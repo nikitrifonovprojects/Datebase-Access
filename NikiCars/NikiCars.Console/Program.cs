@@ -2,6 +2,7 @@
 using NikiCars.Command.Client;
 using NikiCars.Data.Models;
 using NikiCars.Dependancy;
+using Newtonsoft.Json.Linq;
 
 namespace NikiCars.Console
 {
@@ -11,45 +12,40 @@ namespace NikiCars.Console
         {
             var container = new DependencyContainer();
             container.AddDependencies();
-            string command = "login User";
-            User user = new User();
-            user.Password = "gogotorulzz11";
-            user.LoginName = "Gogoto";
-            
+
+            //string command = "list";
+            //var search = new Search();
+            //search.PageNumber = 1;
+            //search.PageSize = 10;
+
+            //var client = container.Resolve<CommandClient>();
+            //var result = client.SendRequest(command, search);
             var client = container.Resolve<CommandClient>();
+            string comm = "login User";
+
+            User user1 = new User();
+            user1.Password = "gogotorulzz11";
+            user1.LoginName = "Gogoto";
+
+            var firstRes = client.SendRequest(comm, user1);
+            if (firstRes.Status == "Success")
+            {
+                client.SetToken(firstRes.Data as string);
+            }
+
+            string command = "get User";
+            User user = new User();
+            user.ID = 12;
             var result = client.SendRequest(command, user);
+            var data = result.Data as JObject;
+            var real = data.ToObject<User>();
 
-            //UserRole role;
-            //using (var repo = DependencyContainer.Resolve<IRepository<UserRole>>())
-            //{
-            //    role = repo.GetByID(1);
-            //}
-
-            //using (var repo = DependencyContainer.Resolve<IUserRepository>())
-            //{
-            //    var user = repo.GetUserByName("Gogoto", new List<Data.Includes.UserIncludes> { Data.Includes.UserIncludes.UserRoles });
-
-            //    user.Roles.Remove(role);
-            //    user.Email = "nik@gnam.xom";
-
-            //    var res = repo.Update(user);
-
-            //    var resToCompare = repo.GetUserByName("Gogoto", new List<Data.Includes.UserIncludes> { Data.Includes.UserIncludes.UserRoles });
-            //}
-
+            string command1 = "edit User";
+            var res = client.SendRequest(command1, real);
+            //var recievedUser = JsonConvert.DeserializeObject<User>(result.Data.ToString());
             //User usera = new User();
-            //usera.Address = "Odrin";
-            //usera.CityID = 1;
-            //usera.Email = "nik@gnam.xom";
-            //usera.IsOfficialImporter = false;
-            //usera.IsOrganisation = false;
             //usera.LoginName = "Niki";
-            //usera.MobilePhone = "07726184593";
-            //usera.Name = "Nikolay";
             //usera.Password = "asmahsgt32";
-
-            //string newCommand = "register User";
-            //var res = client.SendRequest(newCommand, usera);
         }
     }
 }

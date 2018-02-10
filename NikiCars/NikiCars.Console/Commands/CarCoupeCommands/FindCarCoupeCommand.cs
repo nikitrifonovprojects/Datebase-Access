@@ -5,7 +5,7 @@ using NikiCars.Command.Validation;
 using NikiCars.Data.Models;
 using NikiCars.Services.Interfaces;
 
-namespace NikiCars.Console.Commands
+namespace NikiCars.Console.Commands.CarCoupeCommands
 {
     [CommandRoute("get CarCoupe")]
     public class FindCarCoupeCommand : BaseCommand<CarCoupe>

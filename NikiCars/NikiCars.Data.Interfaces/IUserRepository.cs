@@ -10,6 +10,8 @@ namespace NikiCars.Data.Interfaces
 
         User GetUserByEmail(string email, List<UserIncludes> list = null);
 
+        User GetUserByID(int id, List<UserIncludes> list = null);
+
         User GetUserByMobilePhone(string phone);
     }
 }

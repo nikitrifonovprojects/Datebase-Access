@@ -10,6 +10,8 @@ namespace NikiCars.Services.Interfaces
 
         User GetUserByEmail(string email, string password, List<UserIncludes> list = null);
 
+        User GetUserByID(int id, List<UserIncludes> list = null);
+
         bool LoginNameExists(string loginName);
 
         bool EmailExists(string email);

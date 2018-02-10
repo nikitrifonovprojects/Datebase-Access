@@ -32,17 +32,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CommonServiceLocator, Version=2.0.2.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
-      <HintPath>..\packages\Unity.5.5.6\lib\net45\CommonServiceLocator.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.5.2.0\lib\net451\System.IdentityModel.Tokens.Jwt.dll</HintPath>
-    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -52,14 +49,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\CreateCarCoupeCommand.cs" />
-    <Compile Include="Commands\CreateCarMakeCommand.cs" />
-    <Compile Include="Commands\CreateUserCommand.cs" />
-    <Compile Include="Commands\CreateUserRoleCommand.cs" />
-    <Compile Include="Commands\EditCarCoupeCommand.cs" />
-    <Compile Include="Commands\EditUserCommand.cs" />
-    <Compile Include="Commands\FindCarCoupeCommand.cs" />
-    <Compile Include="Commands\LoginCommand.cs" />
+    <Compile Include="Commands\CarCoupeCommands\CreateCarCoupeCommand.cs" />
+    <Compile Include="Commands\CarMakeCommands\CreateCarMakeCommand.cs" />
+    <Compile Include="Commands\UserCommands\CreateUserCommand.cs" />
+    <Compile Include="Commands\UserCommands\FindUserCommand.cs" />
+    <Compile Include="Commands\UserRoleCommands\CreateUserRoleCommand.cs" />
+    <Compile Include="Commands\CarCoupeCommands\EditCarCoupeCommand.cs" />
+    <Compile Include="Commands\UserCommands\EditUserCommand.cs" />
+    <Compile Include="Commands\CarCoupeCommands\FindCarCoupeCommand.cs" />
+    <Compile Include="Commands\LoginCommands\LoginCommand.cs" />
     <Compile Include="Constants\RoleConstants.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -69,9 +67,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NikiCars.Authentication\NikiCars.Authentication.csproj">

@@ -1,35 +1,30 @@
-﻿using System;
-using NikiCars.Command.Framework;
+﻿using NikiCars.Command.Framework;
 using NikiCars.Command.Framework.Routing;
 using NikiCars.Command.Interfaces;
 using NikiCars.Command.Validation;
-using NikiCars.Console.Constants;
 using NikiCars.Data.Models;
 using NikiCars.Services.Interfaces;
 
-namespace NikiCars.Console.Commands
+namespace NikiCars.Console.Commands.UserCommands
 {
-    [CommandRoute("edit User")]
-    public class EditUserCommand : BaseCommand<User>
+    [CommandRoute("register User")]
+    public class CreateUserCommand : BaseCommand<User>
     {
         private IUserService service;
+        private ICryptographyService cryptography;
 
-        public EditUserCommand(CommandContext context, IUserService service, IModelBinder<User> binder, IValidator validation) 
+        public CreateUserCommand(CommandContext context, IUserService service, IModelBinder<User> binder, IValidator validation, ICryptographyService cryptography) 
             : base(context, binder, validation)
         {
             this.service = service;
+            this.cryptography = cryptography;
         }
 
         protected override ICommandResult ExecuteAction(User item)
         {
-            if (!this.context.CommandUser.IsAuthenticated)
+            if (this.context.ModelState.HasError)
             {
-                return this.AuthenticationError("User not logged in");
-            }
-
-            if (item.ID != Convert.ToInt32(this.context.CommandUser.ID) || !this.context.CommandUser.UserRoles.Contains(RoleConstants.ADMINISTRATOR))
-            {
-                return this.AuthorizationError("User does not have permission");
+                return this.Error(this.context.ModelState.ToString());
             }
 
             if (this.service.LoginNameExists(item.LoginName))
@@ -47,9 +42,15 @@ namespace NikiCars.Console.Commands
                 return this.Error($"MobilePhone {item.MobilePhone} already exists");
             }
 
+            item.Password = this.cryptography.HashPassword(item.Password);
             User result = this.service.Save(item);
 
             return this.Success(result);
+        }
+
+        public override void Dispose()
+        {
+            this.service.Dispose();
         }
     }
 }
