@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NikiCars.DependencyExtentio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NikiCars.Utility", "NikiCars.Utility\NikiCars.Utility.csproj", "{346A7ACB-2364-4F7F-B2FC-0AFA9AEF816C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NikiCars.Models", "NikiCars.Models\NikiCars.Models.csproj", "{6AC0948E-2F50-4C45-AC2B-7FC490D951B6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -99,6 +101,10 @@ Global
 		{346A7ACB-2364-4F7F-B2FC-0AFA9AEF816C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{346A7ACB-2364-4F7F-B2FC-0AFA9AEF816C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{346A7ACB-2364-4F7F-B2FC-0AFA9AEF816C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6AC0948E-2F50-4C45-AC2B-7FC490D951B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AC0948E-2F50-4C45-AC2B-7FC490D951B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AC0948E-2F50-4C45-AC2B-7FC490D951B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AC0948E-2F50-4C45-AC2B-7FC490D951B6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
