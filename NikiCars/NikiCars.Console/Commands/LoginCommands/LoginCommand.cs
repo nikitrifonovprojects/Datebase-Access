@@ -7,38 +7,43 @@ using NikiCars.Command.Interfaces;
 using NikiCars.Command.Validation;
 using NikiCars.Data.Models;
 using NikiCars.Data.Models.Includes;
+using NikiCars.Models.LoginModels;
 using NikiCars.Services.Interfaces;
+using NikiCars.Services.Mapping;
 
 namespace NikiCars.Console.Commands.LoginCommands
 {
     [CommandRoute("login User")]
-    public class LoginCommand : BaseCommand<User>
+    public class LoginCommand : BaseCommand<LoginModel>
     {
         private IUserService service;
         private IAuthenticationManager manager;
+        private IMappingService mapping;
 
-        public LoginCommand(CommandContext context, IUserService service, IModelBinder<User> binder, IValidator validation, IAuthenticationManager manager)
+        public LoginCommand(CommandContext context, IUserService service, IModelBinder<LoginModel> binder, IValidator validation, IAuthenticationManager manager, IMappingService mapping)
             : base(context, binder, validation)
         {
             this.service = service;
             this.manager = manager;
+            this.mapping = mapping;
         }
 
-        protected override ICommandResult ExecuteAction(User item)
+        protected override ICommandResult ExecuteAction(LoginModel item)
         {
             User user = null;
+            User convertedUser = this.mapping.Map<User>(item);
 
-            if (item.LoginName != null)
+            if (convertedUser.LoginName != null)
             {
-                user = this.service.GetUserByLoginName(item.LoginName, item.Password, new List<UserIncludes>() { UserIncludes.UserRoles } );
+                user = this.service.GetUserByLoginName(convertedUser.LoginName, convertedUser.Password, new List<UserIncludes>() { UserIncludes.UserRoles } );
                 if (user == null)
                 {
                     return this.Error($"User not found");
                 }
             }
-            else if (item.Email != null)
+            else if (convertedUser.Email != null)
             {
-                user = this.service.GetUserByEmail(item.Email, item.Password, new List<UserIncludes>() { UserIncludes.UserRoles } );
+                user = this.service.GetUserByEmail(convertedUser.Email, convertedUser.Password, new List<UserIncludes>() { UserIncludes.UserRoles } );
                 if (user == null)
                 {
                     return this.Error($"User not found");

@@ -12,6 +12,7 @@ using NikiCars.Data.Interfaces;
 using NikiCars.Dependancy;
 using NikiCars.Services;
 using NikiCars.Services.Interfaces;
+using NikiCars.Services.Mapping;
 using NikiCars.Utility;
 
 namespace DependencyExtentions
@@ -20,6 +21,8 @@ namespace DependencyExtentions
     {
         public static IDependencyContainer AddDependencies(this IDependencyContainer container)
         {
+            container.RegisterType<IMappingService, MappingService>();
+
             container.RegisterType<IConfig, DeveloperConfig>();
             //container.RegisterType<IConfig, Config>();
 

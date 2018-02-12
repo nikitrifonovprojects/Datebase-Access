@@ -105,9 +105,17 @@
       <Project>{c11adc3a-4002-445e-976f-7023d6de706c}</Project>
       <Name>NikiCars.DependencyExtentions</Name>
     </ProjectReference>
+    <ProjectReference Include="..\NikiCars.Models\NikiCars.Models.csproj">
+      <Project>{6AC0948E-2F50-4C45-AC2B-7FC490D951B6}</Project>
+      <Name>NikiCars.Models</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NikiCars.Services.Interfaces\NikiCars.Services.Interfaces.csproj">
       <Project>{CF9F2650-6EBB-46AB-8F57-B1496CD04215}</Project>
       <Name>NikiCars.Services.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NikiCars.Services.Mapping\NikiCars.Services.Mapping.csproj">
+      <Project>{BEBC1E1B-B23B-4405-9EAE-373513F59491}</Project>
+      <Name>NikiCars.Services.Mapping</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

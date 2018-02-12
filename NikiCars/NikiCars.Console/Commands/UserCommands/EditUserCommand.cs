@@ -5,51 +5,59 @@ using NikiCars.Command.Interfaces;
 using NikiCars.Command.Validation;
 using NikiCars.Console.Constants;
 using NikiCars.Data.Models;
+using NikiCars.Models.UserModels;
 using NikiCars.Services.Interfaces;
+using NikiCars.Services.Mapping;
 
 namespace NikiCars.Console.Commands.UserCommands
 {
     [CommandRoute("edit User")]
-    public class EditUserCommand : BaseCommand<User>
+    public class EditUserCommand : BaseCommand<EditUserModel>
     {
         private IUserService service;
+        private IMappingService mapping;
 
-        public EditUserCommand(CommandContext context, IUserService service, IModelBinder<User> binder, IValidator validation) 
+        public EditUserCommand(CommandContext context, IUserService service, IModelBinder<EditUserModel> binder, IValidator validation, IMappingService mapping) 
             : base(context, binder, validation)
         {
             this.service = service;
+            this.mapping = mapping;
         }
 
-        protected override ICommandResult ExecuteAction(User item)
+        protected override ICommandResult ExecuteAction(EditUserModel item)
         {
             if (!this.context.CommandUser.IsAuthenticated)
             {
                 return this.AuthenticationError("User not logged in");
             }
 
-            if (item.ID != Convert.ToInt32(this.context.CommandUser.ID) || !this.context.CommandUser.UserRoles.Contains(RoleConstants.ADMINISTRATOR))
+            User user = this.mapping.Map<User>(item);
+
+            if (user.ID != Convert.ToInt32(this.context.CommandUser.ID) || !this.context.CommandUser.UserRoles.Contains(RoleConstants.ADMINISTRATOR))
             {
                 return this.AuthorizationError("User does not have permission");
             }
 
-            User dbUser = this.service.GetById(item.ID);
+            User dbUser = this.service.GetById(user.ID);
 
-            if (item.LoginName != dbUser.LoginName && this.service.LoginNameExists(item.LoginName))
+            if (user.LoginName != dbUser.LoginName && this.service.LoginNameExists(user.LoginName))
             {
-                return this.Error($"LoginName {item.LoginName} already exists");
+                return this.Error($"LoginName {user.LoginName} already exists");
             }
 
-            if (item.Email != dbUser.Email && this.service.EmailExists(item.Email))
+            if (user.Email != dbUser.Email && this.service.EmailExists(user.Email))
             {
-                return this.Error($"Email {item.Email} already exists");
+                return this.Error($"Email {user.Email} already exists");
             }
 
-            if (item.MobilePhone != dbUser.MobilePhone && this.service.MobilePhoneExists(item.MobilePhone))
+            if (user.MobilePhone != dbUser.MobilePhone && this.service.MobilePhoneExists(user.MobilePhone))
             {
-                return this.Error($"MobilePhone {item.MobilePhone} already exists");
+                return this.Error($"MobilePhone {user.MobilePhone} already exists");
             }
 
-            User result = this.service.Save(item);
+            user = this.service.Save(user);
+
+            EditUserModel result = this.mapping.Map<EditUserModel>(user);
 
             return this.Success(result);
         }

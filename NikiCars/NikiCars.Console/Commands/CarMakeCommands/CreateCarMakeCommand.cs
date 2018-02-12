@@ -3,22 +3,26 @@ using NikiCars.Command.Framework.Routing;
 using NikiCars.Command.Interfaces;
 using NikiCars.Command.Validation;
 using NikiCars.Data.Models;
+using NikiCars.Models.CarMakeModels;
 using NikiCars.Services.Interfaces;
+using NikiCars.Services.Mapping;
 
 namespace NikiCars.Console.Commands.CarMakeCommands
 {
     [CommandRoute("add CarMake")]
-    public class CreateCarMakeCommand : BaseCommand<CarMake>
+    public class CreateCarMakeCommand : BaseCommand<CreateCarMakeModel>
     {
         private IService<CarMake> service;
+        private IMappingService mapping;
 
-        public CreateCarMakeCommand(CommandContext context, IService<CarMake> service, IModelBinder<CarMake> binder, IValidator validation) 
+        public CreateCarMakeCommand(CommandContext context, IService<CarMake> service, IModelBinder<CreateCarMakeModel> binder, IValidator validation, IMappingService mapping) 
             : base(context, binder, validation)
         {
             this.service = service;
+            this.mapping = mapping;
         }
 
-        protected override ICommandResult ExecuteAction(CarMake item)
+        protected override ICommandResult ExecuteAction(CreateCarMakeModel item)
         {
             if (this.context.ModelState.HasError)
             {
@@ -30,7 +34,9 @@ namespace NikiCars.Console.Commands.CarMakeCommands
                 return this.AuthenticationError("User is not authenticated");
             }
 
-            CarMake result = this.service.Save(item);
+            CarMake carMake = this.mapping.Map<CarMake>(item);
+
+            CarMake result = this.service.Save(carMake);
 
             return this.Success(result);
         }

@@ -76,6 +76,10 @@
       <Project>{CF9F2650-6EBB-46AB-8F57-B1496CD04215}</Project>
       <Name>NikiCars.Services.Interfaces</Name>
     </ProjectReference>
+    <ProjectReference Include="..\NikiCars.Services.Mapping\NikiCars.Services.Mapping.csproj">
+      <Project>{BEBC1E1B-B23B-4405-9EAE-373513F59491}</Project>
+      <Name>NikiCars.Services.Mapping</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NikiCars.Services\NikiCars.Services.csproj">
       <Project>{342DD602-4970-4185-A99F-82E6F57E8455}</Project>
       <Name>NikiCars.Services</Name>

@@ -1,8 +1,9 @@
 ﻿using DependencyExtentions;
-using NikiCars.Command.Client;
-using NikiCars.Data.Models;
-using NikiCars.Dependancy;
 using Newtonsoft.Json.Linq;
+using NikiCars.Command.Client;
+using NikiCars.Dependancy;
+using NikiCars.Models.LoginModels;
+using NikiCars.Models.UserModels;
 
 namespace NikiCars.Console
 {
@@ -23,7 +24,7 @@ namespace NikiCars.Console
             var client = container.Resolve<CommandClient>();
             string comm = "login User";
 
-            User user1 = new User();
+            var user1 = new LoginModel();
             user1.Password = "gogotorulzz11";
             user1.LoginName = "Gogoto";
 
@@ -34,14 +35,15 @@ namespace NikiCars.Console
             }
 
             string command = "get User";
-            User user = new User();
+            var user = new FindUserModel();
             user.ID = 12;
             var result = client.SendRequest(command, user);
             var data = result.Data as JObject;
-            var real = data.ToObject<User>();
+            var real = data.ToObject<FindUserModel>();
 
             string command1 = "edit User";
             var res = client.SendRequest(command1, real);
+
             //var recievedUser = JsonConvert.DeserializeObject<User>(result.Data.ToString());
             //User usera = new User();
             //usera.LoginName = "Niki";

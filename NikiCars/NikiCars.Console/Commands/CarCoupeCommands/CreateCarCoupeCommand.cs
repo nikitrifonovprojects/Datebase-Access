@@ -4,22 +4,26 @@ using NikiCars.Command.Framework.Routing;
 using NikiCars.Command.Interfaces;
 using NikiCars.Command.Validation;
 using NikiCars.Data.Models;
+using NikiCars.Models.CarCoupeModels;
 using NikiCars.Services.Interfaces;
+using NikiCars.Services.Mapping;
 
 namespace NikiCars.Console.Commands.CarCoupeCommands
 {
     [CommandRoute("add CarCoupe")]
-    public class CreateCarCoupeCommand : BaseCommand<CarCoupe>
+    public class CreateCarCoupeCommand : BaseCommand<CreateCarCoupeModel>
     {
         private IService<CarCoupe> service;
+        private IMappingService mapping;
 
-        public CreateCarCoupeCommand(CommandContext context, IService<CarCoupe> service, IModelBinder<CarCoupe> binder, IValidator validation)
+        public CreateCarCoupeCommand(CommandContext context, IService<CarCoupe> service, IModelBinder<CreateCarCoupeModel> binder, IValidator validation, IMappingService mapping)
             : base(context, binder, validation)
         {
             this.service = service;
+            this.mapping = mapping;
         }
 
-        protected override ICommandResult ExecuteAction(CarCoupe item)
+        protected override ICommandResult ExecuteAction(CreateCarCoupeModel item)
         {
             if (this.context.ModelState.HasError)
             {
@@ -31,8 +35,9 @@ namespace NikiCars.Console.Commands.CarCoupeCommands
                 return this.AuthenticationError("User is not authenticated");
             }
 
-            item.UserID = Convert.ToInt32(this.context.CommandUser.ID);
-            CarCoupe result = this.service.Save(item);
+            CarCoupe carCoupe = this.mapping.Map<CarCoupe>(item);
+            carCoupe.UserID = Convert.ToInt32(this.context.CommandUser.ID);
+            CarCoupe result = this.service.Save(carCoupe);
             
             return this.Success(result);
         }
