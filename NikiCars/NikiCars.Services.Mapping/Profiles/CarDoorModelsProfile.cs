@@ -8,9 +8,9 @@ namespace NikiCars.Services.Mapping.Profiles
     {
         public CarDoorModelsProfile()
         {
-            CreateMap<CreateCarDoorModel, NumberOfDoors>();
-            CreateMap<EditCarDoorsModel, NumberOfDoors>();
-            CreateMap<ListAllCarDoorsModel, NumberOfDoors>();
+            CreateMap<CreateCarDoorModel, NumberOfDoors>(MemberList.None);
+            CreateMap<EditCarDoorsModel, NumberOfDoors>(MemberList.None);
+            CreateMap<ListAllCarDoorsModel, NumberOfDoors>(MemberList.None);
         }
     }
 }

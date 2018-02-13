@@ -54,9 +54,14 @@
     <Compile Include="Commands\CarDoorCommands\CreateCarDoorCommand.cs" />
     <Compile Include="Commands\CarDoorCommands\DeleteCarDoorCommand.cs" />
     <Compile Include="Commands\CarDoorCommands\EditCarDoorCommand.cs" />
-    <Compile Include="Commands\CarDoorCommands\FindCarDoorsCommand.cs" />
+    <Compile Include="Commands\CarDoorCommands\ListCarDoorsCommand.cs" />
     <Compile Include="Commands\CarMakeCommands\CreateCarMakeCommand.cs" />
     <Compile Include="Commands\CarMakeCommands\EditCarMakeCommand.cs" />
+    <Compile Include="Commands\CarModelCommands\CreateCarModelCommand.cs" />
+    <Compile Include="Commands\CarModelCommands\DeleteCarModelCommand.cs" />
+    <Compile Include="Commands\CarModelCommands\EditCarModelCommand.cs" />
+    <Compile Include="Commands\CarModelCommands\FindCarModelCommand.cs" />
+    <Compile Include="Commands\CarModelCommands\ListCarModelCommand.cs" />
     <Compile Include="Commands\UserCommands\CreateUserCommand.cs" />
     <Compile Include="Commands\UserCommands\FindUserCommand.cs" />
     <Compile Include="Commands\UserRoleCommands\CreateUserRoleCommand.cs" />
