@@ -86,7 +86,7 @@ namespace NikiCars.Data
             return item;
         }
 
-        public void Delete(T item)
+        public bool Delete(T item)
         {
             if (string.IsNullOrEmpty(this.deleteCommandText))
             {
@@ -101,7 +101,14 @@ namespace NikiCars.Data
 
             command.Parameters.AddWithValue("@param1", GetPrimaryKeyValue(item));
 
-            command.ExecuteNonQuery();
+            int result = command.ExecuteNonQuery();
+
+            if (result > 0)
+            {
+                return true;
+            }
+
+            return false;
         }
 
         public List<T> GetAll(int pageNumber, int pageSize)

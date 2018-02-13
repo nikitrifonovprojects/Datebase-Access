@@ -51,6 +51,10 @@
   <ItemGroup>
     <Compile Include="Commands\CarCoupeCommands\CreateCarCoupeCommand.cs" />
     <Compile Include="Commands\CarCoupeCommands\ListAllCarCoupesCommand.cs" />
+    <Compile Include="Commands\CarDoorCommands\CreateCarDoorCommand.cs" />
+    <Compile Include="Commands\CarDoorCommands\DeleteCarDoorCommand.cs" />
+    <Compile Include="Commands\CarDoorCommands\EditCarDoorCommand.cs" />
+    <Compile Include="Commands\CarDoorCommands\FindCarDoorsCommand.cs" />
     <Compile Include="Commands\CarMakeCommands\CreateCarMakeCommand.cs" />
     <Compile Include="Commands\CarMakeCommands\EditCarMakeCommand.cs" />
     <Compile Include="Commands\UserCommands\CreateUserCommand.cs" />
@@ -121,5 +125,6 @@
       <Name>NikiCars.Services.Mapping</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

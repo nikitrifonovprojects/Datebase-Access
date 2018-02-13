@@ -8,7 +8,7 @@ namespace NikiCars.Services.Interfaces
     {
         T Save(T item);
 
-        void Delete(T item);
+        bool Delete(T item);
 
         List<T> GetAll(int pageNum, int pageSize);
 

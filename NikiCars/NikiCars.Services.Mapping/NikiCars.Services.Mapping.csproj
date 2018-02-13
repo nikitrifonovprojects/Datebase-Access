@@ -47,6 +47,7 @@
     <Compile Include="IMappingService.cs" />
     <Compile Include="MappingService.cs" />
     <Compile Include="Profiles\CarCoupeModelsProfile.cs" />
+    <Compile Include="Profiles\CarDoorModelsProfile.cs" />
     <Compile Include="Profiles\CarMakeModelsProfile.cs" />
     <Compile Include="Profiles\LoginModelsProfile.cs" />
     <Compile Include="Profiles\UserModelsProfile.cs" />

@@ -14,9 +14,9 @@ namespace NikiCars.Services
             this.repository = repo;
         }
 
-        public void Delete(T item)
+        public bool Delete(T item)
         {
-            this.repository.Delete(item);
+            return this.repository.Delete(item);
         }
 
         public List<T> GetAll(int pageNum, int pageSize)

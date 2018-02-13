@@ -15,7 +15,7 @@ namespace NikiCars.Data.Interfaces
 
         T Update(T item);
 
-        void Delete(T item);
+        bool Delete(T item);
 
         int Count();
     }
