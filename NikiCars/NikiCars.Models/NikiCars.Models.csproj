@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="CarCoupeModels\CreateCarCoupeModel.cs" />
     <Compile Include="CarCoupeModels\EditCarCoupeModel.cs" />
+    <Compile Include="CarCoupeModels\ListAllCarCoupesModel.cs" />
     <Compile Include="CarMakeModels\CreateCarMakeModel.cs" />
     <Compile Include="LoginModels\LoginModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

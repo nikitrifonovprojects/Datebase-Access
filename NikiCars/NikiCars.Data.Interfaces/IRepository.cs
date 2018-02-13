@@ -9,6 +9,8 @@ namespace NikiCars.Data.Interfaces
 
         List<T> GetAll(int pageNumber, int pageSize);
 
+        List<T> GetAll();
+
         T Create(T item);
 
         T Update(T item);

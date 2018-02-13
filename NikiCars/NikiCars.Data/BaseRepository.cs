@@ -127,6 +127,26 @@ namespace NikiCars.Data
             return list;
         }
 
+        public List<T> GetAll()
+        {
+            var list = new List<T>();
+            SqlCommand command = new SqlCommand("SELECT * FROM " + GetTableName() + " ORDER BY " + GetPrimaryKeyName())
+            {
+                CommandType = CommandType.Text,
+                Connection = Connection
+            };
+
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    list.Add(MapProperties(reader));
+                }
+            }
+
+            return list;
+        }
+
         public T GetByID(int id)
         {
             SqlCommand command = new SqlCommand("SELECT * FROM " + GetTableName() + " WHERE " + GetPrimaryKeyName() + " = @param1")

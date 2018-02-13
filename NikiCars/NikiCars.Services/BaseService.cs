@@ -24,6 +24,11 @@ namespace NikiCars.Services
             return this.repository.GetAll(pageNum, pageSize);
         }
 
+        public List<T> GetAll()
+        {
+            return this.repository.GetAll();
+        }
+
         public T GetById(int id)
         {
             return this.repository.GetByID(id);

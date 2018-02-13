@@ -12,6 +12,8 @@ namespace NikiCars.Services.Interfaces
 
         List<T> GetAll(int pageNum, int pageSize);
 
+        List<T> GetAll();
+
         T GetById(int id);
 
         int Count();

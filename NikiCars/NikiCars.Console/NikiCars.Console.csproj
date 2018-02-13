@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\CarCoupeCommands\CreateCarCoupeCommand.cs" />
+    <Compile Include="Commands\CarCoupeCommands\ListAllCarCoupesCommand.cs" />
     <Compile Include="Commands\CarMakeCommands\CreateCarMakeCommand.cs" />
     <Compile Include="Commands\UserCommands\CreateUserCommand.cs" />
     <Compile Include="Commands\UserCommands\FindUserCommand.cs" />
