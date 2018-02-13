@@ -17,25 +17,24 @@ namespace NikiCars.Console
             var container = new DependencyContainer();
             container.AddDependencies();
 
-            string command = "list CarCoupe";
+            //string command = "list CarCoupe";
 
-            var carCoupe = new ListAllCarCoupesModel();
+            //var carCoupe = new ListAllCarCoupesModel();
 
-            var carCoupeWithPaging = new ListAllCarCoupesModel();
-            carCoupeWithPaging.PageNumber = 0;
-            carCoupeWithPaging.PageSize = 5;
+            //var carCoupeWithPaging = new ListAllCarCoupesModel();
+            //carCoupeWithPaging.PageNumber = 0;
+            //carCoupeWithPaging.PageSize = 5;
 
-            var client = container.Resolve<CommandClient>();
+            //var client = container.Resolve<CommandClient>();
 
-            var result = client.SendRequest(command, carCoupe);
-            var data = result.Data as JArray;
-            var real = data.ToObject<List<ListAllCarCoupesModel>>();
+            //var result = client.SendRequest(command, carCoupe);
+            //var data = result.Data as JArray;
+            //var real = data.ToObject<List<ListAllCarCoupesModel>>();
 
-            var resultWithPaging = client.SendRequest(command, carCoupeWithPaging);
-            var dataWithPaging = resultWithPaging.Data as JArray;
-            var realWithPaging = dataWithPaging.ToObject<List<ListAllCarCoupesModel>>();
+            //var resultWithPaging = client.SendRequest(command, carCoupeWithPaging);
+            //var dataWithPaging = resultWithPaging.Data as JArray;
+            //var realWithPaging = dataWithPaging.ToObject<List<ListAllCarCoupesModel>>();
 
-            var a = 1;
             //string command = "list";
             //var search = new Search();
             //search.PageNumber = 1;

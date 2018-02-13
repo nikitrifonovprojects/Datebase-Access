@@ -52,6 +52,7 @@
     <Compile Include="Commands\CarCoupeCommands\CreateCarCoupeCommand.cs" />
     <Compile Include="Commands\CarCoupeCommands\ListAllCarCoupesCommand.cs" />
     <Compile Include="Commands\CarMakeCommands\CreateCarMakeCommand.cs" />
+    <Compile Include="Commands\CarMakeCommands\EditCarMakeCommand.cs" />
     <Compile Include="Commands\UserCommands\CreateUserCommand.cs" />
     <Compile Include="Commands\UserCommands\FindUserCommand.cs" />
     <Compile Include="Commands\UserRoleCommands\CreateUserRoleCommand.cs" />
@@ -59,6 +60,7 @@
     <Compile Include="Commands\UserCommands\EditUserCommand.cs" />
     <Compile Include="Commands\CarCoupeCommands\FindCarCoupeCommand.cs" />
     <Compile Include="Commands\LoginCommands\LoginCommand.cs" />
+    <Compile Include="Commands\UserRoleCommands\EditUserRoleCommand.cs" />
     <Compile Include="Constants\RoleConstants.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

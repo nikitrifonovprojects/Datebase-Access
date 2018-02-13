@@ -10,13 +10,13 @@ using NikiCars.Services.Mapping;
 
 namespace NikiCars.Console.Commands.UserRoleCommands
 {
-    [CommandRoute("add UserRole")]
-    public class CreateUserRoleCommand : BaseCommand<CreateUserRoleModel>
+    [CommandRoute("edit UserRole")]
+    public class EditUserRoleCommand : BaseCommand<CreateUserRoleModel>
     {
         private IService<UserRole> service;
         private IMappingService mapping;
 
-        public CreateUserRoleCommand(CommandContext context, IService<UserRole> service, IModelBinder<CreateUserRoleModel> binder, IValidator validation, IMappingService mapping) 
+        public EditUserRoleCommand(CommandContext context, IService<UserRole> service, IModelBinder<CreateUserRoleModel> binder, IValidator validation, IMappingService mapping) 
             : base(context, binder, validation)
         {
             this.service = service;
@@ -35,7 +35,7 @@ namespace NikiCars.Console.Commands.UserRoleCommands
                 return this.AuthenticationError("User does not have permission");
             }
 
-            UserRole userRole = this.mapping.Map<UserRole>(item); 
+            UserRole userRole = this.mapping.Map<UserRole>(item);
 
             UserRole result = this.service.Save(userRole);
 

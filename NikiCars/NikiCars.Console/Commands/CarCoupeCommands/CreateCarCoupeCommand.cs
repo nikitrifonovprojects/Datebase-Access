@@ -3,6 +3,7 @@ using NikiCars.Command.Framework;
 using NikiCars.Command.Framework.Routing;
 using NikiCars.Command.Interfaces;
 using NikiCars.Command.Validation;
+using NikiCars.Console.Constants;
 using NikiCars.Data.Models;
 using NikiCars.Models.CarCoupeModels;
 using NikiCars.Services.Interfaces;
@@ -30,7 +31,7 @@ namespace NikiCars.Console.Commands.CarCoupeCommands
                 return this.Error(this.context.ModelState.ToString());
             }
 
-            if (!this.context.CommandUser.IsAuthenticated)
+            if (!this.context.CommandUser.IsAuthenticated || !this.context.CommandUser.UserRoles.Contains(RoleConstants.ADMINISTRATOR))
             {
                 return this.AuthenticationError("User is not authenticated");
             }

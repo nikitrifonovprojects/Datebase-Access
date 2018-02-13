@@ -1,5 +1,4 @@
 ﻿using NikiCars.Command.Framework;
-using NikiCars.Command.Framework.Routing;
 using NikiCars.Command.Interfaces;
 using NikiCars.Command.Validation;
 using NikiCars.Console.Constants;
@@ -10,13 +9,12 @@ using NikiCars.Services.Mapping;
 
 namespace NikiCars.Console.Commands.CarMakeCommands
 {
-    [CommandRoute("add CarMake")]
-    public class CreateCarMakeCommand : BaseCommand<CreateCarMakeModel>
+    public class EditCarMakeCommand : BaseCommand<CreateCarMakeModel>
     {
         private IService<CarMake> service;
         private IMappingService mapping;
 
-        public CreateCarMakeCommand(CommandContext context, IService<CarMake> service, IModelBinder<CreateCarMakeModel> binder, IValidator validation, IMappingService mapping) 
+        public EditCarMakeCommand(CommandContext context, IService<CarMake> service, IModelBinder<CreateCarMakeModel> binder, IValidator validation, IMappingService mapping) 
             : base(context, binder, validation)
         {
             this.service = service;
@@ -25,26 +23,21 @@ namespace NikiCars.Console.Commands.CarMakeCommands
 
         protected override ICommandResult ExecuteAction(CreateCarMakeModel item)
         {
-            if (this.context.ModelState.HasError)
+            if (!this.context.CommandUser.IsAuthenticated)
             {
-                return this.Error(this.context.ModelState.ToString());
-            }
-
-            if (!this.context.CommandUser.IsAuthenticated || !this.context.CommandUser.UserRoles.Contains(RoleConstants.ADMINISTRATOR))
-            {
-                return this.AuthenticationError("User is not authenticated");
+                return this.AuthenticationError("User not logged in");
             }
 
             CarMake carMake = this.mapping.Map<CarMake>(item);
 
+            if (!this.context.CommandUser.UserRoles.Contains(RoleConstants.ADMINISTRATOR))
+            {
+                return this.AuthorizationError("User does not have permission");
+            }
+
             CarMake result = this.service.Save(carMake);
 
             return this.Success(result);
-        }
-
-        public override void Dispose()
-        {
-            this.service.Dispose();
         }
     }
 }
