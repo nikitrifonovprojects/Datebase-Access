@@ -57,6 +57,7 @@
     <Compile Include="Commands\CarDoorCommands\ListCarDoorsCommand.cs" />
     <Compile Include="Commands\CarMakeCommands\CreateCarMakeCommand.cs" />
     <Compile Include="Commands\CarMakeCommands\EditCarMakeCommand.cs" />
+    <Compile Include="Commands\CarMakeCommands\ListCarMakeCommand.cs" />
     <Compile Include="Commands\CarModelCommands\CreateCarModelCommand.cs" />
     <Compile Include="Commands\CarModelCommands\DeleteCarModelCommand.cs" />
     <Compile Include="Commands\CarModelCommands\EditCarModelCommand.cs" />

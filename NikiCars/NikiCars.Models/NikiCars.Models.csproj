@@ -47,6 +47,7 @@
     <Compile Include="CarDoorModels\EditCarDoorsModel.cs" />
     <Compile Include="CarDoorModels\ListAllCarDoorsModel.cs" />
     <Compile Include="CarMakeModels\CreateCarMakeModel.cs" />
+    <Compile Include="CarMakeModels\ListCarMakeModel.cs" />
     <Compile Include="CarModelModels\CreateCarModelModel.cs" />
     <Compile Include="CarModelModels\EditCarModelModel.cs" />
     <Compile Include="CarModelModels\FindCarModelModel.cs" />
