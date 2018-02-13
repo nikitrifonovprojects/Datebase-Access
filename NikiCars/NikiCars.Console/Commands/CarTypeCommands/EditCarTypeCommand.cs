@@ -4,40 +4,40 @@ using NikiCars.Command.Interfaces;
 using NikiCars.Command.Validation;
 using NikiCars.Console.Constants;
 using NikiCars.Data.Models;
-using NikiCars.Models.CarMakeModels;
+using NikiCars.Models.CarTypeModels;
 using NikiCars.Services.Interfaces;
 using NikiCars.Services.Mapping;
 
-namespace NikiCars.Console.Commands.CarMakeCommands
+namespace NikiCars.Console.Commands.CarTypeCommands
 {
-    [CommandRoute("edit CarMake")]
-    public class EditCarMakeCommand : BaseCommand<CreateCarMakeModel>
+    [CommandRoute("edit CarType")]
+    public class EditCarTypeCommand : BaseCommand<EditCarTypeModel>
     {
-        private IService<CarMake> service;
+        private IService<CarType> service;
         private IMappingService mapping;
 
-        public EditCarMakeCommand(CommandContext context, IService<CarMake> service, IModelBinder<CreateCarMakeModel> binder, IValidator validation, IMappingService mapping) 
+        public EditCarTypeCommand(CommandContext context, IService<CarType> service, IModelBinder<EditCarTypeModel> binder, IValidator validation, IMappingService mapping) 
             : base(context, binder, validation)
         {
             this.service = service;
             this.mapping = mapping;
         }
 
-        protected override ICommandResult ExecuteAction(CreateCarMakeModel item)
+        protected override ICommandResult ExecuteAction(EditCarTypeModel item)
         {
             if (!this.context.CommandUser.IsAuthenticated)
             {
                 return this.AuthenticationError("User not logged in");
             }
 
-            CarMake carMake = this.mapping.Map<CarMake>(item);
+            CarType carType = this.mapping.Map<CarType>(item);
 
             if (!this.context.CommandUser.UserRoles.Contains(RoleConstants.ADMINISTRATOR))
             {
                 return this.AuthorizationError("User does not have permission");
             }
 
-            CarMake result = this.service.Save(carMake);
+            CarType result = this.service.Save(carType);
 
             return this.Success(result);
         }

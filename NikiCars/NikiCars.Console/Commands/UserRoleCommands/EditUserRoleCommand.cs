@@ -41,5 +41,10 @@ namespace NikiCars.Console.Commands.UserRoleCommands
 
             return this.Success(result);
         }
+
+        public override void Dispose()
+        {
+            this.service.Dispose();
+        }
     }
 }

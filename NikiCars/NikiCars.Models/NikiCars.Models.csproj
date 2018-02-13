@@ -53,6 +53,9 @@
     <Compile Include="CarModelModels\FindCarModelModel.cs" />
     <Compile Include="CarModelModels\ListCarModelModel.cs" />
     <Compile Include="CarModelModels\ViewCarModelsByCarMakeModel.cs" />
+    <Compile Include="CarTypeModels\CreateCarTypeModel.cs" />
+    <Compile Include="CarTypeModels\EditCarTypeModel.cs" />
+    <Compile Include="CarTypeModels\ListCarTypeModel.cs" />
     <Compile Include="LoginModels\LoginModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserModels\FindUserModel.cs" />

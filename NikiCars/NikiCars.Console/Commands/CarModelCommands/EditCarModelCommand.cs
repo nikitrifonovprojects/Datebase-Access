@@ -30,14 +30,14 @@ namespace NikiCars.Console.Commands.CarModelCommands
                 return this.AuthenticationError("User not logged in");
             }
 
-            CarModel carMake = this.mapping.Map<CarModel>(item);
+            CarModel carModel = this.mapping.Map<CarModel>(item);
 
             if (!this.context.CommandUser.UserRoles.Contains(RoleConstants.ADMINISTRATOR))
             {
                 return this.AuthorizationError("User does not have permission");
             }
 
-            CarModel result = this.service.Save(carMake);
+            CarModel result = this.service.Save(carModel);
 
             return this.Success(result);
         }

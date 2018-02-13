@@ -64,6 +64,10 @@
     <Compile Include="Commands\CarModelCommands\FindCarModelCommand.cs" />
     <Compile Include="Commands\CarModelCommands\ListCarModelCommand.cs" />
     <Compile Include="Commands\CarModelCommands\ViewCarModelsByCarMakeCommand.cs" />
+    <Compile Include="Commands\CarTypeCommands\CreateCarTypeCommand.cs" />
+    <Compile Include="Commands\CarTypeCommands\DeleteCarTypeCommand.cs" />
+    <Compile Include="Commands\CarTypeCommands\EditCarTypeCommand.cs" />
+    <Compile Include="Commands\CarTypeCommands\ListCarTypeCommand.cs" />
     <Compile Include="Commands\UserCommands\CreateUserCommand.cs" />
     <Compile Include="Commands\UserCommands\FindUserCommand.cs" />
     <Compile Include="Commands\UserRoleCommands\CreateUserRoleCommand.cs" />
