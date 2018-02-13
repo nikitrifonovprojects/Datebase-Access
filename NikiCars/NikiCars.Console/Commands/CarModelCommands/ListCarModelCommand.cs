@@ -38,9 +38,9 @@ namespace NikiCars.Console.Commands.CarModelCommands
             if (list.Count > 0)
             {
                 List<ListCarModelModel> carModellist = new List<ListCarModelModel>();
-                foreach (var carCoupe in list)
+                foreach (var carModel in list)
                 {
-                    carModellist.Add(this.mapping.Map<ListCarModelModel>(carCoupe));
+                    carModellist.Add(this.mapping.Map<ListCarModelModel>(carModel));
                 }
 
                 return this.Success(carModellist);
