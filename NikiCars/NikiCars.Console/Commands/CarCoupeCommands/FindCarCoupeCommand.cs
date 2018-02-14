@@ -24,6 +24,11 @@ namespace NikiCars.Console.Commands.CarCoupeCommands
 
         protected override ICommandResult ExecuteAction(EditCarCoupeModel item)
         {
+            if (this.context.ModelState.HasError)
+            {
+                return this.Error(this.context.ModelState.ToString());
+            }
+
             CarCoupe carCoupe = this.mapping.Map<CarCoupe>(item);
 
             CarCoupe result = this.service.GetById(carCoupe.ID);

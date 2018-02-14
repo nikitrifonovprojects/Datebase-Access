@@ -25,6 +25,11 @@ namespace NikiCars.Console.Commands.CarCoupeCommands
 
         protected override ICommandResult ExecuteAction(ListAllCarCoupesModel item)
         {
+            if (this.context.ModelState.HasError)
+            {
+                return this.Error(this.context.ModelState.ToString());
+            }
+
             List<CarCoupe> list;
             if (item.PageNumber != 0 || item.PageSize != 0)
             {
@@ -47,7 +52,7 @@ namespace NikiCars.Console.Commands.CarCoupeCommands
             }
             else
             {
-                return this.NotFound<CarCoupe>();
+                return this.NotFound();
             }
         }
 
