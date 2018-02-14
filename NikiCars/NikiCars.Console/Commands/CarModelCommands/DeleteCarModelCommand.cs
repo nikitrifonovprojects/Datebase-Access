@@ -27,7 +27,7 @@ namespace NikiCars.Console.Commands.CarModelCommands
         {
             if (!this.context.CommandUser.IsAuthenticated && !this.context.CommandUser.UserRoles.Contains(RoleConstants.ADMINISTRATOR))
             {
-                return this.AuthenticationError();
+                return this.AuthorizationError();
             }
 
             if (this.context.ModelState.HasError)
@@ -39,7 +39,7 @@ namespace NikiCars.Console.Commands.CarModelCommands
 
             if (this.service.Delete(carModel))
             {
-                return this.Success();
+                return this.Success(carModel);
             }
 
             return this.Error();

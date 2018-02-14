@@ -25,6 +25,11 @@ namespace NikiCars.Console.Commands.CarModelCommands
 
         protected override ICommandResult ExecuteAction(ListCarModelModel item)
         {
+            if (this.context.ModelState.HasError)
+            {
+                return this.Error(this.context.ModelState.ToString());
+            }
+
             List<CarModel> list;
             if (item.PageNumber != 0 || item.PageSize != 0)
             {

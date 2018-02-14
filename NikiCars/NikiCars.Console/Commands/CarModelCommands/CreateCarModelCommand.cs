@@ -27,7 +27,7 @@ namespace NikiCars.Console.Commands.CarModelCommands
         {
             if (!this.context.CommandUser.IsAuthenticated && !this.context.CommandUser.UserRoles.Contains(RoleConstants.ADMINISTRATOR))
             {
-                return this.AuthenticationError();
+                return this.AuthorizationError();
             }
 
             if (this.context.ModelState.HasError)
