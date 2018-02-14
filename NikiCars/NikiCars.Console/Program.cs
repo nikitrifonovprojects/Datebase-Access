@@ -6,6 +6,7 @@ using NikiCars.Command.Client;
 using NikiCars.Dependancy;
 using NikiCars.Models.CarCoupeModels;
 using NikiCars.Models.CarMakeModels;
+using NikiCars.Models.CarTypeModels;
 using NikiCars.Models.LoginModels;
 using NikiCars.Models.UserModels;
 
@@ -18,26 +19,25 @@ namespace NikiCars.Console
             var container = new DependencyContainer();
             container.AddDependencies();
 
-            //var user1 = new LoginModel();
-            //user1.Password = "gogotorulzz11";
-            //user1.LoginName = "Gogoto";
-            //string comm = "login User";
+            var user1 = new LoginModel();
+            user1.Password = "gogotorulzz11";
+            user1.LoginName = "Gogoto";
+            string comm = "login User";
 
-            //var client = container.Resolve<CommandClient>();
+            var client = container.Resolve<CommandClient>();
 
-            //var firstRes = client.SendRequest(comm, user1);
-            //if (firstRes.Status == "Success")
-            //{
-            //    client.SetToken(firstRes.Data as string);
-            //}
+            var firstRes = client.SendRequest(comm, user1);
+            if (firstRes.Status == "Success")
+            {
+                client.SetToken(firstRes.Data as string);
+            }
 
-            //string command = "edit CarMake";
-            //var input = new EditCarMakeModel();
-            //input.ID = 2;
-            //input.Country = "China";
-            //input.Name = "Kia";
+            string command = "add CarType";
+            var input = new CreateCarTypeModel();
+            input.Name = "Bazinga";
+         
 
-            //var res = client.SendRequest(command, input);
+            var res = client.SendRequest(command, input);
             //string command = "list CarCoupe";
 
             //var carCoupe = new ListAllCarCoupesModel();

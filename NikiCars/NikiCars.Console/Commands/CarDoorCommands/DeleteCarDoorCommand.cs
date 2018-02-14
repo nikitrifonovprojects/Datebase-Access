@@ -25,7 +25,7 @@ namespace NikiCars.Console.Commands.CarDoorCommands
 
         protected override ICommandResult ExecuteAction(EditCarDoorsModel item)
         {
-            if (!this.context.CommandUser.IsAuthenticated && !this.context.CommandUser.UserRoles.Contains(RoleConstants.ADMINISTRATOR))
+            if (!this.context.CommandUser.IsAuthenticated || !this.context.CommandUser.UserRoles.Contains(RoleConstants.ADMINISTRATOR))
             {
                 return this.AuthorizationError();
             }

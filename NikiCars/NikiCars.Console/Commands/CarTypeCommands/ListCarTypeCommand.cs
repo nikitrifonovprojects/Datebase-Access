@@ -42,13 +42,13 @@ namespace NikiCars.Console.Commands.CarTypeCommands
 
             if (list.Count > 0)
             {
-                List<ListCarTypeModel> catTypeList = new List<ListCarTypeModel>();
+                List<ListCarTypeModel> carTypeList = new List<ListCarTypeModel>();
                 foreach (var carType in list)
                 {
-                    catTypeList.Add(this.mapping.Map<ListCarTypeModel>(carType));
+                    carTypeList.Add(this.mapping.Map<ListCarTypeModel>(carType));
                 }
 
-                return this.Success(catTypeList);
+                return this.Success(carTypeList);
             }
             else
             {
