@@ -9,6 +9,7 @@ namespace NikiCars.Services.Mapping.Profiles
         public UserRoleModelsProfile()
         {
             CreateMap<CreateUserRoleModel, UserRole>(MemberList.None);
+            CreateMap<EditUserRoleModel, UserRole>(MemberList.None);
         }
     }
 }

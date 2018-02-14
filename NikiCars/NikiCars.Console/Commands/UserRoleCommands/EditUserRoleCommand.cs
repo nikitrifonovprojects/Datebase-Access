@@ -11,28 +11,28 @@ using NikiCars.Services.Mapping;
 namespace NikiCars.Console.Commands.UserRoleCommands
 {
     [CommandRoute("edit UserRole")]
-    public class EditUserRoleCommand : BaseCommand<CreateUserRoleModel>
+    public class EditUserRoleCommand : BaseCommand<EditUserRoleModel>
     {
         private IService<UserRole> service;
         private IMappingService mapping;
 
-        public EditUserRoleCommand(CommandContext context, IService<UserRole> service, IModelBinder<CreateUserRoleModel> binder, IValidator validation, IMappingService mapping) 
+        public EditUserRoleCommand(CommandContext context, IService<UserRole> service, IModelBinder<EditUserRoleModel> binder, IValidator validation, IMappingService mapping) 
             : base(context, binder, validation)
         {
             this.service = service;
             this.mapping = mapping;
         }
 
-        protected override ICommandResult ExecuteAction(CreateUserRoleModel item)
+        protected override ICommandResult ExecuteAction(EditUserRoleModel item)
         {
+            if (!this.context.CommandUser.IsAuthenticated && !this.context.CommandUser.UserRoles.Contains(RoleConstants.ADMINISTRATOR))
+            {
+                return this.AuthenticationError();
+            }
+
             if (this.context.ModelState.HasError)
             {
                 return this.Error(this.context.ModelState.ToString());
-            }
-
-            if (!this.context.CommandUser.UserRoles.Contains(RoleConstants.ADMINISTRATOR))
-            {
-                return this.AuthenticationError("User does not have permission");
             }
 
             UserRole userRole = this.mapping.Map<UserRole>(item);

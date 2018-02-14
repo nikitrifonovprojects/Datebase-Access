@@ -47,6 +47,7 @@
     <Compile Include="CarDoorModels\EditCarDoorsModel.cs" />
     <Compile Include="CarDoorModels\ListAllCarDoorsModel.cs" />
     <Compile Include="CarMakeModels\CreateCarMakeModel.cs" />
+    <Compile Include="CarMakeModels\EditCarMakeModel.cs" />
     <Compile Include="CarMakeModels\ListCarMakeModel.cs" />
     <Compile Include="CarModelModels\CreateCarModelModel.cs" />
     <Compile Include="CarModelModels\EditCarModelModel.cs" />
@@ -61,6 +62,7 @@
     <Compile Include="UserModels\FindUserModel.cs" />
     <Compile Include="UserModels\EditUserModel.cs" />
     <Compile Include="UserRoleModels\CreateUserRoleModel.cs" />
+    <Compile Include="UserRoleModels\EditUserRoleModel.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
