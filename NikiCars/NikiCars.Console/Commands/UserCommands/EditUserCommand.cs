@@ -26,21 +26,16 @@ namespace NikiCars.Console.Commands.UserCommands
 
         protected override ICommandResult ExecuteAction(EditUserModel item)
         {
+            User user = this.mapping.Map<User>(item);
+
+            if (!this.context.CommandUser.IsAuthenticated && (user.ID != Convert.ToInt32(this.context.CommandUser.ID) || !this.context.CommandUser.UserRoles.Contains(RoleConstants.ADMINISTRATOR)))
+            {
+                return this.AuthorizationError();
+            }
+
             if (this.context.ModelState.HasError)
             {
                 return this.Error(this.context.ModelState.ToString());
-            }
-
-            if (!this.context.CommandUser.IsAuthenticated)
-            {
-                return this.AuthenticationError("User not logged in");
-            }
-
-            User user = this.mapping.Map<User>(item);
-
-            if (user.ID != Convert.ToInt32(this.context.CommandUser.ID) || !this.context.CommandUser.UserRoles.Contains(RoleConstants.ADMINISTRATOR))
-            {
-                return this.AuthorizationError("User does not have permission");
             }
 
             User dbUser = this.service.GetById(user.ID);
@@ -65,6 +60,11 @@ namespace NikiCars.Console.Commands.UserCommands
             EditUserModel result = this.mapping.Map<EditUserModel>(user);
 
             return this.Success(result);
+        }
+
+        public override void Dispose()
+        {
+            this.service.Dispose();
         }
     }
 }
