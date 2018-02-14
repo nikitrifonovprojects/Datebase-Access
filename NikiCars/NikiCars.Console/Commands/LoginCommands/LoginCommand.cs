@@ -30,6 +30,11 @@ namespace NikiCars.Console.Commands.LoginCommands
 
         protected override ICommandResult ExecuteAction(LoginModel item)
         {
+            if (this.context.ModelState.HasError)
+            {
+                return this.Error(this.context.ModelState.ToString());
+            }
+
             User user = null;
             User convertedUser = this.mapping.Map<User>(item);
 

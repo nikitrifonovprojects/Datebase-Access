@@ -26,6 +26,11 @@ namespace NikiCars.Console.Commands.UserCommands
 
         protected override ICommandResult ExecuteAction(FindUserModel item)
         {
+            if (this.context.ModelState.HasError)
+            {
+                return this.Error(this.context.ModelState.ToString());
+            }
+
             User mappedUser = this.mapping.Map<User>(item);
 
             User user = this.service.GetUserByID(mappedUser.ID, new List<UserIncludes> { UserIncludes.UserRoles });

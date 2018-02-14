@@ -26,6 +26,11 @@ namespace NikiCars.Console.Commands.UserCommands
 
         protected override ICommandResult ExecuteAction(EditUserModel item)
         {
+            if (this.context.ModelState.HasError)
+            {
+                return this.Error(this.context.ModelState.ToString());
+            }
+
             if (!this.context.CommandUser.IsAuthenticated)
             {
                 return this.AuthenticationError("User not logged in");
