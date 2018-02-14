@@ -25,6 +25,11 @@ namespace NikiCars.Console.Commands.CarTypeCommands
 
         protected override ICommandResult ExecuteAction(ListCarTypeModel item)
         {
+            if (this.context.ModelState.HasError)
+            {
+                return this.Error(this.context.ModelState.ToString());
+            }
+
             List<CarType> list;
             if (item.PageNumber != 0 || item.PageSize != 0)
             {
@@ -47,7 +52,7 @@ namespace NikiCars.Console.Commands.CarTypeCommands
             }
             else
             {
-                return this.Error($"No CarType found");
+                return this.NotFound();
             }
         }
 

@@ -25,24 +25,24 @@ namespace NikiCars.Console.Commands.CarTypeCommands
 
         protected override ICommandResult ExecuteAction(EditCarTypeModel item)
         {
+            if (!this.context.CommandUser.IsAuthenticated && !this.context.CommandUser.UserRoles.Contains(RoleConstants.ADMINISTRATOR))
+            {
+                return this.AuthenticationError();
+            }
+
             if (this.context.ModelState.HasError)
             {
                 return this.Error(this.context.ModelState.ToString());
-            }
-
-            if (!this.context.CommandUser.IsAuthenticated || !this.context.CommandUser.UserRoles.Contains(RoleConstants.ADMINISTRATOR))
-            {
-                return this.AuthenticationError("User is not authenticated");
             }
 
             CarType carType = this.mapping.Map<CarType>(item);
 
             if (this.service.Delete(carType))
             {
-                return this.Success<CarType>();
+                return this.Success();
             }
 
-            return this.Error<CarType>();
+            return this.Error();
         }
 
         public override void Dispose()
