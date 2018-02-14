@@ -9,12 +9,12 @@ namespace NikiCars.Command.Client
 {
     public class CommandClient
     {
-        private Host invoker;
+        private Host host;
         private string token;
 
-        public CommandClient(Host invoker)
+        public CommandClient(Host host)
         {
-            this.invoker = invoker;
+            this.host = host;
         }
 
         public CommandResponce SendRequest<TIn>(string command, TIn item)
@@ -26,7 +26,7 @@ namespace NikiCars.Command.Client
 
             string input = JsonConvert.SerializeObject(commandRequestData);
 
-            string commandResult = this.invoker.ExecuteCommand(input);
+            string commandResult = this.host.ExecuteCommand(input);
 
             CommandResponce responce = JsonConvert.DeserializeObject<CommandResponce>(commandResult);
 
