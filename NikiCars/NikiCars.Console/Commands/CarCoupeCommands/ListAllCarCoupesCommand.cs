@@ -47,7 +47,7 @@ namespace NikiCars.Console.Commands.CarCoupeCommands
             }
             else
             {
-                return this.Error($"No CarCoupe's found");
+                return this.NotFound<CarCoupe>();
             }
         }
 
