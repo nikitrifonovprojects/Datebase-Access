@@ -40,14 +40,14 @@ namespace NikiCars.Command.Framework
             return new ErrorResult<T2>(item);
         }
 
-        protected ICommandResult Error<T2>()
+        protected ICommandResult Error()
         {
-            return new ErrorResult<T2>();
+            return new ErrorResult<string>();
         }
 
-        protected ICommandResult Success<T2>()
+        protected ICommandResult Success()
         {
-            return new SuccessResult<T2>();
+            return new SuccessResult<string>();
         }
 
         protected ICommandResult Success<T2>(T2 item)
@@ -55,19 +55,19 @@ namespace NikiCars.Command.Framework
             return new SuccessResult<T2>(item);
         }
 
-        protected ICommandResult NotFound<T2>()
+        protected ICommandResult NotFound()
         {
-            return new NotFoundResult<T2>();
+            return new NotFoundResult<string>();
         }
 
-        protected ICommandResult ServerError<T2>()
+        protected ICommandResult ServerError()
         {
-            return new ServerErrorResult<T2>();
+            return new ServerErrorResult<string>();
         }
 
-        protected ICommandResult AuthorizationError<T2>()
+        protected ICommandResult AuthorizationError()
         {
-            return new AuthorizationErrorResult<T2>();
+            return new AuthorizationErrorResult<string>();
         }
 
         protected ICommandResult AuthorizationError<T2>(T2 item)
@@ -75,9 +75,9 @@ namespace NikiCars.Command.Framework
             return new AuthorizationErrorResult<T2>(item);
         }
 
-        protected ICommandResult AuthenticationError<T2>()
+        protected ICommandResult AuthenticationError()
         {
-            return new AuthenticationErrorResult<T2>();
+            return new AuthenticationErrorResult<string>();
         }
 
         protected ICommandResult AuthenticationError<T2>(T2 item)

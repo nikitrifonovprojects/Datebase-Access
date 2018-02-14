@@ -12,7 +12,7 @@ namespace NikiCars.Command.Framework
 
         protected override ICommandResult ExecuteAction(string item)
         {
-            return this.NotFound<string>();
+            return this.NotFound();
         }
     }
 }
