@@ -47,7 +47,7 @@ namespace NikiCars.Console.Commands.CarDoorCommands
             }
             else
             {
-                return this.Error($"No CarDoors found");
+                return this.NotFound();
             }
         }
 

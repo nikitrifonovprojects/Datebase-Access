@@ -25,14 +25,14 @@ namespace NikiCars.Console.Commands.CarDoorCommands
 
         protected override ICommandResult ExecuteAction(EditCarDoorsModel item)
         {
+            if (!this.context.CommandUser.IsAuthenticated && !this.context.CommandUser.UserRoles.Contains(RoleConstants.ADMINISTRATOR))
+            {
+                return this.AuthenticationError();
+            }
+
             if (this.context.ModelState.HasError)
             {
                 return this.Error(this.context.ModelState.ToString());
-            }
-
-            if (!this.context.CommandUser.IsAuthenticated || !this.context.CommandUser.UserRoles.Contains(RoleConstants.ADMINISTRATOR))
-            {
-                return this.AuthenticationError("User is not authenticated");
             }
 
             NumberOfDoors carMake = this.mapping.Map<NumberOfDoors>(item);
