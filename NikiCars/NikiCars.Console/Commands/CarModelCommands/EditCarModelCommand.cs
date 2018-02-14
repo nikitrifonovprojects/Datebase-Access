@@ -25,17 +25,17 @@ namespace NikiCars.Console.Commands.CarModelCommands
 
         protected override ICommandResult ExecuteAction(EditCarModelModel item)
         {
-            if (!this.context.CommandUser.IsAuthenticated)
+            if (!this.context.CommandUser.IsAuthenticated && !this.context.CommandUser.UserRoles.Contains(RoleConstants.ADMINISTRATOR))
             {
-                return this.AuthenticationError("User not logged in");
+                return this.AuthenticationError();
+            }
+
+            if (this.context.ModelState.HasError)
+            {
+                return this.Error(this.context.ModelState.ToString());
             }
 
             CarModel carModel = this.mapping.Map<CarModel>(item);
-
-            if (!this.context.CommandUser.UserRoles.Contains(RoleConstants.ADMINISTRATOR))
-            {
-                return this.AuthorizationError("User does not have permission");
-            }
 
             CarModel result = this.service.Save(carModel);
 

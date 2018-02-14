@@ -25,6 +25,11 @@ namespace NikiCars.Console.Commands.CarModelCommands
 
         protected override ICommandResult ExecuteAction(ViewCarModelsByCarMakeModel item)
         {
+            if (this.context.ModelState.HasError)
+            {
+                return this.Error(this.context.ModelState.ToString());
+            }
+
             List<CarModel> list = list = this.service.GetAll();
 
             if (list.Count > 0)

@@ -47,7 +47,7 @@ namespace NikiCars.Console.Commands.CarModelCommands
             }
             else
             {
-                return this.Error($"No CarModel found");
+                return this.NotFound();
             }
         }
 

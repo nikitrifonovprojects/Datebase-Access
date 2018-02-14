@@ -10,6 +10,7 @@ namespace NikiCars.Services.Mapping.Profiles
         {
             CreateMap<CreateCarMakeModel, CarModel>(MemberList.None);
             CreateMap<ListCarMakeModel, CarMake>(MemberList.None);
+            CreateMap<EditCarMakeModel, CarMake>(MemberList.None);
         }
     }
 }

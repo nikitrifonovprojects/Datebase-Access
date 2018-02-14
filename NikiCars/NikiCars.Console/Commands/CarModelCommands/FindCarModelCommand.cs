@@ -24,6 +24,11 @@ namespace NikiCars.Console.Commands.CarModelCommands
 
         protected override ICommandResult ExecuteAction(FindCarModelModel item)
         {
+            if (this.context.ModelState.HasError)
+            {
+                return this.Error(this.context.ModelState.ToString());
+            }
+
             CarModel carModel = this.mapping.Map<CarModel>(item);
 
             CarModel model = this.service.GetById(carModel.ID);

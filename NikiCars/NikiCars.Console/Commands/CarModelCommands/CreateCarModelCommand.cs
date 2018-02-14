@@ -25,14 +25,14 @@ namespace NikiCars.Console.Commands.CarModelCommands
 
         protected override ICommandResult ExecuteAction(CreateCarModelModel item)
         {
+            if (!this.context.CommandUser.IsAuthenticated && !this.context.CommandUser.UserRoles.Contains(RoleConstants.ADMINISTRATOR))
+            {
+                return this.AuthenticationError();
+            }
+
             if (this.context.ModelState.HasError)
             {
                 return this.Error(this.context.ModelState.ToString());
-            }
-
-            if (!this.context.CommandUser.IsAuthenticated || !this.context.CommandUser.UserRoles.Contains(RoleConstants.ADMINISTRATOR))
-            {
-                return this.AuthenticationError("User is not authenticated");
             }
 
             CarModel carModel = this.mapping.Map<CarModel>(item);
