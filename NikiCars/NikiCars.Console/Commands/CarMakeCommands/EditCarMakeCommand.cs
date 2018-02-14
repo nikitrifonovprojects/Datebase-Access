@@ -11,31 +11,31 @@ using NikiCars.Services.Mapping;
 namespace NikiCars.Console.Commands.CarMakeCommands
 {
     [CommandRoute("edit CarMake")]
-    public class EditCarMakeCommand : BaseCommand<CreateCarMakeModel>
+    public class EditCarMakeCommand : BaseCommand<EditCarMakeModel>
     {
         private IService<CarMake> service;
         private IMappingService mapping;
 
-        public EditCarMakeCommand(CommandContext context, IService<CarMake> service, IModelBinder<CreateCarMakeModel> binder, IValidator validation, IMappingService mapping) 
+        public EditCarMakeCommand(CommandContext context, IService<CarMake> service, IModelBinder<EditCarMakeModel> binder, IValidator validation, IMappingService mapping) 
             : base(context, binder, validation)
         {
             this.service = service;
             this.mapping = mapping;
         }
 
-        protected override ICommandResult ExecuteAction(CreateCarMakeModel item)
+        protected override ICommandResult ExecuteAction(EditCarMakeModel item)
         {
-            if (!this.context.CommandUser.IsAuthenticated)
+            if (!this.context.CommandUser.IsAuthenticated && !this.context.CommandUser.UserRoles.Contains(RoleConstants.ADMINISTRATOR))
             {
-                return this.AuthenticationError("User not logged in");
+                return this.AuthenticationError();
+            }
+
+            if (this.context.ModelState.HasError)
+            {
+                return this.Error(this.context.ModelState.ToString());
             }
 
             CarMake carMake = this.mapping.Map<CarMake>(item);
-
-            if (!this.context.CommandUser.UserRoles.Contains(RoleConstants.ADMINISTRATOR))
-            {
-                return this.AuthorizationError("User does not have permission");
-            }
 
             CarMake result = this.service.Save(carMake);
 

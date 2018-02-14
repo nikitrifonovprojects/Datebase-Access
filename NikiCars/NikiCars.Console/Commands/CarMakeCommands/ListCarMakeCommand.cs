@@ -50,7 +50,7 @@ namespace NikiCars.Console.Commands.CarMakeCommands
             }
             else
             {
-                return this.Error($"No CarMake found");
+                return this.NotFound();
             }
         }
 
