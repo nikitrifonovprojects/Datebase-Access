@@ -5,12 +5,12 @@ using NikiCars.Dependancy;
 
 namespace NikiCars.Command.Framework
 {
-    public class Invoker : IInvoker
+    public class Host : IHost
     {
         private IParser parser;
         private IDependencyContainer container;
 
-        public Invoker(IParser parser, IDependencyContainer container)
+        public Host(IParser parser, IDependencyContainer container)
         {
             this.parser = parser;
             this.container = container;

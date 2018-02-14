@@ -9,10 +9,10 @@ namespace NikiCars.Command.Client
 {
     public class CommandClient
     {
-        private Invoker invoker;
+        private Host invoker;
         private string token;
 
-        public CommandClient(Invoker invoker)
+        public CommandClient(Host invoker)
         {
             this.invoker = invoker;
         }

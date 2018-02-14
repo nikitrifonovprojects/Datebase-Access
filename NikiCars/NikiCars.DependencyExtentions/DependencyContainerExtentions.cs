@@ -27,7 +27,7 @@ namespace DependencyExtentions
             //container.RegisterType<IConfig, Config>();
 
             container.RegisterType<IDependencyContainer, DependencyContainer>();
-            container.RegisterType<IInvoker, Invoker>();
+            container.RegisterType<IHost, Host>();
             container.RegisterType<IAuthenticationManager, AuthenticationManager>();
 
             container.RegisterType(typeof(IService<>), typeof(BaseService<>));

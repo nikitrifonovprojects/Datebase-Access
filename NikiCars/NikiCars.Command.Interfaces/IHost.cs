@@ -1,6 +1,6 @@
 ﻿namespace NikiCars.Command.Framework
 {
-    public interface IInvoker
+    public interface IHost
     {
         string ExecuteCommand(string input);
     }

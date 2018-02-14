@@ -46,7 +46,7 @@
     <Compile Include="BaseCommand.cs" />
     <Compile Include="DefaultModelBinder.cs" />
     <Compile Include="Input\Parser.cs" />
-    <Compile Include="Invoker.cs" />
+    <Compile Include="Host.cs" />
     <Compile Include="NotFoundCommand.cs" />
     <Compile Include="Output\AuthenticationErrorResult.cs" />
     <Compile Include="Output\AuthorizationErrorResult.cs" />

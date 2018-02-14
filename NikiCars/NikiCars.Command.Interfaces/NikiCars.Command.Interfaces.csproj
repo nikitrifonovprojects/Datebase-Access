@@ -46,7 +46,7 @@
     <Compile Include="ICommandResult.cs" />
     <Compile Include="ICommandUser.cs" />
     <Compile Include="IConfig.cs" />
-    <Compile Include="IInvoker.cs" />
+    <Compile Include="IHost.cs" />
     <Compile Include="IModelBinder.cs" />
     <Compile Include="IParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
