@@ -4,9 +4,9 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Transactions;
 
-namespace NikiCars.RemoveAndAddConstraints
+namespace NikiCars.Data.Revisions
 {
-    public class RemoveAddContsraintsFromTable
+    public class Issue_13
     {
         public void Remove()
         {

@@ -37,7 +37,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NikiCars.Models", "NikiCars
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NikiCars.Services.Mapping", "NikiCars.Services.Mapping\NikiCars.Services.Mapping.csproj", "{BEBC1E1B-B23B-4405-9EAE-373513F59491}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NikiCars.RemoveAndAddConstraints", "NikiCars.RemoveAndAddConstraints\NikiCars.RemoveAndAddConstraints.csproj", "{939D37BD-0DE0-497A-92E3-C8E785B11E46}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NikiCars.Data.Revisions", "NikiCars.Data.Revisions\NikiCars.Data.Revisions.csproj", "{8CB8C335-1CC0-409E-9C7A-4CCA2BF06EC2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -113,10 +113,10 @@ Global
 		{BEBC1E1B-B23B-4405-9EAE-373513F59491}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BEBC1E1B-B23B-4405-9EAE-373513F59491}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BEBC1E1B-B23B-4405-9EAE-373513F59491}.Release|Any CPU.Build.0 = Release|Any CPU
-		{939D37BD-0DE0-497A-92E3-C8E785B11E46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{939D37BD-0DE0-497A-92E3-C8E785B11E46}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{939D37BD-0DE0-497A-92E3-C8E785B11E46}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{939D37BD-0DE0-497A-92E3-C8E785B11E46}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CB8C335-1CC0-409E-9C7A-4CCA2BF06EC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CB8C335-1CC0-409E-9C7A-4CCA2BF06EC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CB8C335-1CC0-409E-9C7A-4CCA2BF06EC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CB8C335-1CC0-409E-9C7A-4CCA2BF06EC2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
