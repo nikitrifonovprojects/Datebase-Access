@@ -12,10 +12,7 @@ namespace NikiCars.Data.Revisions
         {
             using (var conn = new SqlConnection(ConfigurationManager.AppSettings["ConnectionString"]))
             {
-                string commandText = "ALTER TABLE Cars DROP CONSTRAINT FK__Cars__FuelTypeID__6383C8BA " +
-                                     "ALTER TABLE Cars DROP CONSTRAINT FK__Cars__ColourID__6477ECF3 " +
-                                     "ALTER TABLE Cars DROP CONSTRAINT FK__Cars__GearboxTyp__656C112C " +
-                                     "ALTER TABLE Cars ALTER COLUMN FuelTypeID int NULL " +
+                string commandText = "ALTER TABLE Cars ALTER COLUMN FuelTypeID int NULL " +
                                      "ALTER TABLE Cars ALTER COLUMN GearboxTypeID int NULL " +
                                      "ALTER TABLE Cars ALTER COLUMN ColourID int NULL";
 
@@ -47,9 +44,6 @@ namespace NikiCars.Data.Revisions
                                              "SET FuelTypeID = ISNULL(FuelTypeID, @fuelType), " +
                                              "GearboxTypeID = ISNULL(GearboxTypeID, @gearboxType), " +
                                              "ColourID = ISNULL(ColourID, @colour) " +
-                                             "ALTER TABLE Cars WITH CHECK ADD CONSTRAINT FK__Cars__FuelTypeID__6383C8BA FOREIGN KEY(FuelTypeID) REFERENCES FuelTypes(FuelTypeID) " +
-                                             "ALTER TABLE Cars WITH CHECK ADD CONSTRAINT FK__Cars__ColourID__6477ECF3 FOREIGN KEY(GearboxTypeID) REFERENCES GearboxTypes(GearboxTypeID) " +
-                                             "ALTER TABLE Cars WITH CHECK ADD CONSTRAINT FK__Cars__GearboxTyp__656C112C FOREIGN KEY(ColourID) REFERENCES Colours(ColourID) " +
                                              "ALTER TABLE Cars ALTER COLUMN FuelTypeID int NOT NULL " +
                                              "ALTER TABLE Cars ALTER COLUMN GearboxTypeID int NOT NULL " +
                                              "ALTER TABLE Cars ALTER COLUMN ColourID int NOT NULL";
