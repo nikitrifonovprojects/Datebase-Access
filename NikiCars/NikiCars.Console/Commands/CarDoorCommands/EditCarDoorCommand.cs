@@ -27,7 +27,7 @@ namespace NikiCars.Console.Commands.CarDoorCommands
         {
             if (!this.context.CommandUser.IsAuthenticated && !this.context.CommandUser.UserRoles.Contains(RoleConstants.ADMINISTRATOR))
             {
-                return this.AuthenticationError();
+                return this.AuthorizationError();
             }
 
             if (this.context.ModelState.HasError)
@@ -35,9 +35,9 @@ namespace NikiCars.Console.Commands.CarDoorCommands
                 return this.Error(this.context.ModelState.ToString());
             }
 
-            NumberOfDoors carMake = this.mapping.Map<NumberOfDoors>(item);
+            NumberOfDoors model = this.mapping.Map<NumberOfDoors>(item);
 
-            NumberOfDoors result = this.service.Save(carMake);
+            NumberOfDoors result = this.service.Save(model);
 
             return this.Success(result);
         }

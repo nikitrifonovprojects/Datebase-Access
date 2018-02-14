@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using NikiCars.Command.Framework;
 using NikiCars.Command.Framework.Routing;
 using NikiCars.Command.Interfaces;
@@ -37,13 +38,10 @@ namespace NikiCars.Console.Commands.CarDoorCommands
 
             if (list.Count > 0)
             {
-                List<ListAllCarDoorsModel> carCoupelist = new List<ListAllCarDoorsModel>();
-                foreach (var carCoupe in list)
-                {
-                    carCoupelist.Add(this.mapping.Map<ListAllCarDoorsModel>(carCoupe));
-                }
+                List<ListAllCarDoorsModel> carDoorsList = list.Select(x => this.mapping.Map<ListAllCarDoorsModel>(x))
+                    .ToList();
 
-                return this.Success(carCoupelist);
+                return this.Success(carDoorsList);
             }
             else
             {
