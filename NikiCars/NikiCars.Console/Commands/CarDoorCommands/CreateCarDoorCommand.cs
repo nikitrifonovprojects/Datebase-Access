@@ -16,8 +16,8 @@ namespace NikiCars.Console.Commands.CarDoorCommands
         private IService<NumberOfDoors> service;
         private IMappingService mapping;
 
-        public CreateCarDoorCommand(CommandContext context, IService<NumberOfDoors> service, IModelBinder<CreateCarDoorModel> binder, IValidator validation, IMappingService mapping) 
-            : base(context, binder, validation)
+        public CreateCarDoorCommand(CommandContext context, IService<NumberOfDoors> service, IValidator validation, IMappingService mapping) 
+            : base(context, validation)
         {
             this.service = service;
             this.mapping = mapping;

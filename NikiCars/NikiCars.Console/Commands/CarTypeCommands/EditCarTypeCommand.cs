@@ -16,8 +16,8 @@ namespace NikiCars.Console.Commands.CarTypeCommands
         private IService<CarType> service;
         private IMappingService mapping;
 
-        public EditCarTypeCommand(CommandContext context, IService<CarType> service, IModelBinder<EditCarTypeModel> binder, IValidator validation, IMappingService mapping) 
-            : base(context, binder, validation)
+        public EditCarTypeCommand(CommandContext context, IService<CarType> service, IValidator validation, IMappingService mapping) 
+            : base(context, validation)
         {
             this.service = service;
             this.mapping = mapping;

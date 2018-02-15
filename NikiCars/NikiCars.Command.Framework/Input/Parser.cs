@@ -54,7 +54,7 @@ namespace NikiCars.Command.Framework.Input
         {
             if (command.Data != null)
             {
-                context.Properties = command.Data;
+                context.Properties = JsonConvert.DeserializeObject(command.Data, command.Type);
             }
         }
 

@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using NikiCars.Command.Framework;
 using NikiCars.Common;
 
@@ -21,7 +18,8 @@ namespace NikiCars.Command.Client
         {
             CommandRequest commandRequestData = new CommandRequest();
             commandRequestData.Command = command;
-            commandRequestData.Data = CreateProperties(item);
+            commandRequestData.Data = JsonConvert.SerializeObject(item, typeof(TIn), null);
+            commandRequestData.Type = typeof(TIn);
             commandRequestData.Token = this.token;
 
             string input = JsonConvert.SerializeObject(commandRequestData);
@@ -46,13 +44,6 @@ namespace NikiCars.Command.Client
         public void ClearToken()
         {
             this.token = null;
-        }
-
-        private Dictionary<string, string> CreateProperties<TIn>(TIn item)
-        {
-            return item.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public)
-                    .Where(p => p.GetValue(item) != null)
-                    .ToDictionary(prop => prop.Name, prop => JsonConvert.SerializeObject(prop.GetValue(item)));
         }
     }
 }

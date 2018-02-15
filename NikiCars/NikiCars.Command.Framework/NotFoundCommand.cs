@@ -5,8 +5,8 @@ namespace NikiCars.Command.Framework
 {
     public class NotFoundCommand : BaseCommand<string>
     {
-        public NotFoundCommand(CommandContext context, IModelBinder<string> binder, IValidator validation) 
-            : base(context, binder, validation)
+        public NotFoundCommand(CommandContext context, IValidator validation) 
+            : base(context, validation)
         {
         }
 

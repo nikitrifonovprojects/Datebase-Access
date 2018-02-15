@@ -17,8 +17,8 @@ namespace NikiCars.Console.Commands.UserCommands
         private IUserService service;
         private IMappingService mapping;
 
-        public FindUserCommand(CommandContext context, IUserService service, IModelBinder<FindUserModel> binder, IValidator validation, IMappingService mapping)
-            : base(context, binder, validation)
+        public FindUserCommand(CommandContext context, IUserService service, IValidator validation, IMappingService mapping)
+            : base(context, validation)
         {
             this.service = service;
             this.mapping = mapping;

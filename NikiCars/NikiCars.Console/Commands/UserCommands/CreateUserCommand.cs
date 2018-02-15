@@ -16,8 +16,8 @@ namespace NikiCars.Console.Commands.UserCommands
         private ICryptographyService cryptography;
         private IMappingService mapping;
 
-        public CreateUserCommand(CommandContext context, IUserService service, IModelBinder<EditUserModel> binder, IValidator validation, ICryptographyService cryptography, IMappingService mapping) 
-            : base(context, binder, validation)
+        public CreateUserCommand(CommandContext context, IUserService service, IValidator validation, ICryptographyService cryptography, IMappingService mapping) 
+            : base(context, validation)
         {
             this.service = service;
             this.cryptography = cryptography;

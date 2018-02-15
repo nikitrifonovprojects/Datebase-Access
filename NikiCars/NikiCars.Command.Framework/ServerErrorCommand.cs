@@ -5,8 +5,8 @@ namespace NikiCars.Command.Framework
 {
     public class ServerErrorCommand : BaseCommand<string>
     {
-        public ServerErrorCommand(CommandContext context, IModelBinder<string> binder, IValidator validation) 
-            : base(context, binder, validation)
+        public ServerErrorCommand(CommandContext context, IValidator validation) 
+            : base(context, validation)
         {
         }
 

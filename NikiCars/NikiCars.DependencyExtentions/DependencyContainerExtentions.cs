@@ -56,7 +56,7 @@ namespace DependencyExtentions
 
             container.RegisterType<IParser, Parser>();
 
-            container.RegisterType(typeof(IModelBinder<>), typeof(DefaultModelBinder<>));
+            //container.RegisterType(typeof(IModelBinder<>), typeof(DefaultModelBinder<>));
 
             var commandTypes = AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(s => s.GetExportedTypes())

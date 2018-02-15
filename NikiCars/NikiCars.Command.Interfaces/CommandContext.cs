@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using NikiCars.Command.Validation;
+﻿using NikiCars.Command.Validation;
 
 namespace NikiCars.Command.Interfaces
 {
@@ -11,8 +10,10 @@ namespace NikiCars.Command.Interfaces
 
         public string CommandText { get; set; }
 
-        public Dictionary<string, string> Properties { get; set; }
+        public dynamic Properties { get; set; }
 
         public EntityValidationResult ModelState { get; set; }
+
+        public ICommandResult ResponseResult { get; set; }
     }
 }

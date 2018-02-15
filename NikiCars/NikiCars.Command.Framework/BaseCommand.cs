@@ -7,13 +7,11 @@ namespace NikiCars.Command.Framework
     public abstract class BaseCommand<T> : ICommand where T : class
     {
         protected CommandContext context;
-        private IModelBinder<T> binder;
         private IValidator validator;
 
-        public BaseCommand(CommandContext context, IModelBinder<T> binder, IValidator validation)
+        public BaseCommand(CommandContext context, IValidator validation)
         {
             this.context = context;
-            this.binder = binder;
             this.validator = validation;
         }
 
@@ -22,9 +20,21 @@ namespace NikiCars.Command.Framework
             
         }
 
+        protected virtual void OnAuthorize()
+        {
+
+        }
+
         public string Execute()
         {
-            T item = this.binder.BindModel(this.context.Properties);
+            OnAuthorize();
+
+            if (this.context.ResponseResult != null)
+            {
+                return this.context.ResponseResult.ExecuteResult();
+            }
+
+            T item = (T)this.context.Properties;
             this.context.ModelState = this.validator.ValidateEntity(item);
 
             ICommandResult commandResult = ExecuteAction(item);

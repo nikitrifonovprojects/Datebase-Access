@@ -20,8 +20,8 @@ namespace NikiCars.Console.Commands.LoginCommands
         private IAuthenticationManager manager;
         private IMappingService mapping;
 
-        public LoginCommand(CommandContext context, IUserService service, IModelBinder<LoginModel> binder, IValidator validation, IAuthenticationManager manager, IMappingService mapping)
-            : base(context, binder, validation)
+        public LoginCommand(CommandContext context, IUserService service, IValidator validation, IAuthenticationManager manager, IMappingService mapping)
+            : base(context, validation)
         {
             this.service = service;
             this.manager = manager;

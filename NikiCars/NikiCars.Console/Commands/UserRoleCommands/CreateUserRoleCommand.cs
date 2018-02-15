@@ -16,8 +16,8 @@ namespace NikiCars.Console.Commands.UserRoleCommands
         private IService<UserRole> service;
         private IMappingService mapping;
 
-        public CreateUserRoleCommand(CommandContext context, IService<UserRole> service, IModelBinder<CreateUserRoleModel> binder, IValidator validation, IMappingService mapping) 
-            : base(context, binder, validation)
+        public CreateUserRoleCommand(CommandContext context, IService<UserRole> service, IValidator validation, IMappingService mapping) 
+            : base(context, validation)
         {
             this.service = service;
             this.mapping = mapping;
