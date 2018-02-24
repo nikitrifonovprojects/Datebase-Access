@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using NikiCars.Command.Framework;
 using NikiCars.Command.Framework.Routing;
 using NikiCars.Command.Interfaces;
 using NikiCars.Command.Validation;
 using NikiCars.Data.Models;
 using NikiCars.Models.CarMakeModels;
+using NikiCars.Search;
+using NikiCars.Search.Interfaces;
 using NikiCars.Services.Interfaces;
 using NikiCars.Services.Mapping;
 
@@ -27,14 +28,14 @@ namespace NikiCars.Console.Commands.CarMakeCommands
         protected override ICommandResult ExecuteAction(ListCarMakeModel item)
         {
             List<CarMake> list;
-            if (item.PageNumber != 0 || item.PageSize != 0)
-            {
-                list = this.service.GetAll(item.PageNumber, item.PageSize);
-            }
-            else
-            {
-                list = this.service.GetAll();
-            }
+            List<IEntitySearch<CarMake>> search = new List<IEntitySearch<CarMake>>();
+            //IEntitySearch<CarMake> make = new NameSearch(item.Name, SearchTypeEnum.Equals);
+            //search.Add(make);
+            var name = new NameOrderBy(OrderByEnum.Descending);
+            var order = new List<IEntityOrderBy<CarMake>>();
+            order.Add(name);
+
+            list = this.service.GetAll(search, order, item.Paging);
 
             if (list.Count > 0)
             {
@@ -44,9 +45,7 @@ namespace NikiCars.Console.Commands.CarMakeCommands
                     carMakellist.Add(this.mapping.Map<ListCarMakeModel>(carMake));
                 }
 
-                List<ListCarMakeModel> ordered = carMakellist.OrderBy(x => x.Name).ToList();
-
-                return this.Success(ordered);
+                return this.Success(carMakellist);
             }
             else
             {
