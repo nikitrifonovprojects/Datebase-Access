@@ -26,6 +26,11 @@ namespace NikiCars.Services
             return this.repository.GetAll(pagination);
         }
 
+        public List<T> GetAll(List<IEntitySearch<T>> search)
+        {
+            return this.repository.GetAll(search);
+        }
+
         public List<T> GetAll()
         {
             return this.repository.GetAll();

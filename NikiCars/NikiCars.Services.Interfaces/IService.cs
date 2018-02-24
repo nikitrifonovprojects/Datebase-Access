@@ -16,6 +16,8 @@ namespace NikiCars.Services.Interfaces
 
         List<T> GetAll();
 
+        List<T> GetAll(List<IEntitySearch<T>> search);
+
         List<T> GetAll(List<IEntitySearch<T>> search, List<IEntityOrderBy<T>> order, Pagination pagination);
 
         T GetById(int id);

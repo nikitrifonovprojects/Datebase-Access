@@ -1,10 +1,13 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using NikiCars.Command.Framework;
 using NikiCars.Command.Framework.Routing;
 using NikiCars.Command.Interfaces;
 using NikiCars.Command.Validation;
 using NikiCars.Data.Models;
 using NikiCars.Models.CarModelModels;
+using NikiCars.Search;
+using NikiCars.Search.Interfaces;
 using NikiCars.Services.Interfaces;
 using NikiCars.Services.Mapping;
 
@@ -30,25 +33,17 @@ namespace NikiCars.Console.Commands.CarModelCommands
                 return this.Error(this.context.ModelState.ToString());
             }
 
-            List<CarModel> list = list = this.service.GetAll();
+            IEntitySearch<CarModel> entitySearch = new CarMakeIDSearch(item.CarMakeID, SearchTypeEnum.Equals);
+            var searchList = new List<IEntitySearch<CarModel>>();
+            searchList.Add(entitySearch);
+            List<CarModel> list = this.service.GetAll(searchList);
 
             if (list.Count > 0)
             {
-                List<ViewCarModelsByCarMakeModel> carModellist = new List<ViewCarModelsByCarMakeModel>();
-                foreach (var carModel in list)
-                {
-                    if (carModel.CarMakeID == item.CarMakeID)
-                    {
-                        carModellist.Add(this.mapping.Map<ViewCarModelsByCarMakeModel>(carModel));
-                    }
-                }
+                var result = new List<ViewCarModelsByCarMakeModel>();
+                result.AddRange(list.Select(x => this.mapping.Map<ViewCarModelsByCarMakeModel>(x)));
 
-                if (carModellist.Count > 0)
-                {
-                    return this.Success(carModellist);
-                }
-
-                return this.Error($"No CarModel by this make found");
+                return this.Success(result);
             }
             else
             {

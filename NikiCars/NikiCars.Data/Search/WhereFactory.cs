@@ -10,8 +10,11 @@ namespace NikiCars.Data.Search
         {
             switch (search)
             {
-                case NameSearch s:
-                    var res = new NameWhere(s);
+                case NameSearch r:
+                    var nameWhere = new NameWhere(r);
+                    return nameWhere;
+                case CarMakeIDSearch s:
+                    var res = new CarMakeIDWhere(s);
                     return res;
                 default:
                     throw new NotSupportedException();

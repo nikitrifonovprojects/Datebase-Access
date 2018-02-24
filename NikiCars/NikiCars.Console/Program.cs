@@ -6,6 +6,7 @@ using NikiCars.Command.Client;
 using NikiCars.Dependancy;
 using NikiCars.Models.CarCoupeModels;
 using NikiCars.Models.CarMakeModels;
+using NikiCars.Models.CarModelModels;
 using NikiCars.Models.CarTypeModels;
 using NikiCars.Models.LoginModels;
 using NikiCars.Models.UserModels;
@@ -39,17 +40,15 @@ namespace NikiCars.Console
 
 
             //var res = client.SendRequest(command, input);
-            string command = "list CarMake";
+            string command = "get CarModelByCarMake";
 
             //var carCoupe = new ListAllCarCoupesModel();
 
-            var carMake = new ListCarMakeModel();
-            carMake.Name = "Kia";
-            carMake.Paging = new Pagination();
-            carMake.Paging.PageNumber = 0;
-            carMake.Paging.PageSize = 10;
+            var carModel = new ViewCarModelsByCarMakeModel();
+            carModel.CarMakeID = 2;
+            
 
-            client.SendRequest(command, carMake);
+            client.SendRequest(command, carModel);
             //var client = container.Resolve<CommandClient>();
 
             //var result = client.SendRequest(command, carCoupe);
