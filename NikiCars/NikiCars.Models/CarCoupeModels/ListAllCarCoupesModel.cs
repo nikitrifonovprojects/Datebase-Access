@@ -1,10 +1,10 @@
-﻿namespace NikiCars.Models.CarCoupeModels
+﻿using NikiCars.Search;
+
+namespace NikiCars.Models.CarCoupeModels
 {
     public class ListAllCarCoupesModel
     {
-        public int PageNumber { get; set; }
-
-        public int PageSize { get; set; }
+        public Pagination Paging { get; set; }
 
         public string Name { get; set; }
     }

@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using NikiCars.Data.Interfaces;
 using NikiCars.Data.Models;
+using NikiCars.Search;
+using NikiCars.Search.Interfaces;
 using NikiCars.Services.Interfaces;
 
 namespace NikiCars.Services
@@ -19,14 +21,19 @@ namespace NikiCars.Services
             return this.repository.Delete(item);
         }
 
-        public List<T> GetAll(int pageNum, int pageSize)
+        public List<T> GetAll(Pagination pagination)
         {
-            return this.repository.GetAll(pageNum, pageSize);
+            return this.repository.GetAll(pagination);
         }
 
         public List<T> GetAll()
         {
             return this.repository.GetAll();
+        }
+
+        public List<T> GetAll(List<IEntitySearch<T>> search, List<IEntityOrderBy<T>> order, Pagination pagination)
+        {
+            return this.repository.GetAll(search, order, pagination);
         }
 
         public T GetById(int id)

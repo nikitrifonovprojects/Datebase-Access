@@ -19,7 +19,6 @@ namespace NikiCars.Command.Framework
         public string ExecuteCommand(string input)
         {
             CommandContext context = new CommandContext();
-            context.Properties = new Dictionary<string, string>();
             try
             {
                 context = this.parser.ParseCommand(input);

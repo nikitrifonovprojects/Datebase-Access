@@ -31,14 +31,16 @@ namespace NikiCars.Console.Commands.CarCoupeCommands
             }
 
             List<CarCoupe> list;
-            if (item.PageNumber != 0 || item.PageSize != 0)
+            if (item.Paging != null)
             {
-                list = this.service.GetAll(item.PageNumber, item.PageSize);
+                list = this.service.GetAll(item.Paging);
+
             }
             else
             {
                 list = this.service.GetAll();
             }
+
 
             if (list.Count > 0)
             {

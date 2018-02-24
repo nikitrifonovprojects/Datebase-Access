@@ -9,6 +9,7 @@ using NikiCars.Models.CarMakeModels;
 using NikiCars.Models.CarTypeModels;
 using NikiCars.Models.LoginModels;
 using NikiCars.Models.UserModels;
+using NikiCars.Search;
 
 namespace NikiCars.Console
 {
@@ -19,18 +20,18 @@ namespace NikiCars.Console
             var container = new DependencyContainer();
             container.AddDependencies();
 
-            //var user1 = new LoginModel();
-            //user1.Password = "gogotorulzz11";
-            //user1.LoginName = "Gogoto";
-            //string comm = "login User";
+            var user1 = new LoginModel();
+            user1.Password = "gogotorulzz11";
+            user1.LoginName = "Gogoto";
+            string comm = "login User";
 
-            //var client = container.Resolve<CommandClient>();
+            var client = container.Resolve<CommandClient>();
 
-            //var firstRes = client.SendRequest(comm, user1);
-            //if (firstRes.Status == "Success")
-            //{
-            //    client.SetToken(firstRes.Data as string);
-            //}
+            var firstRes = client.SendRequest(comm, user1);
+            if (firstRes.Status == "Success")
+            {
+                client.SetToken(firstRes.Data as string);
+            }
 
             //string command = "add CarType";
             //var input = new CreateCarTypeModel();
@@ -38,14 +39,17 @@ namespace NikiCars.Console
 
 
             //var res = client.SendRequest(command, input);
-            //string command = "list CarCoupe";
+            string command = "list CarMake";
 
             //var carCoupe = new ListAllCarCoupesModel();
 
-            //var carCoupeWithPaging = new ListAllCarCoupesModel();
-            //carCoupeWithPaging.PageNumber = 0;
-            //carCoupeWithPaging.PageSize = 5;
+            var carMake = new ListCarMakeModel();
+            carMake.Name = "Kia";
+            carMake.Paging = new Pagination();
+            carMake.Paging.PageNumber = 0;
+            carMake.Paging.PageSize = 10;
 
+            client.SendRequest(command, carMake);
             //var client = container.Resolve<CommandClient>();
 
             //var result = client.SendRequest(command, carCoupe);

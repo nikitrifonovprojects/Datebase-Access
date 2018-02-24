@@ -111,9 +111,17 @@
       <Project>{BA39C19F-9826-499A-BE04-07B287601985}</Project>
       <Name>NikiCars.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\NikiCars.Data.Interfaces\NikiCars.Data.Interfaces.csproj">
+      <Project>{D7CFA203-D0F9-41B9-B853-7738CAE791A2}</Project>
+      <Name>NikiCars.Data.Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NikiCars.Data.Models\NikiCars.Data.Models.csproj">
       <Project>{D28F0078-F301-4062-B405-45CD6D39FB2B}</Project>
       <Name>NikiCars.Data.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NikiCars.Data\NikiCars.Data.csproj">
+      <Project>{76488678-5C35-4B36-A81B-BAF0A532B26F}</Project>
+      <Name>NikiCars.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\NikiCars.Dependancy\NikiCars.Dependancy.csproj">
       <Project>{22146019-DD23-42C7-95AA-4B9BBED4EDB1}</Project>
@@ -126,6 +134,10 @@
     <ProjectReference Include="..\NikiCars.Models\NikiCars.Models.csproj">
       <Project>{6AC0948E-2F50-4C45-AC2B-7FC490D951B6}</Project>
       <Name>NikiCars.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NikiCars.Search\NikiCars.Search.csproj">
+      <Project>{B6789A4B-17D1-4963-BBAB-93C4A10F0369}</Project>
+      <Name>NikiCars.Search</Name>
     </ProjectReference>
     <ProjectReference Include="..\NikiCars.Services.Interfaces\NikiCars.Services.Interfaces.csproj">
       <Project>{CF9F2650-6EBB-46AB-8F57-B1496CD04215}</Project>

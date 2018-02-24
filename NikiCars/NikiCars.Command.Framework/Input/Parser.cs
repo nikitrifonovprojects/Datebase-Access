@@ -17,7 +17,6 @@ namespace NikiCars.Command.Framework.Input
         public CommandContext ParseCommand(string input)
         {
             CommandContext context = new CommandContext();
-            context.Properties = new Dictionary<string, string>();
             context.RawInput = input;
 
             if (!IsValidInput(input))

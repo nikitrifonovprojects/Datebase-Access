@@ -6,6 +6,9 @@ using System.Text;
 using System.Transactions;
 using NikiCars.Command.Interfaces;
 using NikiCars.Data.Interfaces;
+using NikiCars.Data.Search;
+using NikiCars.Search;
+using NikiCars.Search.Interfaces;
 
 namespace NikiCars.Data
 {
@@ -111,47 +114,116 @@ namespace NikiCars.Data
             return false;
         }
 
-        public List<T> GetAll(int pageNumber, int pageSize)
+        public List<T> GetAll(Pagination pagination)
         {
-            var list = new List<T>();
-            SqlCommand command = new SqlCommand("SELECT * FROM " + GetTableName() + " ORDER BY " + GetPrimaryKeyName() + " OFFSET @param1 ROWS FETCH NEXT @param2 ROWS ONLY")
-            {
-                CommandType = CommandType.Text,
-                Connection = Connection
-            };
-
-            command.Parameters.AddWithValue("@param1", pageNumber * pageSize);
-            command.Parameters.AddWithValue("@param2", pageSize);
-
-            using (SqlDataReader reader = command.ExecuteReader())
-            {
-                while (reader.Read())
-                {
-                    list.Add(MapProperties(reader));
-                }
-            }
-
-            return list;
+            return GetAll(null, null, pagination);
         }
 
         public List<T> GetAll()
         {
-            var list = new List<T>();
-            SqlCommand command = new SqlCommand("SELECT * FROM " + GetTableName() + " ORDER BY " + GetPrimaryKeyName())
+            return GetAll(null, null, null);
+        }
+
+        public List<T> GetAll(List<IEntitySearch<T>> search)
+        {
+            return GetAll(search, null, null);
+        }
+
+        public List<T> GetAll(List<IEntitySearch<T>> search, List<IEntityOrderBy<T>> order, Pagination pagination)
+        {
+            SqlCommand command = new SqlCommand()
             {
                 CommandType = CommandType.Text,
                 Connection = Connection
             };
 
+            StringBuilder builder = new StringBuilder();
+            builder.Append("SELECT * FROM " + GetTableName());
+
+            ApplyWhere(builder, search, command);
+            ApplyOrderBy(builder, order);
+            ApplyPaging(builder, command, pagination);
+
+            command.CommandText = builder.ToString();
+
+            var resultList = new List<T>();
+
             using (SqlDataReader reader = command.ExecuteReader())
             {
                 while (reader.Read())
                 {
-                    list.Add(MapProperties(reader));
+                    resultList.Add(MapProperties(reader));
                 }
             }
 
-            return list;
+            return resultList;
+        }
+
+        private void ApplyWhere(StringBuilder builder, List<IEntitySearch<T>> search, SqlCommand command)
+        {
+            var whereClauses = new List<Tuple<string, List<SqlParameter>>>();
+            
+            if (search != null)
+            {
+                foreach (var item in search)
+                {
+                    var res = WhereFactory.CreateWhereClause(item);
+                    whereClauses.Add(res.GenerateWhereClause());
+                }
+            }
+
+            if (whereClauses.Count > 0)
+            {
+                builder.Append(" WHERE ");
+                for (int i = 0; i < whereClauses.Count; i++)
+                {
+                    if (whereClauses.Count > 1)
+                    {
+                        builder.Append(" AND ");
+                    }
+
+                    builder.Append(whereClauses[i].Item1);
+                    command.Parameters.Add(whereClauses[i].Item2[0]);
+                }
+            }
+        }
+
+        private void ApplyOrderBy(StringBuilder builder, List<IEntityOrderBy<T>> order)
+        {
+            var orderByClauses = new List<IOrderByClause>();
+
+            if (order != null)
+            {
+                foreach (var item in order)
+                {
+                    var res = OrderByFactory.CreateOrderByClause(item);
+                    orderByClauses.Add(res);
+                }
+            }
+
+            if (orderByClauses.Count > 0)
+            {
+                builder.Append(" ORDER BY ");
+                for (int i = 0; i < orderByClauses.Count; i++)
+                {
+                    if (orderByClauses.Count > 1)
+                    {
+                        builder.Append(" , ");
+                    }
+
+                    builder.Append(orderByClauses[i].GenerateOrderByClause());
+                }
+            }
+        }
+
+        private void ApplyPaging(StringBuilder builder, SqlCommand command, Pagination pagination)
+        {
+            if (pagination != null)
+            {
+                builder.Append(" OFFSET @number ROWS FETCH NEXT @size ROWS ONLY");
+                command.Parameters.AddWithValue("@number", pagination.PageNumber * pagination.PageSize);
+                command.Parameters.AddWithValue("@size", pagination.PageSize);
+            }
         }
 
         public T GetByID(int id)

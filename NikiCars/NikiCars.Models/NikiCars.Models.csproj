@@ -71,6 +71,10 @@
       <Project>{D28F0078-F301-4062-B405-45CD6D39FB2B}</Project>
       <Name>NikiCars.Data.Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\NikiCars.Search\NikiCars.Search.csproj">
+      <Project>{B6789A4B-17D1-4963-BBAB-93C4A10F0369}</Project>
+      <Name>NikiCars.Search</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

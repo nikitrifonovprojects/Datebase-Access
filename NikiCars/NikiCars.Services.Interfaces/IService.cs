@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using NikiCars.Data.Models;
+using NikiCars.Search;
+using NikiCars.Search.Interfaces;
 
 namespace NikiCars.Services.Interfaces
 {
@@ -10,9 +12,11 @@ namespace NikiCars.Services.Interfaces
 
         bool Delete(T item);
 
-        List<T> GetAll(int pageNum, int pageSize);
+        List<T> GetAll(Pagination pagination);
 
         List<T> GetAll();
+
+        List<T> GetAll(List<IEntitySearch<T>> search, List<IEntityOrderBy<T>> order, Pagination pagination);
 
         T GetById(int id);
 

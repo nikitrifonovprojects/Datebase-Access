@@ -27,9 +27,10 @@ namespace NikiCars.Console.Commands.CarDoorCommands
         protected override ICommandResult ExecuteAction(ListAllCarDoorsModel item)
         {
             List<NumberOfDoors> list;
-            if (item.PageNumber != 0 || item.PageSize != 0)
+            if (item.Paging != null)
             {
-                list = this.service.GetAll(item.PageNumber, item.PageSize);
+                list = this.service.GetAll(item.Paging);
+
             }
             else
             {
