@@ -15,5 +15,7 @@ namespace NikiCars.Command.Interfaces
         public EntityValidationResult ModelState { get; set; }
 
         public ICommandResult ResponseResult { get; set; }
+
+        public string ResultString { get; set; }
     }
 }

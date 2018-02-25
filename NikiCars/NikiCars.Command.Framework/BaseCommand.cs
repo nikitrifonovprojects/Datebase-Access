@@ -1,4 +1,7 @@
-﻿using NikiCars.Command.Framework.Output;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using NikiCars.Command.Framework.Output;
 using NikiCars.Command.Interfaces;
 using NikiCars.Command.Validation;
 
@@ -17,7 +20,7 @@ namespace NikiCars.Command.Framework
 
         public virtual void Dispose()
         {
-            
+
         }
 
         protected virtual void OnAuthorize()
@@ -25,22 +28,148 @@ namespace NikiCars.Command.Framework
 
         }
 
-        public string Execute()
+        protected virtual void OnActionExecuting()
         {
-            OnAuthorize();
 
-            if (this.context.ResponseResult != null)
-            {
-                return this.context.ResponseResult.ExecuteResult();
-            }
+        }
 
+        protected virtual void OnActionExecuted()
+        {
+
+        }
+
+        protected virtual void OnResultExecuting()
+        {
+
+        }
+
+        protected virtual void OnResultExecuted()
+        {
+
+        }
+
+        private void ExecuteOnAuthorize(CommandContext context)
+        {
+            this.OnAuthorize();
+        }
+
+        private void ExecuteOnActionExcuted(CommandContext context)
+        {
+            this.OnActionExecuted();
+        }
+
+        private void ExecuteOnActionExecuting(CommandContext context)
+        {
+            this.OnActionExecuting();
+        }
+
+        private void ExecuteOnResultExecuting(CommandContext context)
+        {
+            this.OnResultExecuting();
+        }
+
+        private void ExecuteOnResultExecuted(CommandContext context)
+        {
+            this.OnResultExecuted();
+        }
+
+        private List<Action<CommandContext>> GetActionPipeLine(Type type)
+        {
+            Attribute[] attributes = Attribute.GetCustomAttributes(type);
+            var actionPipeline = new List<Action<CommandContext>>();
+
+            var authAttributes = attributes.Where(x => typeof(ICommandAuthorizationFilter).IsAssignableFrom(x.GetType()))
+                .Cast<ICommandAuthorizationFilter>()
+                .Select<ICommandAuthorizationFilter, Action<CommandContext>>(c => c.OnAuthorize);
+
+            actionPipeline.AddRange(authAttributes);
+            actionPipeline.Add(this.ExecuteOnAuthorize);
+
+            var actionExecuting = attributes.Where(x => typeof(ICommandActionExecutingFilter).IsAssignableFrom(x.GetType()))
+                .Cast<ICommandActionExecutingFilter>()
+                .Select<ICommandActionExecutingFilter, Action<CommandContext>>(c => c.OnActionExecuting);
+
+            actionPipeline.Add(this.ExecuteValidate);
+
+            actionPipeline.AddRange(actionExecuting);
+            actionPipeline.Add(this.ExecuteOnActionExecuting);
+
+            actionPipeline.Add(this.ExecuteResponseResultAction);
+
+            var actionExecuted = attributes.Where(x => typeof(ICommandActionExecutedFilter).IsAssignableFrom(x.GetType()))
+               .Cast<ICommandActionExecutedFilter>()
+               .Select<ICommandActionExecutedFilter, Action<CommandContext>>(c => c.OnActionExecuted);
+
+            actionPipeline.Add(this.ExecuteOnActionExcuted);
+            actionPipeline.AddRange(actionExecuted);
+
+            return actionPipeline;
+        }
+
+        private List<Action<CommandContext>> GetResultPipeLine(Type type)
+        {
+            Attribute[] attributes = Attribute.GetCustomAttributes(type);
+            var resultPipeline = new List<Action<CommandContext>>();
+
+            var resultExecuting = attributes.Where(x => typeof(ICommandResultExecutingFilter).IsAssignableFrom(x.GetType()))
+               .Cast<ICommandResultExecutingFilter>()
+               .Select<ICommandResultExecutingFilter, Action<CommandContext>>(c => c.OnResultExecuting);
+
+            resultPipeline.AddRange(resultExecuting);
+            resultPipeline.Add(this.ExecuteOnResultExecuting);
+
+            resultPipeline.Add(this.ExecuteResponseResult);
+
+            var resultExecuted = attributes.Where(x => typeof(ICommandResultExecutedFilter).IsAssignableFrom(x.GetType()))
+               .Cast<ICommandResultExecutedFilter>()
+               .Select<ICommandResultExecutedFilter, Action<CommandContext>>(c => c.OnResultExecuted);
+
+            resultPipeline.Add(this.ExecuteOnResultExecuted);
+            resultPipeline.AddRange(resultExecuted);
+
+            return resultPipeline;
+        }
+
+        private void ExecuteValidate(CommandContext context)
+        {
             T item = (T)this.context.Properties;
             this.context.ModelState = this.validator.ValidateEntity(item);
+        }
 
-            ICommandResult commandResult = ExecuteAction(item);
-            string result = commandResult.ExecuteResult();
+        private void ExecuteResponseResultAction(CommandContext context)
+        {
+            T item = (T)this.context.Properties;
+            this.context.ResponseResult = ExecuteAction(item);
+        }
 
-            return result;
+        private void ExecuteResponseResult(CommandContext context)
+        {
+            this.context.ResultString = this.context.ResponseResult.ExecuteResult();
+        }
+
+        public string Execute()
+        {
+            var type = this.GetType();
+            var actionPipeline = this.GetActionPipeLine(type);
+
+            foreach (var action in actionPipeline)
+            {
+                action(this.context);
+
+                if (this.context.ResponseResult != null)
+                {
+                    break;
+                }
+            }
+
+            var resultPipeline = this.GetResultPipeLine(type);
+
+            foreach (var action in resultPipeline)
+            {
+                action(this.context);
+            }
+
+            return this.context.ResultString;
         }
 
         protected abstract ICommandResult ExecuteAction(T item);

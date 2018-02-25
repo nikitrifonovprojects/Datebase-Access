@@ -21,34 +21,36 @@ namespace NikiCars.Console
             var container = new DependencyContainer();
             container.AddDependencies();
 
-            var user1 = new LoginModel();
-            user1.Password = "gogotorulzz11";
-            user1.LoginName = "Gogoto";
-            string comm = "login User";
+            //var user1 = new LoginModel();
+            //user1.Password = "gogotorulzz11";
+            //user1.LoginName = "Gogoto";
+            //string comm = "login User";
 
             var client = container.Resolve<CommandClient>();
 
-            var firstRes = client.SendRequest(comm, user1);
-            if (firstRes.Status == "Success")
-            {
-                client.SetToken(firstRes.Data as string);
-            }
+            //var firstRes = client.SendRequest(comm, user1);
+            //if (firstRes.Status == "Success")
+            //{
+            //    client.SetToken(firstRes.Data as string);
+            //}
 
-            //string command = "add CarType";
-            //var input = new CreateCarTypeModel();
-            //input.Name = "HammerHead";
+            string command = "edit CarMake";
+            var input = new EditCarMakeModel();
+            input.ID = 2;
+            input.Name = "Kia";
+            input.Country = "China";
 
 
-            //var res = client.SendRequest(command, input);
-            string command = "get CarModelByCarMake";
+            var res = client.SendRequest(command, input);
+            string command1 = "get CarModelByCarMake";
 
             //var carCoupe = new ListAllCarCoupesModel();
 
-            var carModel = new ViewCarModelsByCarMakeModel();
-            carModel.CarMakeID = 2;
-            
+            //var carModel = new ViewCarModelsByCarMakeModel();
+            //carModel.CarMakeID = 2;
 
-            client.SendRequest(command, carModel);
+
+            // var res = client.SendRequest(command, carModel);
             //var client = container.Resolve<CommandClient>();
 
             //var result = client.SendRequest(command, carCoupe);

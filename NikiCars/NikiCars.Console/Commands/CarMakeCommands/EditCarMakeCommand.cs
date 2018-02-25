@@ -1,4 +1,5 @@
 ﻿using NikiCars.Command.Framework;
+using NikiCars.Command.Framework.Attributes;
 using NikiCars.Command.Framework.Routing;
 using NikiCars.Command.Interfaces;
 using NikiCars.Command.Validation;
@@ -10,6 +11,7 @@ using NikiCars.Services.Mapping;
 
 namespace NikiCars.Console.Commands.CarMakeCommands
 {
+    [Authorization(RoleConstants.ADMINISTRATOR)]
     [CommandRoute("edit CarMake")]
     public class EditCarMakeCommand : BaseCommand<EditCarMakeModel>
     {
@@ -25,11 +27,6 @@ namespace NikiCars.Console.Commands.CarMakeCommands
 
         protected override ICommandResult ExecuteAction(EditCarMakeModel item)
         {
-            if (!this.context.CommandUser.IsAuthenticated || !this.context.CommandUser.UserRoles.Contains(RoleConstants.ADMINISTRATOR))
-            {
-                return this.AuthenticationError();
-            }
-
             if (this.context.ModelState.HasError)
             {
                 return this.Error(this.context.ModelState.ToString());

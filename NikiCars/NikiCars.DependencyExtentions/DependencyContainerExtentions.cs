@@ -65,9 +65,11 @@ namespace DependencyExtentions
             foreach (var type in commandTypes)
             {
                 var attributeValue = type.GetCustomAttributesData()
+                    .First(c => c.AttributeType == typeof(CommandRouteAttribute))
+                    .ConstructorArguments
+                    .Select(z => z.Value)
                     .First()
-                    .ConstructorArguments.Select(z => z.Value)
-                    .First().ToString();
+                    .ToString();
 
                 container.RegisterType(typeof(ICommand), type, attributeValue);
             }
