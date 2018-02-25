@@ -1,7 +1,10 @@
-﻿namespace NikiCars.Models.UserModels
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace NikiCars.Models.UserModels
 {
     public class FindUserModel
     {
+        [Required]
         public int ID { get; set; }
 
         public string Name { get; set; }
