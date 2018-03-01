@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using NikiCars.Command.Interfaces;
 using NikiCars.Common;
 
@@ -8,10 +7,12 @@ namespace NikiCars.Command.Framework.Input
     public class Parser : IParser
     {
         private IAuthenticationManager manager;
+        private IModelBinder binder;
 
-        public Parser(IAuthenticationManager manager)
+        public Parser(IAuthenticationManager manager, IModelBinder binder)
         {
             this.manager = manager;
+            this.binder = binder;
         }
 
         public CommandContext ParseCommand(string input)
@@ -53,7 +54,7 @@ namespace NikiCars.Command.Framework.Input
         {
             if (command.Data != null)
             {
-                context.Properties = JsonConvert.DeserializeObject(command.Data, command.Type);
+                context.Properties = this.binder.BindModel(command.Data, command.Type);
             }
         }
 

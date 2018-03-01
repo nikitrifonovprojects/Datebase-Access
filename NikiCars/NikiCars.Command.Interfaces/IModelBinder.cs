@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
 
 namespace NikiCars.Command.Interfaces
 {
-    public interface IModelBinder<T>
+    public interface IModelBinder
     {
-        T BindModel(Dictionary<string,string> properties);
+        dynamic BindModel(string data, Type type);
     }
 }
