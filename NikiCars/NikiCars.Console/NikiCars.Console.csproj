@@ -55,6 +55,10 @@
     <Compile Include="Commands\CarDoorCommands\DeleteCarDoorCommand.cs" />
     <Compile Include="Commands\CarDoorCommands\EditCarDoorCommand.cs" />
     <Compile Include="Commands\CarDoorCommands\ListCarDoorsCommand.cs" />
+    <Compile Include="Commands\CarExtraCommands\CreateCarExtraCommand.cs" />
+    <Compile Include="Commands\CarExtraCommands\DeleteCarExtraCommand.cs" />
+    <Compile Include="Commands\CarExtraCommands\EditCarExtraCommand.cs" />
+    <Compile Include="Commands\CarExtraCommands\ListCarExtraCommand.cs" />
     <Compile Include="Commands\CarMakeCommands\CreateCarMakeCommand.cs" />
     <Compile Include="Commands\CarMakeCommands\EditCarMakeCommand.cs" />
     <Compile Include="Commands\CarMakeCommands\ListCarMakeCommand.cs" />
