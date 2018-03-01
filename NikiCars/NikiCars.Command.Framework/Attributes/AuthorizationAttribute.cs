@@ -4,9 +4,7 @@ using NikiCars.Command.Interfaces;
 
 namespace NikiCars.Command.Framework.Attributes
 {
-    [AttributeUsage(AttributeTargets.Class,
-                       AllowMultiple = true)
-    ]
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
     public class AuthorizationAttribute : Attribute, ICommandAuthorizationFilter
     {
         private string[] roles;
@@ -38,9 +36,7 @@ namespace NikiCars.Command.Framework.Attributes
                         return;
                     }
                 }
-            }
-            else
-            {
+
                 context.ResponseResult = new AuthorizationErrorResult<string>();
             }
         }

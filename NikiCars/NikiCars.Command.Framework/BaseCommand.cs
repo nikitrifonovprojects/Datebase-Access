@@ -96,13 +96,6 @@ namespace NikiCars.Command.Framework
 
             actionPipeline.Add(this.ExecuteResponseResultAction);
 
-            var actionExecuted = attributes.Where(x => typeof(ICommandActionExecutedFilter).IsAssignableFrom(x.GetType()))
-               .Cast<ICommandActionExecutedFilter>()
-               .Select<ICommandActionExecutedFilter, Action<CommandContext>>(c => c.OnActionExecuted);
-
-            actionPipeline.Add(this.ExecuteOnActionExcuted);
-            actionPipeline.AddRange(actionExecuted);
-
             return actionPipeline;
         }
 
@@ -110,6 +103,13 @@ namespace NikiCars.Command.Framework
         {
             Attribute[] attributes = Attribute.GetCustomAttributes(type);
             var resultPipeline = new List<Action<CommandContext>>();
+
+            var actionExecuted = attributes.Where(x => typeof(ICommandActionExecutedFilter).IsAssignableFrom(x.GetType()))
+              .Cast<ICommandActionExecutedFilter>()
+              .Select<ICommandActionExecutedFilter, Action<CommandContext>>(c => c.OnActionExecuted);
+
+            resultPipeline.Add(this.ExecuteOnActionExcuted);
+            resultPipeline.AddRange(actionExecuted);
 
             var resultExecuting = attributes.Where(x => typeof(ICommandResultExecutingFilter).IsAssignableFrom(x.GetType()))
                .Cast<ICommandResultExecutingFilter>()
