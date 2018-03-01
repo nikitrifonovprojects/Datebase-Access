@@ -1,4 +1,5 @@
 ﻿using NikiCars.Command.Framework;
+using NikiCars.Command.Framework.Attributes;
 using NikiCars.Command.Framework.Routing;
 using NikiCars.Command.Interfaces;
 using NikiCars.Command.Validation;
@@ -10,6 +11,8 @@ using NikiCars.Services.Mapping;
 
 namespace NikiCars.Console.Commands.CarModelCommands
 {
+    [Validate]
+    [Authorization(RoleConstants.ADMINISTRATOR)]
     [CommandRoute("edit CarModel")]
     public class EditCarModelCommand : BaseCommand<EditCarModelModel>
     {
@@ -25,16 +28,6 @@ namespace NikiCars.Console.Commands.CarModelCommands
 
         protected override ICommandResult ExecuteAction(EditCarModelModel item)
         {
-            if (!this.context.CommandUser.IsAuthenticated || !this.context.CommandUser.UserRoles.Contains(RoleConstants.ADMINISTRATOR))
-            {
-                return this.AuthorizationError();
-            }
-
-            if (this.context.ModelState.HasError)
-            {
-                return this.Error(this.context.ModelState.ToString());
-            }
-
             CarModel carModel = this.mapping.Map<CarModel>(item);
 
             CarModel result = this.service.Save(carModel);

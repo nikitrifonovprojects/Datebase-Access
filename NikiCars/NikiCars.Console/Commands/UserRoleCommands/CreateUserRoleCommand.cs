@@ -1,4 +1,5 @@
 ﻿using NikiCars.Command.Framework;
+using NikiCars.Command.Framework.Attributes;
 using NikiCars.Command.Framework.Routing;
 using NikiCars.Command.Interfaces;
 using NikiCars.Command.Validation;
@@ -10,6 +11,8 @@ using NikiCars.Services.Mapping;
 
 namespace NikiCars.Console.Commands.UserRoleCommands
 {
+    [Validate]
+    [Authorization(RoleConstants.ADMINISTRATOR)]
     [CommandRoute("add UserRole")]
     public class CreateUserRoleCommand : BaseCommand<CreateUserRoleModel>
     {
@@ -25,16 +28,6 @@ namespace NikiCars.Console.Commands.UserRoleCommands
 
         protected override ICommandResult ExecuteAction(CreateUserRoleModel item)
         {
-            if (!this.context.CommandUser.IsAuthenticated || !this.context.CommandUser.UserRoles.Contains(RoleConstants.ADMINISTRATOR))
-            {
-                return this.AuthenticationError();
-            }
-
-            if (this.context.ModelState.HasError)
-            {
-                return this.Error(this.context.ModelState.ToString());
-            }
-
             UserRole userRole = this.mapping.Map<UserRole>(item); 
 
             UserRole result = this.service.Save(userRole);

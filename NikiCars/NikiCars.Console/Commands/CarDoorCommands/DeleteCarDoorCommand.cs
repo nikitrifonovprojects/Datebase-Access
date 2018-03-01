@@ -1,4 +1,5 @@
 ﻿using NikiCars.Command.Framework;
+using NikiCars.Command.Framework.Attributes;
 using NikiCars.Command.Framework.Routing;
 using NikiCars.Command.Interfaces;
 using NikiCars.Command.Validation;
@@ -10,6 +11,8 @@ using NikiCars.Services.Mapping;
 
 namespace NikiCars.Console.Commands.CarDoorCommands
 {
+    [Validate]
+    [Authorization(RoleConstants.ADMINISTRATOR)]
     [CommandRoute("delete CarDoor")]
     public class DeleteCarDoorCommand : BaseCommand<EditCarDoorsModel>
     {
@@ -25,16 +28,6 @@ namespace NikiCars.Console.Commands.CarDoorCommands
 
         protected override ICommandResult ExecuteAction(EditCarDoorsModel item)
         {
-            if (!this.context.CommandUser.IsAuthenticated || !this.context.CommandUser.UserRoles.Contains(RoleConstants.ADMINISTRATOR))
-            {
-                return this.AuthorizationError();
-            }
-
-            if (this.context.ModelState.HasError)
-            {
-                return this.Error(this.context.ModelState.ToString());
-            }
-
             NumberOfDoors model = this.mapping.Map<NumberOfDoors>(item);
 
             if (this.service.Delete(model))

@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Attributes\AuthorizationAttribute.cs" />
     <Compile Include="Attributes\BaseCommandAttribute.cs" />
+    <Compile Include="Attributes\ValidateAttribute.cs" />
     <Compile Include="BaseCommand.cs" />
     <Compile Include="DefaultModelBinder.cs" />
     <Compile Include="Input\Parser.cs" />

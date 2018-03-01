@@ -1,4 +1,5 @@
 ﻿using NikiCars.Command.Framework;
+using NikiCars.Command.Framework.Attributes;
 using NikiCars.Command.Framework.Routing;
 using NikiCars.Command.Interfaces;
 using NikiCars.Command.Validation;
@@ -9,6 +10,7 @@ using NikiCars.Services.Mapping;
 
 namespace NikiCars.Console.Commands.UserCommands
 {
+    [Validate]
     [CommandRoute("register User")]
     public class CreateUserCommand : BaseCommand<EditUserModel>
     {
@@ -26,11 +28,6 @@ namespace NikiCars.Console.Commands.UserCommands
 
         protected override ICommandResult ExecuteAction(EditUserModel item)
         {
-            if (this.context.ModelState.HasError)
-            {
-                return this.Error(this.context.ModelState.ToString());
-            }
-
             User user = this.mapping.Map<User>(item);
 
             if (this.service.LoginNameExists(user.LoginName))

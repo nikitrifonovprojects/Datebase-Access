@@ -1,5 +1,6 @@
 ﻿using System;
 using NikiCars.Command.Framework;
+using NikiCars.Command.Framework.Attributes;
 using NikiCars.Command.Framework.Routing;
 using NikiCars.Command.Interfaces;
 using NikiCars.Command.Validation;
@@ -11,6 +12,8 @@ using NikiCars.Services.Mapping;
 
 namespace NikiCars.Console.Commands.UserCommands
 {
+    [Validate]
+    [Authorization(RoleConstants.ADMINISTRATOR)]
     [CommandRoute("edit User")]
     public class EditUserCommand : BaseCommand<EditUserModel>
     {
@@ -28,14 +31,9 @@ namespace NikiCars.Console.Commands.UserCommands
         {
             User user = this.mapping.Map<User>(item);
 
-            if (!this.context.CommandUser.IsAuthenticated && (user.ID != Convert.ToInt32(this.context.CommandUser.ID) || !this.context.CommandUser.UserRoles.Contains(RoleConstants.ADMINISTRATOR)))
+            if (user.ID != Convert.ToInt32(this.context.CommandUser.ID))
             {
                 return this.AuthorizationError();
-            }
-
-            if (this.context.ModelState.HasError)
-            {
-                return this.Error(this.context.ModelState.ToString());
             }
 
             User dbUser = this.service.GetById(user.ID);

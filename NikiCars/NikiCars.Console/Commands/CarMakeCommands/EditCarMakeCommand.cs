@@ -11,6 +11,7 @@ using NikiCars.Services.Mapping;
 
 namespace NikiCars.Console.Commands.CarMakeCommands
 {
+    [Validate]
     [Authorization(RoleConstants.ADMINISTRATOR)]
     [CommandRoute("edit CarMake")]
     public class EditCarMakeCommand : BaseCommand<EditCarMakeModel>
@@ -27,11 +28,6 @@ namespace NikiCars.Console.Commands.CarMakeCommands
 
         protected override ICommandResult ExecuteAction(EditCarMakeModel item)
         {
-            if (this.context.ModelState.HasError)
-            {
-                return this.Error(this.context.ModelState.ToString());
-            }
-
             CarMake carMake = this.mapping.Map<CarMake>(item);
 
             CarMake result = this.service.Save(carMake);
