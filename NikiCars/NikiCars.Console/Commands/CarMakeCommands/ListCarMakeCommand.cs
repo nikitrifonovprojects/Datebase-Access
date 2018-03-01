@@ -28,14 +28,11 @@ namespace NikiCars.Console.Commands.CarMakeCommands
         protected override ICommandResult ExecuteAction(ListCarMakeModel item)
         {
             List<CarMake> list;
-            List<IEntitySearch<CarMake>> search = new List<IEntitySearch<CarMake>>();
-            //IEntitySearch<CarMake> make = new NameSearch(item.Name, SearchTypeEnum.Equals);
-            //search.Add(make);
             var name = new NameOrderBy(OrderByEnum.Descending);
             var order = new List<IEntityOrderBy<CarMake>>();
             order.Add(name);
 
-            list = this.service.GetAll(search, order, item.Paging);
+            list = this.service.GetAll(order, item.Paging);
 
             if (list.Count > 0)
             {

@@ -14,6 +14,10 @@ namespace NikiCars.Services.Interfaces
 
         List<T> GetAll(Pagination pagination);
 
+        List<T> GetAll(List<IEntityOrderBy<T>> order);
+
+        List<T> GetAll(List<IEntityOrderBy<T>> order, Pagination pagination);
+
         List<T> GetAll();
 
         List<T> GetAll(List<IEntitySearch<T>> search);

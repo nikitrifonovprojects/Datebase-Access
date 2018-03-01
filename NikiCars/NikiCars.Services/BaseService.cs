@@ -36,6 +36,16 @@ namespace NikiCars.Services
             return this.repository.GetAll();
         }
 
+        public List<T> GetAll(List<IEntityOrderBy<T>> order)
+        {
+            return this.repository.GetAll(order);
+        }
+
+        public List<T> GetAll(List<IEntityOrderBy<T>> order, Pagination pagination)
+        {
+            return this.repository.GetAll(order, pagination);
+        }
+
         public List<T> GetAll(List<IEntitySearch<T>> search, List<IEntityOrderBy<T>> order, Pagination pagination)
         {
             return this.repository.GetAll(search, order, pagination);

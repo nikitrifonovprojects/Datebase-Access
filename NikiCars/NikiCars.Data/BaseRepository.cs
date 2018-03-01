@@ -129,6 +129,16 @@ namespace NikiCars.Data
             return GetAll(search, null, null);
         }
 
+        public List<T> GetAll(List<IEntityOrderBy<T>> order)
+        {
+            return GetAll(null, order, null);
+        }
+
+        public List<T> GetAll(List<IEntityOrderBy<T>> order, Pagination pagination)
+        {
+            return GetAll(null, order, pagination);
+        }
+
         public List<T> GetAll(List<IEntitySearch<T>> search, List<IEntityOrderBy<T>> order, Pagination pagination)
         {
             SqlCommand command = new SqlCommand()
