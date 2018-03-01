@@ -13,7 +13,6 @@ using NikiCars.Services.Mapping;
 namespace NikiCars.Console.Commands.UserCommands
 {
     [Validate]
-    [Authorization(RoleConstants.ADMINISTRATOR)]
     [CommandRoute("edit User")]
     public class EditUserCommand : BaseCommand<EditUserModel>
     {
@@ -31,7 +30,7 @@ namespace NikiCars.Console.Commands.UserCommands
         {
             User user = this.mapping.Map<User>(item);
 
-            if (user.ID != Convert.ToInt32(this.context.CommandUser.ID))
+            if (!this.context.CommandUser.IsAuthenticated && (user.ID != Convert.ToInt32(this.context.CommandUser.ID) || !this.context.CommandUser.UserRoles.Contains(RoleConstants.ADMINISTRATOR)))
             {
                 return this.AuthorizationError();
             }
