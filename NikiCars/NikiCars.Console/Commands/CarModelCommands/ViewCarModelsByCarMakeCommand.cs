@@ -38,17 +38,10 @@ namespace NikiCars.Console.Commands.CarModelCommands
             searchList.Add(entitySearch);
             List<CarModel> list = this.service.GetAll(searchList);
 
-            if (list.Count > 0)
-            {
-                var result = new List<ViewCarModelsByCarMakeModel>();
-                result.AddRange(list.Select(x => this.mapping.Map<ViewCarModelsByCarMakeModel>(x)));
+            var result = list.Select(x => this.mapping.Map<ViewCarModelsByCarMakeModel>(x))
+                    .ToList();
 
-                return this.Success(result);
-            }
-            else
-            {
-                return this.Error($"No CarModel found");
-            }
+            return this.Success(result);
         }
 
         public override void Dispose()
