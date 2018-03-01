@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using NikiCars.Command.Framework;
+using NikiCars.Command.Framework.Attributes;
 using NikiCars.Command.Framework.Routing;
 using NikiCars.Command.Interfaces;
 using NikiCars.Command.Validation;
@@ -11,6 +12,7 @@ using NikiCars.Services.Mapping;
 
 namespace NikiCars.Console.Commands.UserCommands
 {
+    [Validate]
     [CommandRoute("get User")]
     public class FindUserCommand : BaseCommand<FindUserModel>
     {
@@ -26,11 +28,6 @@ namespace NikiCars.Console.Commands.UserCommands
 
         protected override ICommandResult ExecuteAction(FindUserModel item)
         {
-            if (this.context.ModelState.HasError)
-            {
-                return this.Error(this.context.ModelState.ToString());
-            }
-
             User mappedUser = this.mapping.Map<User>(item);
 
             User user = this.service.GetUserByID(mappedUser.ID, new List<UserIncludes> { UserIncludes.UserRoles });

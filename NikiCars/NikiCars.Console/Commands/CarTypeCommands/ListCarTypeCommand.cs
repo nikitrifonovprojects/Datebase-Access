@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using NikiCars.Command.Framework;
+using NikiCars.Command.Framework.Attributes;
 using NikiCars.Command.Framework.Routing;
 using NikiCars.Command.Interfaces;
 using NikiCars.Command.Validation;
@@ -10,6 +11,7 @@ using NikiCars.Services.Mapping;
 
 namespace NikiCars.Console.Commands.CarTypeCommands
 {
+    [Validate]
     [CommandRoute("list CarType")]
     public class ListCarTypeCommand : BaseCommand<ListCarTypeModel>
     {
@@ -25,11 +27,6 @@ namespace NikiCars.Console.Commands.CarTypeCommands
 
         protected override ICommandResult ExecuteAction(ListCarTypeModel item)
         {
-            if (this.context.ModelState.HasError)
-            {
-                return this.Error(this.context.ModelState.ToString());
-            }
-
             List<CarType> list;
             if (item.Paging != null)
             {

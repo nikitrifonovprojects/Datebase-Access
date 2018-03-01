@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using NikiCars.Command.Framework;
+using NikiCars.Command.Framework.Attributes;
 using NikiCars.Command.Framework.Routing;
 using NikiCars.Command.Interfaces;
 using NikiCars.Command.Validation;
@@ -11,6 +12,7 @@ using NikiCars.Services.Mapping;
 
 namespace NikiCars.Console.Commands.CarDoorCommands
 {
+    [Validate]
     [CommandRoute("list CarDoor")]
     public class ListCarDoorsCommand : BaseCommand<ListAllCarDoorsModel>
     {

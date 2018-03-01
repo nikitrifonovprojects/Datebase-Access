@@ -1,4 +1,5 @@
 ﻿using NikiCars.Command.Framework;
+using NikiCars.Command.Framework.Attributes;
 using NikiCars.Command.Framework.Routing;
 using NikiCars.Command.Interfaces;
 using NikiCars.Command.Validation;
@@ -9,6 +10,7 @@ using NikiCars.Services.Mapping;
 
 namespace NikiCars.Console.Commands.CarModelCommands
 {
+    [Validate]
     [CommandRoute("get CarModel")]
     public class FindCarModelCommand : BaseCommand<FindCarModelModel>
     {
@@ -24,11 +26,6 @@ namespace NikiCars.Console.Commands.CarModelCommands
 
         protected override ICommandResult ExecuteAction(FindCarModelModel item)
         {
-            if (this.context.ModelState.HasError)
-            {
-                return this.Error(this.context.ModelState.ToString());
-            }
-
             CarModel carModel = this.mapping.Map<CarModel>(item);
 
             CarModel model = this.service.GetById(carModel.ID);
