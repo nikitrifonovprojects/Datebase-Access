@@ -12,6 +12,7 @@ namespace NikiCars.Data.Revisions
         {
             using (var conn = new SqlConnection(ConfigurationManager.AppSettings["ConnectionString"]))
             {
+                conn.Open();
                 string commandText = "ALTER TABLE Cars ALTER COLUMN FuelTypeID int NULL " +
                                      "ALTER TABLE Cars ALTER COLUMN GearboxTypeID int NULL " +
                                      "ALTER TABLE Cars ALTER COLUMN ColourID int NULL";
@@ -34,6 +35,7 @@ namespace NikiCars.Data.Revisions
                 {
                     using (var conn = new SqlConnection(ConfigurationManager.AppSettings["ConnectionString"]))
                     {
+                        conn.Open();
                         string commandText = "DECLARE @fuelType int " +
                                              "DECLARE @gearboxType int " +
                                              "DECLARE @colour int " +

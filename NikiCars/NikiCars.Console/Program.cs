@@ -1,12 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using DependencyExtentions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NikiCars.Command.Client;
+using NikiCars.Data.Revisions;
 using NikiCars.Dependancy;
 using NikiCars.Models.CarCoupeModels;
 using NikiCars.Models.CarMakeModels;
 using NikiCars.Models.CarModelModels;
+using NikiCars.Models.CarModels;
 using NikiCars.Models.CarTypeModels;
 using NikiCars.Models.LoginModels;
 using NikiCars.Models.UserModels;
@@ -34,11 +37,22 @@ namespace NikiCars.Console
                 client.SetToken(firstRes.Data as string);
             }
 
-            string command = "edit CarMake";
-            var input = new EditCarMakeModel();
-            input.ID = 2;
-            input.Name = "Kia";
-            input.Country = "China";
+            string command = "edit Car";
+            var input = new EditCarModel();
+            input.ID = 30;
+            input.CarCoupeID = 2;
+            input.CarModelID = 2;
+            input.Discription = "very good and bad car";
+            input.EngineCapacity = 1600;
+            input.FirstRegistrationDate = DateTime.Now.AddYears(-10);
+            input.HorsePower = 100;
+            input.IsDamaged = false;
+            input.IsForParts = false;
+            input.IsLeftSteering = false;
+            input.IsUsed = true;
+            input.Kilometers = 20100;
+            input.NumberOfDoorsID = 2;
+            input.Price = 12000;
 
 
             var res = client.SendRequest(command, input);

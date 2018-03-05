@@ -28,9 +28,16 @@ namespace NikiCars.Console.Commands.CarCoupeCommands
 
         protected override ICommandResult ExecuteAction(EditCarCoupeModel item)
         {
-            CarCoupe carCoupe = this.mapping.Map<CarCoupe>(item);
+            CarCoupe dbCarCoupe = this.service.GetById(item.ID);
 
-            CarCoupe result = this.service.Save(carCoupe);
+            if (dbCarCoupe == null)
+            {
+                return this.Error(item.ID);
+            }
+
+            dbCarCoupe = this.mapping.Map(item, dbCarCoupe);
+
+            CarCoupe result = this.service.Save(dbCarCoupe);
 
             return this.Success(result);
         }
@@ -39,7 +46,5 @@ namespace NikiCars.Console.Commands.CarCoupeCommands
         {
             this.service.Dispose();
         }
-
-        
     }
 }

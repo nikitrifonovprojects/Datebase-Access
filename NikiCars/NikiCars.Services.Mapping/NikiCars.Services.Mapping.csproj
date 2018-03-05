@@ -51,6 +51,7 @@
     <Compile Include="Profiles\CarExtraModelsProfile.cs" />
     <Compile Include="Profiles\CarMakeModelsProfile.cs" />
     <Compile Include="Profiles\CarModelModelsProfile.cs" />
+    <Compile Include="Profiles\CarProfile.cs" />
     <Compile Include="Profiles\CarTypeModelsProfile.cs" />
     <Compile Include="Profiles\LoginModelsProfile.cs" />
     <Compile Include="Profiles\UserModelsProfile.cs" />

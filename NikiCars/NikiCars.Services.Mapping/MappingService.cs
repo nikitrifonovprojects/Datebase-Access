@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Reflection;
+﻿using System.Reflection;
 using AutoMapper;
 
 namespace NikiCars.Services.Mapping
@@ -16,6 +14,11 @@ namespace NikiCars.Services.Mapping
         public TOut Map<TOut>(object model)
         {
             return Mapper.Map<TOut>(model);
+        }
+
+        public TOut Map<TIn, TOut>(TIn source, TOut destination)
+        {
+            return Mapper.Map(source, destination);
         }
     }
 }

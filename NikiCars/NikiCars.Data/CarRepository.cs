@@ -22,9 +22,9 @@ namespace NikiCars.Data
                 {"CarModelID", new SqlParameter() { Value = item.CarModelID.ToString() } },
                 {"CarCoupeID", new SqlParameter() { Value = item.CarCoupeID.ToString() } },
                 {"NumberOfDoorsID", new SqlParameter() { Value = item.NumberOfDoorsID.ToString() } },
-                {"FuelTypeID", new SqlParameter() { Value = item.FuelTypeID.ToString() } },
-                {"ColourID", new SqlParameter() { Value = item.ColourID.ToString() } },
-                {"GearboxTypeID", new SqlParameter() { Value = item.GearboxTypeID.ToString() } },
+                {"FuelTypeID", new SqlParameter() { Value = (object)item.FuelTypeID ?? DBNull.Value} },
+                {"ColourID", new SqlParameter() { Value = (object)item.ColourID ?? DBNull.Value } },
+                {"GearboxTypeID", new SqlParameter() { Value = (object)item.GearboxTypeID ?? DBNull.Value } },
                 {"HorsePower", new SqlParameter() { Value = item.HorsePower.ToString() } },
                 {"FirstRegistrationDate", new SqlParameter() { Value = item.FirstRegistrationDate.ToString() } },
                 {"EngineCapacity", new SqlParameter() { Value = item.EngineCapacity.ToString() } },
@@ -68,9 +68,9 @@ namespace NikiCars.Data
             car.CarModelID = Convert.ToInt32(reader["CarModelID"]);
             car.CarCoupeID = Convert.ToInt32(reader["CarCoupeID"]);
             car.NumberOfDoorsID = Convert.ToInt32(reader["NumberOfDoorsID"]);
-            car.FuelTypeID = Convert.ToInt32(reader["FuelTypeID"]);
-            car.ColourID = Convert.ToInt32(reader["ColourID"]);
-            car.GearboxTypeID = Convert.ToInt32(reader["GearboxTypeID"]);
+            car.FuelTypeID = Convert.IsDBNull(reader["FuelTypeID"]) ? default(int?) : Convert.ToInt32(reader["FuelTypeID"]);
+            car.ColourID = Convert.IsDBNull(reader["ColourID"]) ? default(int?) : Convert.ToInt32(reader["ColourID"]);
+            car.GearboxTypeID = Convert.IsDBNull(reader["GearboxTypeID"]) ? default(int?) : Convert.ToInt32(reader["GearboxTypeID"]);
             car.HorsePower = Convert.ToInt32(reader["HorsePower"]);
             car.FirstRegistrationDate = Convert.ToDateTime(reader["FirstRegistrationDate"]);
             car.EngineCapacity = Convert.ToInt32(reader["EngineCapacity"]);
@@ -81,7 +81,7 @@ namespace NikiCars.Data
             car.IsUsed = Convert.ToBoolean(reader["IsUsed"]);
             car.IsForParts = Convert.ToBoolean(reader["IsForParts"]);
             car.IsDamaged = Convert.ToBoolean(reader["IsDamaged"]);
-            car.Title = Convert.ToString(reader["Title"]);
+            car.Title = Convert.IsDBNull(reader["Title"]) ? null : Convert.ToString(reader["Title"]);
             car.DateCreated = Convert.ToDateTime(reader["DateCreated"]);
             car.UserID = Convert.ToInt32(reader["UserID"]);
 

@@ -28,9 +28,15 @@ namespace NikiCars.Console.Commands.CarModelCommands
 
         protected override ICommandResult ExecuteAction(EditCarModelModel item)
         {
-            CarModel carModel = this.mapping.Map<CarModel>(item);
+            CarModel dbCarModel = this.service.GetById(item.ID);
 
-            CarModel result = this.service.Save(carModel);
+            if (dbCarModel == null)
+            {
+                return this.Error(item.ID);
+            }
+
+            dbCarModel = this.mapping.Map(item, dbCarModel);
+            CarModel result = this.service.Save(dbCarModel);
 
             return this.Success(result);
         }

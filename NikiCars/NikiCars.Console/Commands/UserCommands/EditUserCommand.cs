@@ -12,6 +12,7 @@ using NikiCars.Services.Mapping;
 
 namespace NikiCars.Console.Commands.UserCommands
 {
+    [Authorization]
     [Validate]
     [CommandRoute("edit User")]
     public class EditUserCommand : BaseCommand<EditUserModel>
@@ -28,31 +29,34 @@ namespace NikiCars.Console.Commands.UserCommands
 
         protected override ICommandResult ExecuteAction(EditUserModel item)
         {
-            User user = this.mapping.Map<User>(item);
+            User dbUser = this.service.GetById(item.ID);
+            if (dbUser == null)
+            {
+                return this.Error(item.ID);
+            }
 
-            if (!this.context.CommandUser.IsAuthenticated && (user.ID != Convert.ToInt32(this.context.CommandUser.ID) || !this.context.CommandUser.UserRoles.Contains(RoleConstants.ADMINISTRATOR)))
+            if ((item.ID != Convert.ToInt32(this.context.CommandUser.ID) && !this.context.CommandUser.UserRoles.Contains(RoleConstants.ADMINISTRATOR)))
             {
                 return this.AuthorizationError();
             }
 
-            User dbUser = this.service.GetById(user.ID);
-
-            if (user.LoginName != dbUser.LoginName && this.service.LoginNameExists(user.LoginName))
+            if (item.LoginName != dbUser.LoginName && this.service.LoginNameExists(item.LoginName))
             {
-                return this.Error($"LoginName {user.LoginName} already exists");
+                return this.Error($"LoginName {item.LoginName} already exists");
             }
 
-            if (user.Email != dbUser.Email && this.service.EmailExists(user.Email))
+            if (item.Email != dbUser.Email && this.service.EmailExists(item.Email))
             {
-                return this.Error($"Email {user.Email} already exists");
+                return this.Error($"Email {item.Email} already exists");
             }
 
-            if (user.MobilePhone != dbUser.MobilePhone && this.service.MobilePhoneExists(user.MobilePhone))
+            if (item.MobilePhone != dbUser.MobilePhone && this.service.MobilePhoneExists(item.MobilePhone))
             {
-                return this.Error($"MobilePhone {user.MobilePhone} already exists");
+                return this.Error($"MobilePhone {item.MobilePhone} already exists");
             }
 
-            user = this.service.Save(user);
+            dbUser = this.mapping.Map(item, dbUser);
+            User user = this.service.Save(dbUser);
 
             EditUserModel result = this.mapping.Map<EditUserModel>(user);
 

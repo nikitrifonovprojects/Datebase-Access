@@ -28,9 +28,16 @@ namespace NikiCars.Console.Commands.CarDoorCommands
 
         protected override ICommandResult ExecuteAction(EditCarDoorsModel item)
         {
-            NumberOfDoors model = this.mapping.Map<NumberOfDoors>(item);
+            NumberOfDoors dbDoors = this.service.GetById(item.ID);
 
-            NumberOfDoors result = this.service.Save(model);
+            if (dbDoors == null)
+            {
+                return this.Error(item.ID);
+            }
+
+            dbDoors = this.mapping.Map(item, dbDoors);
+
+            NumberOfDoors result = this.service.Save(dbDoors);
 
             return this.Success(result);
         }

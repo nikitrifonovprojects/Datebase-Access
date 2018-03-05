@@ -24,18 +24,15 @@ namespace NikiCars.Data.Models
 
         public FuelType FuelType { get; set; }
 
-        [Required]
-        public int FuelTypeID { get; set; }
+        public int? FuelTypeID { get; set; }
 
         public Colour Colour { get; set; }
 
-        [Required]
-        public int ColourID { get; set; }
+        public int? ColourID { get; set; }
 
         public GearBoxType GearboxType { get; set; }
 
-        [Required]
-        public int GearboxTypeID { get; set; }
+        public int? GearboxTypeID { get; set; }
 
         [Required]
         public int HorsePower { get; set; }

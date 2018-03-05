@@ -1,5 +1,4 @@
-﻿using System;
-using NikiCars.Command.Framework;
+﻿using NikiCars.Command.Framework;
 using NikiCars.Command.Framework.Attributes;
 using NikiCars.Command.Framework.Routing;
 using NikiCars.Command.Interfaces;
@@ -29,9 +28,15 @@ namespace NikiCars.Console.Commands.CarExtraCommands
 
         protected override ICommandResult ExecuteAction(EditCarExtraModel item)
         {
-            Extra model = this.mapping.Map<Extra>(item);
+            Extra dbExtra = this.service.GetById(item.ID);
 
-            Extra result = this.service.Save(model);
+            if (dbExtra == null)
+            {
+                return this.Error(item.ID);
+            }
+
+            dbExtra = this.mapping.Map(item, dbExtra);
+            Extra result = this.service.Save(dbExtra);
 
             return this.Success(result);
         }

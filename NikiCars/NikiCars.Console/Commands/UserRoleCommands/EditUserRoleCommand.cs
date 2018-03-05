@@ -28,9 +28,15 @@ namespace NikiCars.Console.Commands.UserRoleCommands
 
         protected override ICommandResult ExecuteAction(EditUserRoleModel item)
         {
-            UserRole userRole = this.mapping.Map<UserRole>(item);
+            UserRole dbUserRole = this.service.GetById(item.ID);
 
-            UserRole result = this.service.Save(userRole);
+            if (dbUserRole == null)
+            {
+                return this.Error(item.ID);
+            }
+
+            dbUserRole = this.mapping.Map(item, dbUserRole);
+            UserRole result = this.service.Save(dbUserRole);
 
             return this.Success(result);
         }

@@ -49,6 +49,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\CarCommands\CreateCarCommand.cs" />
+    <Compile Include="Commands\CarCommands\EditCarCommand.cs" />
     <Compile Include="Commands\CarCoupeCommands\CreateCarCoupeCommand.cs" />
     <Compile Include="Commands\CarCoupeCommands\ListAllCarCoupesCommand.cs" />
     <Compile Include="Commands\CarDoorCommands\CreateCarDoorCommand.cs" />
@@ -122,6 +124,10 @@
     <ProjectReference Include="..\NikiCars.Data.Models\NikiCars.Data.Models.csproj">
       <Project>{D28F0078-F301-4062-B405-45CD6D39FB2B}</Project>
       <Name>NikiCars.Data.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NikiCars.Data.Revisions\NikiCars.Data.Revisions.csproj">
+      <Project>{8CB8C335-1CC0-409E-9C7A-4CCA2BF06EC2}</Project>
+      <Name>NikiCars.Data.Revisions</Name>
     </ProjectReference>
     <ProjectReference Include="..\NikiCars.Data\NikiCars.Data.csproj">
       <Project>{76488678-5C35-4B36-A81B-BAF0A532B26F}</Project>
