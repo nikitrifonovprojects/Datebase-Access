@@ -4,7 +4,7 @@ using NikiCars.Command.Interfaces;
 namespace NikiCars.Command.Framework.Attributes
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
-    public abstract class BaseCommandAttribute : Attribute, ICommandActionExecutedFilter, ICommandActionExecutingFilter, ICommandResultExecutedFilter, ICommandResultExecutingFilter
+    public abstract class BaseCommandAttribute : Attribute, ICommandActionExecutedFilter, ICommandActionExecutingFilter, ICommandResultExecutedFilter, ICommandResultExecutingFilter, ICommandExceptionFilter
     {
         public virtual void OnActionExecuted(CommandContext context)
         {
@@ -12,6 +12,11 @@ namespace NikiCars.Command.Framework.Attributes
         }
 
         public virtual void OnActionExecuting(CommandContext context)
+        {
+
+        }
+
+        public void OnException(ExceptionContext context)
         {
 
         }

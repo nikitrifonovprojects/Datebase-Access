@@ -3,7 +3,7 @@ using NikiCars.Search.Interfaces;
 
 namespace NikiCars.Search
 {
-    public class CarMakeIDSearch : ISearch, IEntitySearch<CarMake>, IEntitySearch<CarModel>
+    public class CarMakeIDSearch : ISearch, IEntitySearch<CarMake>, IEntitySearch<CarModel>, IEntitySearch<Car>
     {
         public object Value { get; private set; }
 

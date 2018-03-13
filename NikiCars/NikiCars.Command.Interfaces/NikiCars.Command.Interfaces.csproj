@@ -41,11 +41,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommandContext.cs" />
+    <Compile Include="ExceptionContext.cs" />
     <Compile Include="IAuthenticationManager.cs" />
     <Compile Include="ICommand.cs" />
     <Compile Include="ICommandAuthorizationFilter.cs" />
     <Compile Include="ICommandActionExecutedFilter.cs" />
     <Compile Include="ICommandActionExecutingFilter.cs" />
+    <Compile Include="ICommandExceptionFilter.cs" />
     <Compile Include="ICommandResult.cs" />
     <Compile Include="ICommandResultExecutedFilter.cs" />
     <Compile Include="ICommandResultExecutingFilter.cs" />

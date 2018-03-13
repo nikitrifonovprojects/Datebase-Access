@@ -48,6 +48,11 @@ namespace NikiCars.Command.Framework
 
         }
 
+        protected virtual void OnException(ExceptionContext context)
+        {
+
+        }
+
         private void ExecuteOnAuthorize(CommandContext context)
         {
             this.OnAuthorize();
@@ -104,13 +109,6 @@ namespace NikiCars.Command.Framework
             Attribute[] attributes = Attribute.GetCustomAttributes(type);
             var resultPipeline = new List<Action<CommandContext>>();
 
-            var actionExecuted = attributes.Where(x => typeof(ICommandActionExecutedFilter).IsAssignableFrom(x.GetType()))
-              .Cast<ICommandActionExecutedFilter>()
-              .Select<ICommandActionExecutedFilter, Action<CommandContext>>(c => c.OnActionExecuted);
-
-            resultPipeline.Add(this.ExecuteOnActionExcuted);
-            resultPipeline.AddRange(actionExecuted);
-
             var resultExecuting = attributes.Where(x => typeof(ICommandResultExecutingFilter).IsAssignableFrom(x.GetType()))
                .Cast<ICommandResultExecutingFilter>()
                .Select<ICommandResultExecutingFilter, Action<CommandContext>>(c => c.OnResultExecuting);
@@ -128,6 +126,36 @@ namespace NikiCars.Command.Framework
             resultPipeline.AddRange(resultExecuted);
 
             return resultPipeline;
+        }
+
+        private List<Action<CommandContext>> GetActionExecutedPipeline(Type type)
+        {
+            Attribute[] attributes = Attribute.GetCustomAttributes(type);
+            var actionExecutedPipeline = new List<Action<CommandContext>>();
+
+            var actionExecuted = attributes.Where(x => typeof(ICommandActionExecutedFilter).IsAssignableFrom(x.GetType()))
+              .Cast<ICommandActionExecutedFilter>()
+              .Select<ICommandActionExecutedFilter, Action<CommandContext>>(c => c.OnActionExecuted);
+
+            actionExecutedPipeline.Add(this.ExecuteOnActionExcuted);
+            actionExecutedPipeline.AddRange(actionExecuted);
+
+            return actionExecutedPipeline;
+        }
+
+        private List<Action<ExceptionContext>> GetExceptionPipeLine(Type type)
+        {
+            Attribute[] attributes = Attribute.GetCustomAttributes(type);
+            var exceptionPipeline = new List<Action<ExceptionContext>>();
+
+            var onException = attributes.Where(x => typeof(ICommandExceptionFilter).IsAssignableFrom(x.GetType()))
+              .Cast<ICommandExceptionFilter>()
+              .Select<ICommandExceptionFilter, Action<ExceptionContext>>(c => c.OnException);
+
+            exceptionPipeline.Add(this.OnException);
+            exceptionPipeline.AddRange(onException);
+
+            return exceptionPipeline;
         }
 
         private void ExecuteValidate(CommandContext context)
@@ -150,15 +178,44 @@ namespace NikiCars.Command.Framework
         public string Execute()
         {
             var type = this.GetType();
-            var actionPipeline = this.GetActionPipeLine(type);
 
-            foreach (var action in actionPipeline)
+            try
             {
-                action(this.context);
+                var actionPipeline = this.GetActionPipeLine(type);
 
-                if (this.context.ResponseResult != null)
+                foreach (var action in actionPipeline)
                 {
-                    break;
+                    action(this.context);
+
+                    if (this.context.ResponseResult != null)
+                    {
+                        break;
+                    }
+                }
+
+                var actionExecutedPipeline = this.GetActionExecutedPipeline(type);
+
+                foreach (var action in actionExecutedPipeline)
+                {
+                    action(this.context);
+                }
+            }
+            catch (Exception ex)
+            {
+                var exceptionContext = new ExceptionContext(this.context);
+                exceptionContext.IsHandled = false;
+                exceptionContext.Exception = ex;
+
+                var exceptionPipeline = GetExceptionPipeLine(type);
+
+                foreach (var exeptionHandler in exceptionPipeline)
+                {
+                    exeptionHandler(exceptionContext);
+                }
+
+                if (!exceptionContext.IsHandled)
+                {
+                    throw;
                 }
             }
 
