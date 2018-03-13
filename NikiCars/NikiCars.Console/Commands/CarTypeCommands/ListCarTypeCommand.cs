@@ -13,7 +13,7 @@ namespace NikiCars.Console.Commands.CarTypeCommands
 {
     [Validate]
     [CommandRoute("list CarType")]
-    public class ListCarTypeCommand : BaseCommand<ListCarTypeModel>
+    public class ListCarTypeCommand : BaseCommand<string>
     {
         private IService<CarType> service;
         private IMappingService mapping;
@@ -25,28 +25,14 @@ namespace NikiCars.Console.Commands.CarTypeCommands
             this.mapping = mapping;
         }
 
-        protected override ICommandResult ExecuteAction(ListCarTypeModel item)
+        protected override ICommandResult ExecuteAction(string item)
         {
             List<CarType> list;
-            if (item.Paging != null)
-            {
-                list = this.service.GetAll(item.Paging);
-
-            }
-            else
-            {
-                list = this.service.GetAll();
-            }
+            list = this.service.GetAll();
 
             if (list.Count > 0)
             {
-                List<ListCarTypeModel> carTypeList = new List<ListCarTypeModel>();
-                foreach (var carType in list)
-                {
-                    carTypeList.Add(this.mapping.Map<ListCarTypeModel>(carType));
-                }
-
-                return this.Success(carTypeList);
+                return this.Success(list);
             }
             else
             {

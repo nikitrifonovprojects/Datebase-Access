@@ -14,7 +14,7 @@ namespace NikiCars.Console.Commands.CarDoorCommands
 {
     [Validate]
     [CommandRoute("list CarDoor")]
-    public class ListCarDoorsCommand : BaseCommand<ListAllCarDoorsModel>
+    public class ListCarDoorsCommand : BaseCommand<string>
     {
         private IService<NumberOfDoors> service;
         private IMappingService mapping;
@@ -26,25 +26,14 @@ namespace NikiCars.Console.Commands.CarDoorCommands
             this.mapping = mapping;
         }
 
-        protected override ICommandResult ExecuteAction(ListAllCarDoorsModel item)
+        protected override ICommandResult ExecuteAction(string item)
         {
             List<NumberOfDoors> list;
-            if (item.Paging != null)
-            {
-                list = this.service.GetAll(item.Paging);
-
-            }
-            else
-            {
-                list = this.service.GetAll();
-            }
+            list = this.service.GetAll();
 
             if (list.Count > 0)
             {
-                List<ListAllCarDoorsModel> carDoorsList = list.Select(x => this.mapping.Map<ListAllCarDoorsModel>(x))
-                    .ToList();
-
-                return this.Success(carDoorsList);
+                return this.Success(list);
             }
             else
             {

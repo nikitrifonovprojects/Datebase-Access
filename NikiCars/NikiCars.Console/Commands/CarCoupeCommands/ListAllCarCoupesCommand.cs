@@ -13,7 +13,7 @@ namespace NikiCars.Console.Commands.CarCoupeCommands
 {
     [Validate]
     [CommandRoute("list CarCoupe")]
-    public class ListAllCarCoupesCommand : BaseCommand<ListAllCarCoupesModel>
+    public class ListAllCarCoupesCommand : BaseCommand<string>
     {
         private IService<CarCoupe> service;
         private IMappingService mapping;
@@ -25,29 +25,14 @@ namespace NikiCars.Console.Commands.CarCoupeCommands
             this.mapping = mapping;
         }
 
-        protected override ICommandResult ExecuteAction(ListAllCarCoupesModel item)
+        protected override ICommandResult ExecuteAction(string item)
         {
             List<CarCoupe> list;
-            if (item.Paging != null)
-            {
-                list = this.service.GetAll(item.Paging);
-
-            }
-            else
-            {
-                list = this.service.GetAll();
-            }
-
+            list = this.service.GetAll();
 
             if (list.Count > 0)
             {
-                List<ListAllCarCoupesModel> carCoupelist = new List<ListAllCarCoupesModel>();
-                foreach (var carCoupe in list)
-                {
-                    carCoupelist.Add(this.mapping.Map<ListAllCarCoupesModel>(carCoupe));
-                }
-
-                return this.Success(carCoupelist);
+                return this.Success(list);
             }
             else
             {

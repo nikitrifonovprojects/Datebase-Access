@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="Commands\CarCommands\CreateCarCommand.cs" />
     <Compile Include="Commands\CarCommands\EditCarCommand.cs" />
+    <Compile Include="Commands\CarCommands\FindCarCommand.cs" />
     <Compile Include="Commands\CarCoupeCommands\CreateCarCoupeCommand.cs" />
     <Compile Include="Commands\CarCoupeCommands\ListAllCarCoupesCommand.cs" />
     <Compile Include="Commands\CarDoorCommands\CreateCarDoorCommand.cs" />
