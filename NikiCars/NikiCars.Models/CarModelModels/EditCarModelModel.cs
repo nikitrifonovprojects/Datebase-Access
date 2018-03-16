@@ -4,17 +4,17 @@ namespace NikiCars.Models.CarModelModels
 {
     public class EditCarModelModel
     {
-        [Required]
+        [Range(1, int.MaxValue)]
         public int ID { get; set; }
 
         [Required]
         [StringLength(20)]
         public string Name { get; set; }
 
-        [Required]
+        [Range(1, int.MaxValue)]
         public int CarMakeID { get; set; }
 
-        [Required]
+        [Range(1, int.MaxValue)]
         public int CarTypeID { get; set; }
     }
 }

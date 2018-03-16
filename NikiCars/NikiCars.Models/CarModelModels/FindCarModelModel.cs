@@ -4,7 +4,7 @@ namespace NikiCars.Models.CarModelModels
 {
     public class FindCarModelModel
     {
-        [Required]
+        [Range(1, int.MaxValue)]
         public int ID { get; set; }
 
         public string Name { get; set; }

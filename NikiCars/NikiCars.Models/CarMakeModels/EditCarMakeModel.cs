@@ -4,7 +4,7 @@ namespace NikiCars.Models.CarMakeModels
 {
     public class EditCarMakeModel
     {
-        [Required]
+        [Range(1, int.MaxValue)]
         public int ID { get; set; }
 
         [Required]

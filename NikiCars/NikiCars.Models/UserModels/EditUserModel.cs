@@ -6,7 +6,7 @@ namespace NikiCars.Models.UserModels
 {
     public class EditUserModel
     {
-        [Required]
+        [Range(1, int.MaxValue)]
         public int ID { get; set; }
 
         [Required]
@@ -29,7 +29,7 @@ namespace NikiCars.Models.UserModels
         [StringLength(20)]
         public string MobilePhone { get; set; }
 
-        [Required]
+        [Range(1, int.MaxValue)]
         public int CityID { get; set; }
 
         public string Address { get; set; }

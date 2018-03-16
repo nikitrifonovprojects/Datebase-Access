@@ -4,7 +4,7 @@ namespace NikiCars.Models.UserRoleModels
 {
     public class EditUserRoleModel
     {
-        [Required]
+        [Range(1, int.MaxValue)]
         public int ID { get; set; }
 
         [Required]
