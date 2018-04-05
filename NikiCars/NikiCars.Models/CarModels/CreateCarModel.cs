@@ -6,9 +6,11 @@ namespace NikiCars.Models.CarModels
     public class CreateCarModel
     {
         [Required]
+        [Range(1, int.MaxValue)]
         public int CarModelID { get; set; }
 
         [Required]
+        [Range(1, int.MaxValue)]
         public int CarCoupeID { get; set; }
 
         [Required]
@@ -21,18 +23,22 @@ namespace NikiCars.Models.CarModels
         public int? GearboxTypeID { get; set; }
 
         [Required]
+        [Range(1, int.MaxValue)]
         public int HorsePower { get; set; }
 
         [Required]
         public DateTime FirstRegistrationDate { get; set; }
 
         [Required]
+        [Range(1, int.MaxValue)]
         public int EngineCapacity { get; set; }
 
         [Required]
+        [Range(1, int.MaxValue)]
         public int Kilometers { get; set; }
 
         [Required]
+        [Range(1, decimal.MaxValue)]
         public decimal Price { get; set; }
 
         [Required]
