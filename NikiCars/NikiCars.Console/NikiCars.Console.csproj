@@ -32,8 +32,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -141,6 +141,10 @@
     <ProjectReference Include="..\NikiCars.DependencyExtentions\NikiCars.DependencyExtentions.csproj">
       <Project>{c11adc3a-4002-445e-976f-7023d6de706c}</Project>
       <Name>NikiCars.DependencyExtentions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NikiCars.Logging\NikiCars.Logging.csproj">
+      <Project>{E78F5925-A7EF-462F-9D6E-090C7651192F}</Project>
+      <Name>NikiCars.Logging</Name>
     </ProjectReference>
     <ProjectReference Include="..\NikiCars.Models\NikiCars.Models.csproj">
       <Project>{6AC0948E-2F50-4C45-AC2B-7FC490D951B6}</Project>

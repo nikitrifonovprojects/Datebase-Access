@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using NikiCars.Command.Interfaces;
 using NikiCars.Dependancy;
+using NikiCars.Logging;
 
 namespace NikiCars.Command.Framework
 {
@@ -33,7 +33,11 @@ namespace NikiCars.Command.Framework
                     {
                         using (var command = this.container.Resolve<ICommand>(context.CommandText, new DependencyObject(typeof(CommandContext), context)))
                         {
-                            return command.Execute();
+                            using (var executionLogger = this.container.Resolve<IExecutionTimerLogger>())
+                            {
+                                executionLogger.CommandName = context.CommandText;
+                                return command.Execute();
+                            }
                         }
                     }
                     else

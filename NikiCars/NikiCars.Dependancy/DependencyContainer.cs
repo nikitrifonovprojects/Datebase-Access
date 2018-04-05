@@ -7,8 +7,13 @@ namespace NikiCars.Dependancy
 {
     public class DependencyContainer : IDependencyContainer
     {
-        public static IUnityContainer container = new UnityContainer();
-       
+        private static IUnityContainer container = new UnityContainer();
+
+        public void RegisterSingleton<TFrom, TTo>() where TTo : TFrom
+        {
+            container.RegisterSingleton<TFrom, TTo>();
+        }
+
         public void RegisterType<TFrom, TTo>() where TTo : TFrom
         {
             container.RegisterType<TFrom, TTo>();

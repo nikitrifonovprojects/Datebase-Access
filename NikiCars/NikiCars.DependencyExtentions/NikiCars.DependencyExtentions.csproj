@@ -72,6 +72,10 @@
       <Project>{22146019-DD23-42C7-95AA-4B9BBED4EDB1}</Project>
       <Name>NikiCars.Dependancy</Name>
     </ProjectReference>
+    <ProjectReference Include="..\NikiCars.Logging\NikiCars.Logging.csproj">
+      <Project>{E78F5925-A7EF-462F-9D6E-090C7651192F}</Project>
+      <Name>NikiCars.Logging</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NikiCars.Services.Interfaces\NikiCars.Services.Interfaces.csproj">
       <Project>{CF9F2650-6EBB-46AB-8F57-B1496CD04215}</Project>
       <Name>NikiCars.Services.Interfaces</Name>

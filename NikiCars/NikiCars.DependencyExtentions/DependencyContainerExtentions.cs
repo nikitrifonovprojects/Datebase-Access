@@ -10,6 +10,7 @@ using NikiCars.Command.Validation;
 using NikiCars.Data;
 using NikiCars.Data.Interfaces;
 using NikiCars.Dependancy;
+using NikiCars.Logging;
 using NikiCars.Services;
 using NikiCars.Services.Interfaces;
 using NikiCars.Services.Mapping;
@@ -25,6 +26,8 @@ namespace DependencyExtentions
 
             container.RegisterType<IConfig, DeveloperConfig>();
             //container.RegisterType<IConfig, Config>();
+            container.RegisterSingleton<ILogger, Logger>();
+            container.RegisterType<IExecutionTimerLogger, ExecutionTimerLogger>();
 
             container.RegisterType<IDependencyContainer, DependencyContainer>();
             container.RegisterType<IHost, Host>();

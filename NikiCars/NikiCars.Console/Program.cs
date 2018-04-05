@@ -7,6 +7,7 @@ using Newtonsoft.Json.Linq;
 using NikiCars.Command.Client;
 using NikiCars.Data.Revisions;
 using NikiCars.Dependancy;
+using NikiCars.Logging;
 using NikiCars.Models.CarCoupeModels;
 using NikiCars.Models.CarMakeModels;
 using NikiCars.Models.CarModelModels;
@@ -20,6 +21,7 @@ namespace NikiCars.Console
 {
     class Program
     {
+
         static void Main()
         {
             var container = new DependencyContainer();

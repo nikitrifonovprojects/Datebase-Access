@@ -7,6 +7,8 @@ namespace NikiCars.Dependancy
     {
         bool IsRegistered(Type type, string name);
 
+        void RegisterSingleton<TFrom, TTo>() where TTo : TFrom;
+
         void RegisterType<TFrom, TTo>() where TTo : TFrom;
 
         void RegisterType(Type from, Type to);
