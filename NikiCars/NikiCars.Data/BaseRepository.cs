@@ -139,6 +139,11 @@ namespace NikiCars.Data
             return GetAll(null, order, pagination);
         }
 
+        public List<T> GetAll(List<IEntitySearch<T>> search, List<IEntityOrderBy<T>> order)
+        {
+            return GetAll(search, order, null);
+        }
+
         public List<T> GetAll(List<IEntitySearch<T>> search, List<IEntityOrderBy<T>> order, Pagination pagination)
         {
             SqlCommand command = new SqlCommand()
@@ -150,7 +155,7 @@ namespace NikiCars.Data
             StringBuilder builder = new StringBuilder();
             builder.Append("SELECT * FROM " + GetTableName());
 
-            ApplyWhere(builder, search, command);
+            ApplyWhere(builder, search, command, order);
             ApplyOrderBy(builder, order);
             ApplyPaging(builder, command, pagination);
 
@@ -169,17 +174,35 @@ namespace NikiCars.Data
             return resultList;
         }
 
-        private void ApplyWhere(StringBuilder builder, List<IEntitySearch<T>> search, SqlCommand command)
+        private void ApplyWhere(StringBuilder builder, List<IEntitySearch<T>> search, SqlCommand command, List<IEntityOrderBy<T>> order)
         {
             var whereClauses = new List<Tuple<string, List<SqlParameter>>>();
+            var innerJoins = new HashSet<string>();
             
             if (search != null)
             {
                 foreach (var item in search)
                 {
                     var res = WhereFactory.CreateWhereClause(item);
+                    var join = res.GenerateJoin();
+                    innerJoins.Add(join);
                     whereClauses.Add(res.GenerateWhereClause());
                 }
+            }
+
+            if (order != null)
+            {
+                foreach (var item in order)
+                {
+                    var res = OrderByFactory.CreateOrderByClause(item);
+                    var join = res.GenerateInnerJoin();
+                    innerJoins.Add(join);
+                }
+            }
+
+            foreach (var item in innerJoins)
+            {
+                builder.Append(item);
             }
 
             if (whereClauses.Count > 0)
@@ -187,13 +210,13 @@ namespace NikiCars.Data
                 builder.Append(" WHERE ");
                 for (int i = 0; i < whereClauses.Count; i++)
                 {
-                    if (whereClauses.Count > 1)
+                    builder.Append(whereClauses[i].Item1);
+                    command.Parameters.AddRange(whereClauses[i].Item2.ToArray());
+
+                    if (i < whereClauses.Count - 1)
                     {
                         builder.Append(" AND ");
                     }
-
-                    builder.Append(whereClauses[i].Item1);
-                    command.Parameters.Add(whereClauses[i].Item2[0]);
                 }
             }
         }
@@ -216,12 +239,12 @@ namespace NikiCars.Data
                 builder.Append(" ORDER BY ");
                 for (int i = 0; i < orderByClauses.Count; i++)
                 {
-                    if (orderByClauses.Count > 1)
+                    builder.Append(orderByClauses[i].GenerateOrderByClause());
+
+                    if (i < orderByClauses.Count -1)
                     {
                         builder.Append(" , ");
                     }
-
-                    builder.Append(orderByClauses[i].GenerateOrderByClause());
                 }
             }
         }

@@ -11,7 +11,7 @@ namespace NikiCars.Models.CarModels
         [Range(1, int.MaxValue)]
         public int CarCoupeID { get; set; }
 
-        [Required]
+        [Range(1, int.MaxValue)]
         public int NumberOfDoorsID { get; set; }
 
         public int? FuelTypeID { get; set; }

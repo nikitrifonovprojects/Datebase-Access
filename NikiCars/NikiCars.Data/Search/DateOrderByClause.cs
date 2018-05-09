@@ -2,11 +2,11 @@
 
 namespace NikiCars.Data.Search
 {
-    public class NameOrderByClause : OrderBy
+    public class DateOrderByClause : OrderBy
     {
         private OrderByEnum orderBy;
 
-        public NameOrderByClause(OrderByEnum orderBy)
+        public DateOrderByClause(OrderByEnum orderBy)
         {
             this.orderBy = orderBy;
         }
@@ -15,15 +15,15 @@ namespace NikiCars.Data.Search
         {
             if (this.orderBy == OrderByEnum.None)
             {
-                return "Name";
+                return "Cars.DateCreated";
             }
             else if (this.orderBy == OrderByEnum.Ascending)
             {
-                return "Name ASC";
+                return "Cars.DateCreated ASC";
             }
             else
             {
-                return "Name DESC";
+                return "Cars.DateCreated DESC";
             }
         }
     }

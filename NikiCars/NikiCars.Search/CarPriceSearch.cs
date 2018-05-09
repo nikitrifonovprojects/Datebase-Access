@@ -4,13 +4,13 @@ using NikiCars.Search.Interfaces;
 
 namespace NikiCars.Search
 {
-    public class CarMakeIDSearch : ISearch, IEntitySearch<CarMake>, IEntitySearch<CarModel>, IEntitySearch<Car>
+    public class CarPriceSearch : ISearch, IEntitySearch<Car>
     {
         public object Value { get; private set; }
 
         public SearchTypeEnum SearchType { get; private set; }
 
-        public CarMakeIDSearch(List<int> value, SearchTypeEnum searchType)
+        public CarPriceSearch(decimal value, SearchTypeEnum searchType)
         {
             this.Value = value;
             this.SearchType = searchType;

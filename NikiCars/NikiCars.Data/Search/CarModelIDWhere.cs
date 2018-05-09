@@ -6,12 +6,12 @@ using NikiCars.Search;
 
 namespace NikiCars.Data.Search
 {
-    public class CarMakeIDWhere : Where
+    public class CarModelIDWhere : Where
     {
-        private const string PARAMETER = "CarMakeIDWhere";
-        private readonly CarMakeIDSearch search;
+        private const string PARAMETER = "CarModelIDWhere";
+        private readonly CarModelIDSearch search;
 
-        public CarMakeIDWhere(CarMakeIDSearch search)
+        public CarModelIDWhere(CarModelIDSearch search)
         {
             this.search = search;
         }
@@ -33,10 +33,10 @@ namespace NikiCars.Data.Search
                 switch (this.search.SearchType)
                 {
                     case SearchTypeEnum.Equals:
-                        result.Append($"Cars.CarMakeID = @{PARAMETER + this.ParameterName + i}");
+                        result.Append($"Cars.CarModelID  = @{PARAMETER + this.ParameterName + i}");
                         break;
                     case SearchTypeEnum.NotEquals:
-                        result.Append($"Cars.CarMakeID != @{PARAMETER + this.ParameterName + i}");
+                        result.Append($"Cars.CarModelID  != @{PARAMETER + this.ParameterName + i}");
                         break;
                     default:
                         throw new NotSupportedException();

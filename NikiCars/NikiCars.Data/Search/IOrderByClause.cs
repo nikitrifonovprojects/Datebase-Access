@@ -3,5 +3,7 @@
     internal interface IOrderByClause
     {
         string GenerateOrderByClause();
+
+        string GenerateInnerJoin();
     }
 }

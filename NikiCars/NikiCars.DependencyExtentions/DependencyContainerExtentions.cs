@@ -25,6 +25,7 @@ namespace DependencyExtentions
             container.RegisterType<IMappingService, MappingService>();
 
             container.RegisterType<IConfig, DeveloperConfig>();
+            
             //container.RegisterType<IConfig, Config>();
             container.RegisterSingleton<ILogger, Logger>();
             container.RegisterType<IExecutionTimerLogger, ExecutionTimerLogger>();
@@ -36,8 +37,10 @@ namespace DependencyExtentions
             container.RegisterType(typeof(IService<>), typeof(BaseService<>));
             container.RegisterType<IUserService, UserService>();
             container.RegisterType<ICryptographyService, CryptographyService>();
+            container.RegisterType<ICarService, CarService>();
 
             container.RegisterType<IUserRepository, UserRepository>();
+            container.RegisterType<ICarRepository, CarRepository>();
 
             var types = AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(s => s.GetExportedTypes())

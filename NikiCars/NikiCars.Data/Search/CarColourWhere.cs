@@ -5,30 +5,29 @@ using NikiCars.Search;
 
 namespace NikiCars.Data.Search
 {
-    internal class NameWhere : Where
+    public class CarColourWhere : Where
     {
-        private const string PARAMETER_NAME = "NameWhere";
-        private readonly NameSearch search;
+        private const string PARAMETER = "CarColourWhere";
+        private readonly CarColourSearch search;
 
-        public NameWhere(NameSearch search)
+        public CarColourWhere(CarColourSearch search)
         {
             this.search = search;
         }
 
         public override Tuple<string, List<SqlParameter>> GenerateWhereClause()
         {
-            var value = this.search.Value as string;
+            var value = (int)this.search.Value;
+            var result = string.Empty;
 
-            SqlParameter sqlParameter = new SqlParameter() { Value = value, ParameterName = PARAMETER_NAME };
-
-            string result = string.Empty;
+            SqlParameter sqlParameter = new SqlParameter() { Value = value, ParameterName = PARAMETER };
             switch (this.search.SearchType)
             {
                 case SearchTypeEnum.Equals:
-                    result = $"Name = @{PARAMETER_NAME}";
+                    result += ($"Cars.ColourID = @{PARAMETER}");
                     break;
                 case SearchTypeEnum.NotEquals:
-                    result = $"Name != @{PARAMETER_NAME}";
+                    result += ($"Cars.ColourID =! @{PARAMETER}");
                     break;
                 default:
                     throw new NotSupportedException();

@@ -10,6 +10,7 @@ namespace NikiCars.Services.Mapping.Profiles
         {
             CreateMap<CreateCarModel, Car>(MemberList.None).ReverseMap();
             CreateMap<EditCarModel, Car>(MemberList.None).ReverseMap();
+            CreateMap<Car, AdvancedSearchReturnModel>(MemberList.None);
         }
     }
 }

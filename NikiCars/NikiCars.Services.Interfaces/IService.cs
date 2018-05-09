@@ -24,6 +24,8 @@ namespace NikiCars.Services.Interfaces
 
         List<T> GetAll(List<IEntitySearch<T>> search, List<IEntityOrderBy<T>> order, Pagination pagination);
 
+        List<T> GetAll(List<IEntitySearch<T>> search, List<IEntityOrderBy<T>> order);
+
         T GetById(int id);
 
         int Count();

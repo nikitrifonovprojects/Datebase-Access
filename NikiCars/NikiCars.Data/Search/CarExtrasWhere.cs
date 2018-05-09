@@ -6,14 +6,19 @@ using NikiCars.Search;
 
 namespace NikiCars.Data.Search
 {
-    public class CarMakeIDWhere : Where
+    public class CarExtrasWhere : Where
     {
-        private const string PARAMETER = "CarMakeIDWhere";
-        private readonly CarMakeIDSearch search;
+        private const string PARAMETER = "CarExtraWhere";
+        private readonly CarExtrasSearch search;
 
-        public CarMakeIDWhere(CarMakeIDSearch search)
+        public CarExtrasWhere(CarExtrasSearch search)
         {
             this.search = search;
+        }
+
+        public override string GenerateJoin()
+        {
+            return " INNER JOIN Cars_CarExtras ON Cars.CarID = Cars_CarExtras.CarID ";
         }
 
         public override Tuple<string, List<SqlParameter>> GenerateWhereClause()
@@ -22,21 +27,16 @@ namespace NikiCars.Data.Search
             var list = new List<SqlParameter>();
             var result = new StringBuilder();
 
-            if (value.Count > 1)
-            {
-                result.Append("(");
-            }
-
             for (int i = 0; i < value.Count; i++)
             {
-                SqlParameter sqlParameter = new SqlParameter() { Value = value[i], ParameterName = PARAMETER + this.ParameterName + i };
+                SqlParameter sqlParameter = new SqlParameter() { Value = value[i], ParameterName = PARAMETER + this.ParameterName + i};
                 switch (this.search.SearchType)
                 {
                     case SearchTypeEnum.Equals:
-                        result.Append($"Cars.CarMakeID = @{PARAMETER + this.ParameterName + i}");
+                        result.Append($"Cars_CarExtras.CarExtraID = @{PARAMETER + this.ParameterName + i}");
                         break;
                     case SearchTypeEnum.NotEquals:
-                        result.Append($"Cars.CarMakeID != @{PARAMETER + this.ParameterName + i}");
+                        result.Append($"Cars_CarExtras.CarExtraID != @{PARAMETER + this.ParameterName + i}");
                         break;
                     default:
                         throw new NotSupportedException();
@@ -44,15 +44,10 @@ namespace NikiCars.Data.Search
 
                 list.Add(sqlParameter);
 
-                if (i < value.Count - 1)
+                if (i < value.Count -1)
                 {
-                    result.Append(" OR ");
+                    result.Append(" AND ");
                 }
-            }
-
-            if (value.Count > 1)
-            {
-                result.Append(")");
             }
 
             return Tuple.Create(result.ToString(), list);
