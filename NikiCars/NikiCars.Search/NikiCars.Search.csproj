@@ -40,7 +40,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CarColourSearch.cs" />
+    <Compile Include="CarConditionSearch.cs" />
+    <Compile Include="CarEngineSearch.cs" />
+    <Compile Include="CarExtrasSearch.cs" />
+    <Compile Include="CarGearboxIDSearch.cs" />
+    <Compile Include="CarHorsePowerSearch.cs" />
+    <Compile Include="CarIDSearch.cs" />
+    <Compile Include="CarKilometersOrderBy.cs" />
+    <Compile Include="CarKilometersSearch.cs" />
+    <Compile Include="CarDateCreatedSearch.cs" />
     <Compile Include="CarMakeIDSearch.cs" />
+    <Compile Include="CarMakeModelPriceOrderBy.cs" />
+    <Compile Include="CarModelIDSearch.cs" />
+    <Compile Include="CarPriceOrderBy.cs" />
+    <Compile Include="CarPriceSearch.cs" />
+    <Compile Include="CarRegistrationOrderBy.cs" />
+    <Compile Include="CarYearSearch.cs" />
+    <Compile Include="DateOrderBy.cs" />
     <Compile Include="Interfaces\IEntitySearch.cs" />
     <Compile Include="Interfaces\IEntityOrderBy.cs" />
     <Compile Include="Interfaces\IOrderBy.cs" />

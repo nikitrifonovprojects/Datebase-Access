@@ -56,9 +56,15 @@
     <Compile Include="CarModelModels\FindCarModelModel.cs" />
     <Compile Include="CarModelModels\ListCarModelModel.cs" />
     <Compile Include="CarModelModels\ViewCarModelsByCarMakeModel.cs" />
+    <Compile Include="CarModels\AdvancedSearchCarModel.cs" />
+    <Compile Include="CarModels\AdvancedSearchReturnModel.cs" />
+    <Compile Include="CarModels\CarOrderByEnum.cs" />
     <Compile Include="CarModels\CreateCarModel.cs" />
     <Compile Include="CarModels\EditCarModel.cs" />
     <Compile Include="CarModels\FindCarModel.cs" />
+    <Compile Include="CarModels\ListShortCarModel.cs" />
+    <Compile Include="CarModels\ShortSearchCarModel.cs" />
+    <Compile Include="CarModels\ShowCarDetailsModel.cs" />
     <Compile Include="CarTypeModels\CreateCarTypeModel.cs" />
     <Compile Include="CarTypeModels\EditCarTypeModel.cs" />
     <Compile Include="LoginModels\LoginModel.cs" />

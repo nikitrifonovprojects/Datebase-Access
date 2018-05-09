@@ -1,16 +1,23 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace NikiCars.Data.Models
 {
     public class Car : IIdentifiable
     {
+        [Range(1, int.MaxValue)]
         public int ID { get; set; }
         
         public CarModel CarModel { get; set; }
 
         [Required]
         public int CarModelID { get; set; }
+
+        public CarMake CarMake { get; set; }
+
+        [Required]
+        public int CarMakeID { get; set; }
 
         public CarCoupe CarCoupe { get; set; }
 
@@ -65,6 +72,8 @@ namespace NikiCars.Data.Models
         public bool IsDamaged { get; set; }
 
         public string Title { get; set; }
+
+        public List<Extra> Extras { get; set; }
 
         [Required]
         public DateTime DateCreated { get; set; }

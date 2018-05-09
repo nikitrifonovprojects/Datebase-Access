@@ -5,6 +5,7 @@ using DependencyExtentions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NikiCars.Command.Client;
+using NikiCars.Data.Models;
 using NikiCars.Data.Revisions;
 using NikiCars.Dependancy;
 using NikiCars.Logging;
@@ -16,6 +17,8 @@ using NikiCars.Models.CarTypeModels;
 using NikiCars.Models.LoginModels;
 using NikiCars.Models.UserModels;
 using NikiCars.Search;
+using NikiCars.Search.Interfaces;
+using NikiCars.Services.Interfaces;
 
 namespace NikiCars.Console
 {
@@ -40,26 +43,35 @@ namespace NikiCars.Console
                 client.SetToken(firstRes.Data as string);
             }
 
-            string command = "edit Car";
-            var input = new EditCarModel();
-            input.ID = 30;
-            input.CarCoupeID = 2;
-            input.CarModelID = 2;
-            input.Discription = "very good and bad car";
-            input.EngineCapacity = 1600;
-            input.FirstRegistrationDate = DateTime.Now.AddYears(-10);
-            input.HorsePower = 100;
-            input.IsDamaged = false;
-            input.IsForParts = false;
+            string command = "list AdvancedList";
+            var input = new AdvancedSearchCarModel();
+            input.CarGearbox = 1;
+            input.CarMake = new List<int> { 2, 1, 3, 4 };
+            input.CarModel = new List<int> { 2, 1 };
+            input.FromCarPrice = 500;
+            input.ToCarPrice = 50000;
+            input.ColourID = 1;
+            input.FromHorsePower = 90;
+            input.Kilometers = 1000000;
+            input.IncludedExtras = new List<int>() { 1 };
             input.IsLeftSteering = false;
             input.IsUsed = true;
-            input.Kilometers = 20100;
-            input.NumberOfDoorsID = 2;
-            input.Price = 12000;
-
+            input.IsForParts = false;
+            input.OrderBy = CarOrderByEnum.Kilometers;
 
             var res = client.SendRequest(command, input);
-            //string command = "get CarModelByCarMake";
+            var data = res.Data as JArray;
+            var real = data.ToObject<List<AdvancedSearchReturnModel>>();
+
+            //string command1 = "get CarDetails";
+            //var input1 = new ShowCarDetailsModel();
+            //input1.ID = 7;
+
+            //var res1 = client.SendRequest(command1, input1);
+            //var data1 = res1.Data as JArray;
+            //var real1 = data1.ToObject<List<Car>>();
+
+            string commanda = "get CarModelByCarMake";
 
             //var carCoupe = new ListAllCarCoupesModel();
 

@@ -4,6 +4,7 @@ namespace NikiCars.Data.Models
 {
     public class CarType :IIdentifiable
     {
+        [Range(1, int.MaxValue)]
         public int ID { get; set; }
 
         [Required]

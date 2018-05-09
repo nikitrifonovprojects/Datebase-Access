@@ -30,7 +30,7 @@ namespace NikiCars.Console.Commands.UserCommands
         {
             User mappedUser = this.mapping.Map<User>(item);
 
-            User user = this.service.GetUserByID(mappedUser.ID, new List<UserIncludes> { UserIncludes.UserRoles });
+            User user = this.service.GetUserByID(mappedUser.ID);
             if (user == null)
             {
                 return this.Error($"User with ID: {user.ID} not found");

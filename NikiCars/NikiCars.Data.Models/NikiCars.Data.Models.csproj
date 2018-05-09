@@ -53,6 +53,7 @@
     <Compile Include="FuelType.cs" />
     <Compile Include="GearBoxType.cs" />
     <Compile Include="IIdentifiable.cs" />
+    <Compile Include="Includes\CarIncludes.cs" />
     <Compile Include="Includes\UserIncludes.cs" />
     <Compile Include="NumberOfDoors.cs" />
     <Compile Include="Picture.cs" />
