@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using NikiCars.Data.DataConstants;
 using NikiCars.Search;
 
 namespace NikiCars.Data.Search
@@ -24,10 +25,10 @@ namespace NikiCars.Data.Search
             switch (this.search.SearchType)
             {
                 case SearchTypeEnum.Equals:
-                    result += ($"Cars.CarID = @{PARAMETER}");
+                    result += ($"{DatabaseTableNames.CARS}.{CarColumns.CAR_ID} = @{PARAMETER}");
                     break;
                 case SearchTypeEnum.NotEquals:
-                    result += ($"Cars.CarID != @{PARAMETER}");
+                    result += ($"{DatabaseTableNames.CARS}.{CarColumns.CAR_ID} != @{PARAMETER}");
                     break;
                 default:
                     throw new NotSupportedException();

@@ -65,5 +65,11 @@ namespace NikiCars.Services
         {
             return this.userRepository.GetUserByMobilePhone(mobilePhone) != null;
         }
+
+        public override void Dispose()
+        {
+            base.Dispose();
+            this.userRepository.Dispose();
+        }
     }
 }

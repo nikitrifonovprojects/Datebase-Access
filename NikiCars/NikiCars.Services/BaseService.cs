@@ -87,7 +87,7 @@ namespace NikiCars.Services
             return this.repository.Count();
         }
 
-        public void Dispose()
+        public virtual void Dispose()
         {
             this.repository.Dispose();
         }

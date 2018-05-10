@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Text;
+using NikiCars.Data.DataConstants;
 using NikiCars.Search;
 
 namespace NikiCars.Data.Search
@@ -33,10 +34,10 @@ namespace NikiCars.Data.Search
                 switch (this.search.SearchType)
                 {
                     case SearchTypeEnum.Equals:
-                        result.Append($"Cars.CarModelID  = @{PARAMETER + this.ParameterName + i}");
+                        result.Append($"{DatabaseTableNames.CARS}.{CarColumns.CARMODEL_ID} = @{PARAMETER + this.ParameterName + i}");
                         break;
                     case SearchTypeEnum.NotEquals:
-                        result.Append($"Cars.CarModelID  != @{PARAMETER + this.ParameterName + i}");
+                        result.Append($"{DatabaseTableNames.CARS}.{CarColumns.CARMODEL_ID} != @{PARAMETER + this.ParameterName + i}");
                         break;
                     default:
                         throw new NotSupportedException();

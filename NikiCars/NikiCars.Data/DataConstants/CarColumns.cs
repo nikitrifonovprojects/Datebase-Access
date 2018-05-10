@@ -2,26 +2,26 @@
 {
     public static class CarColumns
     {
-        public const string CARMODELID = "CarModelID";
-        public const string CARCOUPEID = "CarCoupeID";
-        public const string NUMBEROFDOORSID = "NumberOfDoorsID";
-        public const string FUELTYPEID = "FuelTypeID";
-        public const string COLOURID = "ColourID";
-        public const string GEARBOXTYPEID = "GearboxTypeID";
+        public const string CARMODEL_ID = "CarModelID";
+        public const string CARCOUPE_ID = "CarCoupeID";
+        public const string NUMBEROFDOORS_ID = "NumberOfDoorsID";
+        public const string FUELTYPE_ID = "FuelTypeID";
+        public const string COLOUR_ID = "ColourID";
+        public const string GEARBOXTYPE_ID = "GearboxTypeID";
         public const string HORSEPOWER = "HorsePower";
-        public const string FIRSTREGISTRATIONDATE = "FirstRegistrationDate";
-        public const string ENGINECAPACITY = "EngineCapacity";
+        public const string FIRST_REGISTRATION_DATE = "FirstRegistrationDate";
+        public const string ENGINE_CAPACITY = "EngineCapacity";
         public const string KILOMETERS = "Kilometers";
         public const string PRICE = "Price";
         public const string DISCRIPTION = "Discription";
-        public const string ISLEFTSTEERING = "IsLeftSteering";
-        public const string ISUSED = "IsUsed";
-        public const string ISFORPARTS = "IsForParts";
-        public const string ISDAMAGED = "IsDamaged";
+        public const string IS_LEFTSTEERING = "IsLeftSteering";
+        public const string IS_USED = "IsUsed";
+        public const string IS_FORPARTS = "IsForParts";
+        public const string IS_DAMAGED = "IsDamaged";
         public const string TITLE = "Title";
-        public const string DATECREATED = "DateCreated";
-        public const string USERID = "UserID";
-        public const string CARMAKEID = "CarMakeID";
-        public const string CARID = "CarID";
+        public const string DATE_CREATED = "DateCreated";
+        public const string USER_ID = "UserID";
+        public const string CARMAKE_ID = "CarMakeID";
+        public const string CAR_ID = "CarID";
     }
 }

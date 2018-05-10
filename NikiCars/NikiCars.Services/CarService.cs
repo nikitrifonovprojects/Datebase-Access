@@ -27,5 +27,11 @@ namespace NikiCars.Services
         {
             return this.carRepository.GetById(id, includes);
         }
+
+        public override void Dispose()
+        {
+            base.Dispose();
+            this.carRepository.Dispose();
+        }
     }
 }

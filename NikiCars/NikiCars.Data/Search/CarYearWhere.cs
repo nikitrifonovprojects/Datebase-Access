@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Text;
+using NikiCars.Data.DataConstants;
 using NikiCars.Search;
 
 namespace NikiCars.Data.Search
@@ -25,16 +26,16 @@ namespace NikiCars.Data.Search
             switch (this.search.SearchType)
             {
                 case SearchTypeEnum.Equals:
-                    result.Append($"Cars.DateCreated = @{PARAMETER + this.ParameterName}");
+                    result.Append($"{DatabaseTableNames.CARS}.{CarColumns.DATE_CREATED} = @{PARAMETER + this.ParameterName}");
                     break;
                 case SearchTypeEnum.NotEquals:
-                    result.Append($"Cars.DateCreated != @{PARAMETER + this.ParameterName}");
+                    result.Append($"{DatabaseTableNames.CARS}.{CarColumns.DATE_CREATED} != @{PARAMETER + this.ParameterName}");
                     break;
                 case SearchTypeEnum.LessThan:
-                    result.Append($"Cars.DateCreated < @{PARAMETER + this.ParameterName}");
+                    result.Append($"{DatabaseTableNames.CARS}.{CarColumns.DATE_CREATED} < @{PARAMETER + this.ParameterName}");
                     break;
                 case SearchTypeEnum.GreaterThan:
-                    result.Append($"Cars.DateCreated > @{PARAMETER + this.ParameterName}");
+                    result.Append($"{DatabaseTableNames.CARS}.{CarColumns.DATE_CREATED} > @{PARAMETER + this.ParameterName}");
                     break;
                 default:
                     throw new NotSupportedException();

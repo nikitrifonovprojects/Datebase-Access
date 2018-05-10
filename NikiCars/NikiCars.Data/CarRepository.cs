@@ -17,9 +17,9 @@ namespace NikiCars.Data
 {
     public class CarRepository : BaseRepository<Car>, ICarRepository
     {
-        private const string PRIMARY_KEY = CarColumns.CARID;
+        private const string PRIMARY_KEY = CarColumns.CAR_ID;
 
-        public CarRepository(IConfig config) 
+        public CarRepository(IConfig config)
             : base(config)
         {
         }
@@ -28,26 +28,26 @@ namespace NikiCars.Data
         {
             return new Dictionary<string, SqlParameter>
             {
-                {CarColumns.CARMODELID, new SqlParameter() { Value = item.CarModelID.ToString() } },
-                {CarColumns.CARCOUPEID, new SqlParameter() { Value = item.CarCoupeID.ToString() } },
-                {CarColumns.NUMBEROFDOORSID, new SqlParameter() { Value = item.NumberOfDoorsID.ToString() } },
-                {CarColumns.FUELTYPEID, new SqlParameter() { Value = (object)item.FuelTypeID ?? DBNull.Value} },
-                {CarColumns.COLOURID, new SqlParameter() { Value = (object)item.ColourID ?? DBNull.Value } },
-                {CarColumns.GEARBOXTYPEID, new SqlParameter() { Value = (object)item.GearboxTypeID ?? DBNull.Value } },
+                {CarColumns.CARMODEL_ID, new SqlParameter() { Value = item.CarModelID.ToString() } },
+                {CarColumns.CARCOUPE_ID, new SqlParameter() { Value = item.CarCoupeID.ToString() } },
+                {CarColumns.NUMBEROFDOORS_ID, new SqlParameter() { Value = item.NumberOfDoorsID.ToString() } },
+                {CarColumns.FUELTYPE_ID, new SqlParameter() { Value = (object)item.FuelTypeID ?? DBNull.Value} },
+                {CarColumns.COLOUR_ID, new SqlParameter() { Value = (object)item.ColourID ?? DBNull.Value } },
+                {CarColumns.GEARBOXTYPE_ID, new SqlParameter() { Value = (object)item.GearboxTypeID ?? DBNull.Value } },
                 {CarColumns.HORSEPOWER, new SqlParameter() { Value = item.HorsePower.ToString() } },
-                {CarColumns.FIRSTREGISTRATIONDATE, new SqlParameter() { Value = item.FirstRegistrationDate.ToString() } },
-                {CarColumns.ENGINECAPACITY, new SqlParameter() { Value = item.EngineCapacity.ToString() } },
+                {CarColumns.FIRST_REGISTRATION_DATE, new SqlParameter() { Value = item.FirstRegistrationDate.ToString() } },
+                {CarColumns.ENGINE_CAPACITY, new SqlParameter() { Value = item.EngineCapacity.ToString() } },
                 {CarColumns.KILOMETERS, new SqlParameter() { Value = item.Kilometers.ToString() } },
                 {CarColumns.PRICE, new SqlParameter() { Value = item.Price.ToString() } },
                 {CarColumns.DISCRIPTION, new SqlParameter() { Value = item.Discription } },
-                {CarColumns.ISLEFTSTEERING, new SqlParameter() { Value = item.IsLeftSteering.ToString() } },
-                {CarColumns.ISUSED, new SqlParameter() { Value = item.IsUsed.ToString() } },
-                {CarColumns.ISFORPARTS, new SqlParameter() { Value = item.IsForParts.ToString() } },
-                {CarColumns.ISDAMAGED, new SqlParameter() { Value = item.IsDamaged.ToString() } },
+                {CarColumns.IS_LEFTSTEERING, new SqlParameter() { Value = item.IsLeftSteering.ToString() } },
+                {CarColumns.IS_USED, new SqlParameter() { Value = item.IsUsed.ToString() } },
+                {CarColumns.IS_FORPARTS, new SqlParameter() { Value = item.IsForParts.ToString() } },
+                {CarColumns.IS_DAMAGED, new SqlParameter() { Value = item.IsDamaged.ToString() } },
                 {CarColumns.TITLE, new SqlParameter() { Value = (object)item.Title ?? DBNull.Value } },
-                {CarColumns.DATECREATED, new SqlParameter() { Value = item.DateCreated.ToString() } },
-                {CarColumns.USERID, new SqlParameter() { Value = item.UserID.ToString() } },
-                {CarColumns.CARMAKEID, new SqlParameter() { Value = item.CarMakeID.ToString() } }
+                {CarColumns.DATE_CREATED, new SqlParameter() { Value = item.DateCreated.ToString() } },
+                {CarColumns.USER_ID, new SqlParameter() { Value = item.UserID.ToString() } },
+                {CarColumns.CARMAKE_ID, new SqlParameter() { Value = item.CarMakeID.ToString() } }
             };
         }
 
@@ -74,27 +74,27 @@ namespace NikiCars.Data
         protected override Car MapProperties(SqlDataReader reader)
         {
             Car car = new Car();
-            car.ID = Convert.ToInt32(reader[CarColumns.CARID]);
-            car.CarModelID = Convert.ToInt32(reader[CarColumns.CARMODELID]);
-            car.CarCoupeID = Convert.ToInt32(reader[CarColumns.CARCOUPEID]);
-            car.NumberOfDoorsID = Convert.ToInt32(reader[CarColumns.NUMBEROFDOORSID]);
-            car.FuelTypeID = Convert.IsDBNull(reader[CarColumns.FUELTYPEID]) ? default(int?) : Convert.ToInt32(reader[CarColumns.FUELTYPEID]);
-            car.ColourID = Convert.IsDBNull(reader[CarColumns.COLOURID]) ? default(int?) : Convert.ToInt32(reader[CarColumns.COLOURID]);
-            car.GearboxTypeID = Convert.IsDBNull(reader[CarColumns.GEARBOXTYPEID]) ? default(int?) : Convert.ToInt32(reader[CarColumns.GEARBOXTYPEID]);
+            car.ID = Convert.ToInt32(reader[CarColumns.CAR_ID]);
+            car.CarModelID = Convert.ToInt32(reader[CarColumns.CARMODEL_ID]);
+            car.CarCoupeID = Convert.ToInt32(reader[CarColumns.CARCOUPE_ID]);
+            car.NumberOfDoorsID = Convert.ToInt32(reader[CarColumns.NUMBEROFDOORS_ID]);
+            car.FuelTypeID = Convert.IsDBNull(reader[CarColumns.FUELTYPE_ID]) ? default(int?) : Convert.ToInt32(reader[CarColumns.FUELTYPE_ID]);
+            car.ColourID = Convert.IsDBNull(reader[CarColumns.COLOUR_ID]) ? default(int?) : Convert.ToInt32(reader[CarColumns.COLOUR_ID]);
+            car.GearboxTypeID = Convert.IsDBNull(reader[CarColumns.GEARBOXTYPE_ID]) ? default(int?) : Convert.ToInt32(reader[CarColumns.GEARBOXTYPE_ID]);
             car.HorsePower = Convert.ToInt32(reader[CarColumns.HORSEPOWER]);
-            car.FirstRegistrationDate = Convert.ToDateTime(reader[CarColumns.FIRSTREGISTRATIONDATE]);
-            car.EngineCapacity = Convert.ToInt32(reader[CarColumns.ENGINECAPACITY]);
+            car.FirstRegistrationDate = Convert.ToDateTime(reader[CarColumns.FIRST_REGISTRATION_DATE]);
+            car.EngineCapacity = Convert.ToInt32(reader[CarColumns.ENGINE_CAPACITY]);
             car.Kilometers = Convert.ToInt32(reader[CarColumns.KILOMETERS]);
             car.Price = Convert.ToDecimal(reader[CarColumns.PRICE]);
             car.Discription = Convert.ToString(reader[CarColumns.DISCRIPTION]);
-            car.IsLeftSteering = Convert.ToBoolean(reader[CarColumns.ISLEFTSTEERING]);
-            car.IsUsed = Convert.ToBoolean(reader[CarColumns.ISUSED]);
-            car.IsForParts = Convert.ToBoolean(reader[CarColumns.ISFORPARTS]);
-            car.IsDamaged = Convert.ToBoolean(reader[CarColumns.ISDAMAGED]);
+            car.IsLeftSteering = Convert.ToBoolean(reader[CarColumns.IS_LEFTSTEERING]);
+            car.IsUsed = Convert.ToBoolean(reader[CarColumns.IS_USED]);
+            car.IsForParts = Convert.ToBoolean(reader[CarColumns.IS_FORPARTS]);
+            car.IsDamaged = Convert.ToBoolean(reader[CarColumns.IS_DAMAGED]);
             car.Title = Convert.IsDBNull(reader[CarColumns.TITLE]) ? null : Convert.ToString(reader[CarColumns.TITLE]);
-            car.DateCreated = Convert.ToDateTime(reader[CarColumns.DATECREATED]);
-            car.UserID = Convert.ToInt32(reader[CarColumns.USERID]);
-            car.CarMakeID = Convert.ToInt32(reader[CarColumns.CARMAKEID]);
+            car.DateCreated = Convert.ToDateTime(reader[CarColumns.DATE_CREATED]);
+            car.UserID = Convert.ToInt32(reader[CarColumns.USER_ID]);
+            car.CarMakeID = Convert.ToInt32(reader[CarColumns.CARMAKE_ID]);
 
             return car;
         }
@@ -102,11 +102,11 @@ namespace NikiCars.Data
         private Car Map(SqlDataReader reader)
         {
             var car = MapProperties(reader);
-            car.GearboxType = new GearBoxType() { Type = Convert.ToString(reader["GearboxTypes.Type"]) };
-            car.FuelType = new FuelType() {  Name = Convert.ToString(reader["FuelTypes.Name"]) };
-            car.Colour = new Colour() { Name = Convert.ToString(reader["Colours.Name"]) };
-            car.CarModel = new CarModel() { Name = Convert.ToString(reader["CarModels.Name"]) };
-            car.CarMake = new CarMake() { Name = Convert.ToString(reader["CarMakes.Name"]) };
+            car.GearboxType = new GearBoxType() { Type = Convert.ToString(reader[$"{DatabaseTableNames.GEARBOX_TYPES}.{GearboxTypeColumns.TYPE}"]) };
+            car.FuelType = new FuelType() { Name = Convert.ToString(reader[$"{DatabaseTableNames.FUEL_TYPES}.{FuelTypesColumns.NAME}"]) };
+            car.Colour = new Colour() { Name = Convert.ToString(reader[$"{DatabaseTableNames.COLOURS}.{ColoursColumns.NAME}"]) };
+            car.CarModel = new CarModel() { Name = Convert.ToString(reader[$"{DatabaseTableNames.CAR_MODELS}.{CarModelsColumns.NAME}"]) };
+            car.CarMake = new CarMake() { Name = Convert.ToString(reader[$"{DatabaseTableNames.CAR_MAKES}.{CarMakesColumns.NAME}"]) };
 
             return car;
         }
@@ -120,9 +120,12 @@ namespace NikiCars.Data
             };
 
             StringBuilder builder = new StringBuilder();
-            builder.Append(@"SELECT Cars.HorsePower, Cars.FirstRegistrationDate, Cars.Kilometers, Cars.Price, Cars.Discription, Cars.Title, Cars.DateCreated , Cars.CarID,
-                 Cars.CarModelID, Cars.CarMakeID, Cars.CarCoupeID, Cars.NumberOfDoorsID, Cars.FuelTypeID, Cars.ColourID, Cars.GearboxTypeID, Cars.EngineCapacity, Cars.UserID,
-                 Cars.IsLeftSteering, Cars.IsForParts, Cars.IsDamaged, Cars.IsUsed");
+            builder.Append($@"SELECT {DatabaseTableNames.CARS}.{CarColumns.HORSEPOWER}, {DatabaseTableNames.CARS}.{CarColumns.FIRST_REGISTRATION_DATE}, {DatabaseTableNames.CARS}.{CarColumns.KILOMETERS},
+                 {DatabaseTableNames.CARS}.{CarColumns.PRICE}, {DatabaseTableNames.CARS}.{CarColumns.DISCRIPTION}, {DatabaseTableNames.CARS}.{CarColumns.TITLE}, {DatabaseTableNames.CARS}.{CarColumns.DATE_CREATED} ,
+                 {DatabaseTableNames.CARS}.{CarColumns.CAR_ID},{DatabaseTableNames.CARS}.{CarColumns.CARMODEL_ID}, {DatabaseTableNames.CARS}.{CarColumns.CARMAKE_ID}, {DatabaseTableNames.CARS}.{CarColumns.CARCOUPE_ID},
+                 {DatabaseTableNames.CARS}.{CarColumns.NUMBEROFDOORS_ID},{DatabaseTableNames.CARS}.{CarColumns.FUELTYPE_ID}, {DatabaseTableNames.CARS}.{CarColumns.COLOUR_ID}, {DatabaseTableNames.CARS}.{CarColumns.GEARBOXTYPE_ID}, 
+                 {DatabaseTableNames.CARS}.{CarColumns.ENGINE_CAPACITY}, {DatabaseTableNames.CARS}.{CarColumns.USER_ID},{DatabaseTableNames.CARS}.{CarColumns.IS_LEFTSTEERING},
+                 {DatabaseTableNames.CARS}.{CarColumns.IS_FORPARTS}, {DatabaseTableNames.CARS}.{CarColumns.IS_DAMAGED}, {DatabaseTableNames.CARS}.{CarColumns.IS_USED}");
 
             var whereClauses = new List<Tuple<string, List<SqlParameter>>>();
             var innerJoins = new HashSet<string>();
@@ -131,7 +134,7 @@ namespace NikiCars.Data
             CreateClauses(whereClauses, innerJoins, orderByClauses, search, order);
             ProcessIncludes(includes, builder, innerJoins);
 
-            builder.Append(" FROM Cars");
+            builder.Append($" FROM {DatabaseTableNames.CARS}");
 
             ApplyInnerJoin(innerJoins, builder);
             ApplyWhere(whereClauses, builder, command);
@@ -168,7 +171,13 @@ namespace NikiCars.Data
                         Connection = Connection
                     };
 
-                    command.CommandText = "SELECT DISTINCT CarExtras.Name FROM Cars INNER JOIN Cars_CarExtras ON Cars.CarID = Cars_CarExtras.CarID INNER JOIN CarExtras ON Cars_CarExtras.CarExtraID = Cars_CarExtras.CarExtraID WHERE Cars.CarID = @param";
+                    command.CommandText = $@"SELECT DISTINCT {DatabaseTableNames.CAR_EXTRAS}.{CarExtrasColumns.NAME} 
+                                            FROM {DatabaseTableNames.CARS} 
+                                            INNER JOIN {DatabaseTableNames.CARS_EXTRAS} 
+                                            ON {DatabaseTableNames.CARS}.{CarColumns.CAR_ID} = {DatabaseTableNames.CARS_EXTRAS}.{Cars_CarExtrasColumns.CAR_ID} 
+                                            INNER JOIN {DatabaseTableNames.CAR_EXTRAS}  
+                                            ON {DatabaseTableNames.CARS_EXTRAS}.{Cars_CarExtrasColumns.CAR_EXTRA_ID} = {DatabaseTableNames.CAR_EXTRAS}.{CarExtrasColumns.CAR_EXTRA_ID} 
+                                            WHERE {DatabaseTableNames.CARS}.{CarColumns.CAR_ID} = @param";
 
                     command.Parameters.AddWithValue("@param", item.ID);
 
@@ -176,7 +185,7 @@ namespace NikiCars.Data
                     {
                         while (reader.Read())
                         {
-                            item.Extras.Add(new Extra() { Name = Convert.ToString(reader["Name"]) });
+                            item.Extras.Add(new Extra() { Name = Convert.ToString(reader[$"{CarExtrasColumns.NAME}"]) });
                         }
                     }
                 }
@@ -193,28 +202,28 @@ namespace NikiCars.Data
                     {
                         case CarIncludes.FuelType:
                             builder.Append(", ");
-                            builder.Append("FuelTypes.Name AS [FuelTypes.Name]");
-                            innerJoins.Add(" INNER JOIN FuelTypes ON Cars.FuelTypeID = FuelTypes.FuelTypeID ");
+                            builder.Append($"{DatabaseTableNames.FUEL_TYPES}.{FuelTypesColumns.NAME} AS [{DatabaseTableNames.FUEL_TYPES}.{FuelTypesColumns.NAME}]");
+                            innerJoins.Add($" INNER JOIN {DatabaseTableNames.FUEL_TYPES} ON {DatabaseTableNames.CARS}.{CarColumns.FUELTYPE_ID} = {DatabaseTableNames.FUEL_TYPES}.{FuelTypesColumns.FUEL_TYPE_ID} ");
                             break;
                         case CarIncludes.GearboxType:
                             builder.Append(", ");
-                            builder.Append("GearboxTypes.Type AS [GearboxTypes.Type]");
-                            innerJoins.Add(" INNER JOIN GearboxTypes ON Cars.GearboxTypeID = GearboxTypes.GearboxTypeID ");
+                            builder.Append($"{DatabaseTableNames.GEARBOX_TYPES}.{GearboxTypeColumns.TYPE} AS [{DatabaseTableNames.GEARBOX_TYPES}.{GearboxTypeColumns.TYPE}]");
+                            innerJoins.Add($" INNER JOIN {DatabaseTableNames.GEARBOX_TYPES} ON {DatabaseTableNames.CARS}.{CarColumns.GEARBOXTYPE_ID} = {DatabaseTableNames.GEARBOX_TYPES}.{GearboxTypeColumns.TYPE} ");
                             break;
                         case CarIncludes.Colour:
                             builder.Append(", ");
-                            builder.Append("Colours.Name AS [Colours.Name]");
-                            innerJoins.Add(" INNER JOIN Colours ON Cars.ColourID = Colours.ColourID ");
+                            builder.Append($"{DatabaseTableNames.COLOURS}.{ColoursColumns.NAME} AS [{DatabaseTableNames.COLOURS}.{ColoursColumns.NAME}]");
+                            innerJoins.Add($" INNER JOIN {DatabaseTableNames.COLOURS} ON {DatabaseTableNames.CARS}.{CarColumns.COLOUR_ID} = {DatabaseTableNames.COLOURS}.{ColoursColumns.COLOUR_ID} ");
                             break;
                         case CarIncludes.CarMake:
                             builder.Append(", ");
-                            builder.Append("CarMakes.Name AS [CarMakes.Name]");
-                            innerJoins.Add(" INNER JOIN CarMakes ON Cars.CarMakeID = CarMakes.CarMakeID ");
+                            builder.Append($"{DatabaseTableNames.CAR_MAKES}.{CarMakesColumns.NAME} AS [{DatabaseTableNames.CAR_MAKES}.{CarMakesColumns.NAME}]");
+                            innerJoins.Add($" INNER JOIN {DatabaseTableNames.CAR_MAKES} ON {DatabaseTableNames.CARS}.{CarColumns.CARMAKE_ID} = {DatabaseTableNames.CAR_MAKES}.{CarMakesColumns.CAR_MAKE_ID} ");
                             break;
                         case CarIncludes.CarModel:
                             builder.Append(", ");
-                            builder.Append("CarModels.Name AS [CarModels.Name]");
-                            innerJoins.Add(" INNER JOIN CarModels ON Cars.CarModelID = CarModels.CarModelID ");
+                            builder.Append($"{DatabaseTableNames.CAR_MODELS}.{CarModelsColumns.NAME} AS [{DatabaseTableNames.CAR_MODELS}.{CarModelsColumns.NAME}]");
+                            innerJoins.Add($" INNER JOIN {DatabaseTableNames.CAR_MODELS} ON {DatabaseTableNames.CARS}.{CarColumns.CARMODEL_ID} = {DatabaseTableNames.CAR_MODELS}.{CarModelsColumns.CAR_MODEL_ID} ");
                             break;
                         default:
                             break;
@@ -304,7 +313,7 @@ namespace NikiCars.Data
             }
         }
 
-        public Car GetById(int id , List<CarIncludes> includes = null)
+        public Car GetById(int id, List<CarIncludes> includes = null)
         {
             var search = new CarIDSearch(id, SearchTypeEnum.Equals);
             var list = new List<IEntitySearch<Car>>() { search };

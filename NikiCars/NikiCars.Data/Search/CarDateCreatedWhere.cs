@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using NikiCars.Data.DataConstants;
 using NikiCars.Search;
 
 namespace NikiCars.Data.Search
@@ -24,7 +25,7 @@ namespace NikiCars.Data.Search
             switch (this.search.SearchType)
             {
                 case SearchTypeEnum.GreaterOrEquals:
-                    result += ($"Cars.DateCreated >= @{PARAMETER}");
+                    result += ($"Cars{DatabaseTableNames.CARS}.{CarColumns.DATE_CREATED} >= @{PARAMETER}");
                     break;
                 default:
                     throw new NotSupportedException();

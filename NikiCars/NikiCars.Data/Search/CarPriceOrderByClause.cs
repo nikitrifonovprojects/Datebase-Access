@@ -1,4 +1,5 @@
-﻿using NikiCars.Search;
+﻿using NikiCars.Data.DataConstants;
+using NikiCars.Search;
 
 namespace NikiCars.Data.Search
 {
@@ -15,15 +16,15 @@ namespace NikiCars.Data.Search
         {
             if (this.orderBy == OrderByEnum.None)
             {
-                return "Cars.Price";
+                return $"{DatabaseTableNames.CARS}.{CarColumns.PRICE}";
             }
             else if (this.orderBy == OrderByEnum.Ascending)
             {
-                return "Cars.Price ASC";
+                return $"{DatabaseTableNames.CARS}.{CarColumns.PRICE} ASC";
             }
             else
             {
-                return "Cars.Price DESC";
+                return $"{DatabaseTableNames.CARS}.{CarColumns.PRICE} DESC";
             }
         }
     }

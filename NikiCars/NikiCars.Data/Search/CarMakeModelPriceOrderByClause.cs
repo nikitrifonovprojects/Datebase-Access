@@ -1,4 +1,5 @@
-﻿using NikiCars.Search;
+﻿using NikiCars.Data.DataConstants;
+using NikiCars.Search;
 
 namespace NikiCars.Data.Search
 {
@@ -13,22 +14,23 @@ namespace NikiCars.Data.Search
 
         public override string GenerateInnerJoin()
         {
-            return "INNER JOIN CarMakes ON Cars.CarMakeID = CarMakes.CarMakeID INNER JOIN CarModels ON Cars.CarModelID = CarModels.CarModelID";
+            return $@"INNER JOIN {DatabaseTableNames.CAR_MAKES} ON {DatabaseTableNames.CARS}.{CarColumns.CARMAKE_ID} = {DatabaseTableNames.CAR_MAKES}.{CarMakesColumns.CAR_MAKE_ID}
+                      INNER JOIN {DatabaseTableNames.CAR_MODELS} ON {DatabaseTableNames.CARS}.{CarColumns.CARMODEL_ID} = {DatabaseTableNames.CAR_MODELS}.{CarModelsColumns.CAR_MODEL_ID}";
         }
 
         public override string GenerateOrderByClause()
         {
             if (this.orderBy == OrderByEnum.None)
             {
-                return "CarMakes.Name, CarModels.Name, Cars.Price";
+                return $"{DatabaseTableNames.CAR_MAKES}.{CarMakesColumns.NAME}, {DatabaseTableNames.CAR_MODELS}.{CarModelsColumns.NAME}, {DatabaseTableNames.CARS}.{CarColumns.PRICE}";
             }
             else if (this.orderBy == OrderByEnum.Ascending)
             {
-                return "CarMakes.Name, CarModels.Name, Cars.Price ASC";
+                return $"{DatabaseTableNames.CAR_MAKES}.{CarMakesColumns.NAME}, {DatabaseTableNames.CAR_MODELS}.{CarModelsColumns.NAME}, {DatabaseTableNames.CARS}.{CarColumns.PRICE} ASC";
             }
             else
             {
-                return "CarMakes.Name, CarModels.Name, Cars.Price DESC";
+                return $"{DatabaseTableNames.CAR_MAKES}.{CarMakesColumns.NAME}, {DatabaseTableNames.CAR_MODELS}.{CarModelsColumns.NAME}, {DatabaseTableNames.CARS}.{CarColumns.PRICE} DESC";
             }
         }
     }

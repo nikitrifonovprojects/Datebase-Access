@@ -57,7 +57,15 @@
     <Compile Include="ColourRepository.cs" />
     <Compile Include="CountryRepository.cs" />
     <Compile Include="DataConstants\CarColumns.cs" />
+    <Compile Include="DataConstants\CarExtrasColumns.cs" />
+    <Compile Include="DataConstants\CarMakesColumns.cs" />
+    <Compile Include="DataConstants\CarModelsColumns.cs" />
+    <Compile Include="DataConstants\Cars_CarExtrasColumns.cs" />
+    <Compile Include="DataConstants\CarTypesColumns.cs" />
+    <Compile Include="DataConstants\ColoursColumns.cs" />
     <Compile Include="DataConstants\DatabaseTableNames.cs" />
+    <Compile Include="DataConstants\FuelTypesColumns.cs" />
+    <Compile Include="DataConstants\GearboxTypeColumns.cs" />
     <Compile Include="ExtraRepository.cs" />
     <Compile Include="FuelTypeRepository.cs" />
     <Compile Include="GearBoxTypeRepository.cs" />

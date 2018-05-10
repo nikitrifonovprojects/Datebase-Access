@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Text;
+using NikiCars.Data.DataConstants;
 using NikiCars.Search;
 
 namespace NikiCars.Data.Search
@@ -18,7 +19,7 @@ namespace NikiCars.Data.Search
 
         public override string GenerateJoin()
         {
-            return " INNER JOIN Cars_CarExtras ON Cars.CarID = Cars_CarExtras.CarID ";
+            return $" INNER JOIN {DatabaseTableNames.CARS_EXTRAS} ON {DatabaseTableNames.CARS}.{CarColumns.CAR_ID} = {DatabaseTableNames.CARS_EXTRAS}.{Cars_CarExtrasColumns.CAR_ID} ";
         }
 
         public override Tuple<string, List<SqlParameter>> GenerateWhereClause()
@@ -33,10 +34,10 @@ namespace NikiCars.Data.Search
                 switch (this.search.SearchType)
                 {
                     case SearchTypeEnum.Equals:
-                        result.Append($"Cars_CarExtras.CarExtraID = @{PARAMETER + this.ParameterName + i}");
+                        result.Append($"{DatabaseTableNames.CARS_EXTRAS}.{Cars_CarExtrasColumns.CAR_EXTRA_ID} = @{PARAMETER + this.ParameterName + i}");
                         break;
                     case SearchTypeEnum.NotEquals:
-                        result.Append($"Cars_CarExtras.CarExtraID != @{PARAMETER + this.ParameterName + i}");
+                        result.Append($"{DatabaseTableNames.CARS_EXTRAS}.{Cars_CarExtrasColumns.CAR_EXTRA_ID} != @{PARAMETER + this.ParameterName + i}");
                         break;
                     default:
                         throw new NotSupportedException();

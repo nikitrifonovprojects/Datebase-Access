@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using NikiCars.Command.Framework;
 using NikiCars.Command.Framework.Attributes;
 using NikiCars.Command.Framework.Routing;
@@ -40,18 +41,13 @@ namespace NikiCars.Console.Commands.CarCommands
 
             if (list.Count > 0)
             {
-                List<AdvancedSearchReturnModel> cars = new List<AdvancedSearchReturnModel>();
-
-                foreach (var car in list)
-                {
-                    cars.Add(this.mapping.Map<AdvancedSearchReturnModel>(car));
-                }
+                var cars = list.Select(c => this.mapping.Map<AdvancedSearchReturnModel>(c)).ToList();
 
                 return this.Success(cars);
             }
             else
             {
-                return this.NotFound();
+                return this.Success(list);
             }
         }
 
