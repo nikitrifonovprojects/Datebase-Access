@@ -4,6 +4,6 @@
     {
         object Value { get; }
 
-        SearchTypeEnum SearchType { get; }
+        SearchEnum SearchType { get; }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Text;
+using NikiCars.Models.CarModels;
 using NikiCars.Search;
 
 namespace NikiCars.Data.Search
@@ -18,13 +19,13 @@ namespace NikiCars.Data.Search
 
         public override Tuple<string, List<SqlParameter>> GenerateWhereClause()
         {
-            var value = (Dictionary<string, bool>)this.search.Value;
+            var value = (CarContitionModel)this.search.Value;
             var list = new List<SqlParameter>();
             var result = new StringBuilder();
 
-            if (value.ContainsKey("IsUsed"))
+            if (value.IsUsed.HasValue)
             {
-                if (value["IsUsed"])
+                if (value.IsUsed == true)
                 {
                     var sqlParameter = new SqlParameter() { Value = 1, ParameterName = PARAMETER };
                     list.Add(sqlParameter);
@@ -37,9 +38,9 @@ namespace NikiCars.Data.Search
 
                 result.Append($"Cars.IsUsed = @{PARAMETER}");
             }
-            if (value.ContainsKey("IsForParts"))
+            if (value.IsForParts.HasValue)
             {
-                if (value["IsForParts"])
+                if (value.IsForParts == true)
                 {
                     var sqlParameter = new SqlParameter() { Value = 1, ParameterName = PARAMETER + 1};
                     list.Add(sqlParameter);
@@ -50,7 +51,7 @@ namespace NikiCars.Data.Search
                     list.Add(sqlParameter);
                 }
 
-                if (value["IsUsed"])
+                if (value.IsUsed == true)
                 {
                     result.Append($" AND Cars.IsForParts = @{PARAMETER + 1}");
                 }
@@ -59,29 +60,6 @@ namespace NikiCars.Data.Search
                     result.Append($"Cars.IsForParts = @{PARAMETER + 1}");
                 }
             }
-            if (value.ContainsKey("IsLeftSteering"))
-            {
-                if (value["IsLeftSteering"])
-                {
-                    var sqlParameter = new SqlParameter() { Value = 1, ParameterName = PARAMETER + 2 };
-                    list.Add(sqlParameter);
-                }
-                else
-                {
-                    var sqlParameter = new SqlParameter() { Value = 0, ParameterName = PARAMETER + 2 };
-                    list.Add(sqlParameter);
-                }
-
-                if (value["IsUsed"] || value["IsForParts"])
-                {
-                    result.Append($" AND Cars.IsLeftSteering = @{PARAMETER + 2}");
-                }
-                else
-                {
-                    result.Append($"Cars.IsLeftSteering = @{PARAMETER + 2}");
-                }
-            }
-
 
             return Tuple.Create(result.ToString(), list);
         }

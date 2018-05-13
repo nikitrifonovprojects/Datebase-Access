@@ -31,11 +31,10 @@ namespace NikiCars.Console.Commands.CarCommands
 
         protected override ICommandResult ExecuteAction(ShortSearchCarModel item)
         {
-            var list = new List<Car>();
-            var search = CreateSearch(item, list);
+            var search = CreateSearch(item);
             var includes = new List<CarIncludes>() { CarIncludes.Colour, CarIncludes.Extras, CarIncludes.FuelType, CarIncludes.GearboxType, CarIncludes.CarMake, CarIncludes.CarModel };
 
-            list = this.service.GetAll(search, null, item.Paging, includes);
+            var list = this.service.GetAll(search, null, item.Paging, includes);
 
             if (list.Count > 0)
             {
@@ -49,48 +48,42 @@ namespace NikiCars.Console.Commands.CarCommands
             }
         }
 
-        private List<IEntitySearch<Car>> CreateSearch(ShortSearchCarModel item, List<Car> list)
+        private List<IEntitySearch<Car>> CreateSearch(ShortSearchCarModel item)
         {
             var entitySearches = new List<IEntitySearch<Car>>();
 
             if (item.CarEngine.HasValue)
             {
-                entitySearches.Add(new CarEngineSearch(item.CarEngine.Value, SearchTypeEnum.Equals));
+                entitySearches.Add(new CarEngineSearch(item.CarEngine.Value, SearchEnum.Equals));
             }
             if (item.CarGearbox.HasValue)
             {
-                entitySearches.Add(new CarGearboxIDSearch(item.CarGearbox.Value, SearchTypeEnum.Equals));
+                entitySearches.Add(new CarGearboxIDSearch(item.CarGearbox.Value, SearchEnum.Equals));
             }
-            if (item.CarMake != null)
+            if (item.CarMakeID.HasValue)
             {
-                entitySearches.Add(new CarMakeIDSearch(item.CarMake, SearchTypeEnum.Equals));
+                entitySearches.Add(new CarMakeIDSearch(item.CarMakeID.Value, SearchEnum.Equals));
             }
-            if (item.CarModel != null)
+            if (item.CarModelID.HasValue)
             {
-                entitySearches.Add(new CarModelIDSearch(item.CarModel, SearchTypeEnum.Equals));
+                entitySearches.Add(new CarModelIDSearch(item.CarModelID.Value, SearchEnum.Equals));
             }
             if (item.CarPrice.HasValue)
             {
-                entitySearches.Add(new CarPriceSearch(item.CarPrice.Value, SearchTypeEnum.LessThan));
+                entitySearches.Add(new CarPriceSearch(item.CarPrice.Value, SearchEnum.LessThan));
             }
             if (item.CarYear.HasValue)
             {
-                entitySearches.Add(new CarYearSearch(item.CarYear.Value, SearchTypeEnum.GreaterThan));
+                entitySearches.Add(new CarYearSearch(item.CarYear.Value, SearchEnum.GreaterThan));
             }
             
             if (item.IsForParts.HasValue || item.IsUsed.HasValue)
             {
-                var condition = new Dictionary<string, bool>();
-                if (item.IsForParts.HasValue)
-                {
-                    condition.Add("IsForParts", item.IsForParts.Value);
-                }
-                if (item.IsUsed.HasValue)
-                {
-                    condition.Add("IsUsed", item.IsUsed.Value);
-                }
+                var condition = new CarContitionModel();
+                condition.IsForParts = item.IsForParts;
+                condition.IsUsed = item.IsUsed;
 
-                entitySearches.Add(new CarConditionSearch(condition, SearchTypeEnum.Equals));
+                entitySearches.Add(new CarConditionSearch(condition, SearchEnum.Equals));
             }
 
             return entitySearches;

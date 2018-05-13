@@ -24,8 +24,6 @@ namespace NikiCars.Models.CarModels
 
         public List<Extra> Extras { get; set; }
 
-        public bool IsLeftSteering { get; set; }
-
         public bool IsUsed { get; set; }
 
         public bool IsForParts { get; set; }

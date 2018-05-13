@@ -6,9 +6,9 @@ namespace NikiCars.Models.CarModels
 {
     public class AdvancedSearchCarModel
     {
-        public List<int> CarMake { get; set; }
+        public List<int> CarMakeIds { get; set; }
 
-        public List<int> CarModel { get; set; }
+        public List<int> CarModelIds { get; set; }
 
         public decimal? FromCarPrice { get; set; }
 
@@ -28,11 +28,9 @@ namespace NikiCars.Models.CarModels
 
         public int? CarGearbox { get; set; }
 
-        public List<int> IncludedExtras { get; set; }
+        public List<int> IncludedExtrasIds { get; set; }
 
-        public List<int> ExcludedExtras { get; set; }
-
-        public bool? IsLeftSteering { get; set; }
+        public List<int> ExcludedExtrasIds { get; set; }
 
         public bool? IsUsed { get; set; }
         

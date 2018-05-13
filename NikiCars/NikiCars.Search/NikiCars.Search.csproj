@@ -67,7 +67,7 @@
     <Compile Include="OrderByEnum.cs" />
     <Compile Include="Pagination.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SearchTypeEnum.cs" />
+    <Compile Include="SearchEnum.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NikiCars.Data.Models\NikiCars.Data.Models.csproj">

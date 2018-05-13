@@ -14,8 +14,8 @@ namespace NikiCars.Data.Search
 
         public override string GenerateInnerJoin()
         {
-            return $@"INNER JOIN {DatabaseTableNames.CAR_MAKES} ON {DatabaseTableNames.CARS}.{CarColumns.CARMAKE_ID} = {DatabaseTableNames.CAR_MAKES}.{CarMakesColumns.CAR_MAKE_ID}
-                      INNER JOIN {DatabaseTableNames.CAR_MODELS} ON {DatabaseTableNames.CARS}.{CarColumns.CARMODEL_ID} = {DatabaseTableNames.CAR_MODELS}.{CarModelsColumns.CAR_MODEL_ID}";
+            return $"INNER JOIN {DatabaseTableNames.CAR_MAKES} ON {DatabaseTableNames.CARS}.{CarColumns.CAR_MAKE_ID} = {DatabaseTableNames.CAR_MAKES}.{CarMakesColumns.CAR_MAKE_ID} " +
+                   $"INNER JOIN {DatabaseTableNames.CAR_MODELS} ON {DatabaseTableNames.CARS}.{CarColumns.CAR_MODEL_ID} = {DatabaseTableNames.CAR_MODELS}.{CarModelsColumns.CAR_MODEL_ID}";
         }
 
         public override string GenerateOrderByClause()

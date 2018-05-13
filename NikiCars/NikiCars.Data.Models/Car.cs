@@ -60,9 +60,6 @@ namespace NikiCars.Data.Models
         public string Discription { get; set; }
 
         [Required]
-        public bool IsLeftSteering { get; set; }
-
-        [Required]
         public bool IsUsed { get; set; }
 
         [Required]

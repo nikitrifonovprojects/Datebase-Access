@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using NikiCars.Data.Models;
+﻿using NikiCars.Data.Models;
 using NikiCars.Search.Interfaces;
 
 namespace NikiCars.Search
@@ -8,9 +7,9 @@ namespace NikiCars.Search
     {
         public object Value { get; private set; }
 
-        public SearchTypeEnum SearchType { get; private set; }
+        public SearchEnum SearchType { get; private set; }
 
-        public CarConditionSearch(Dictionary<string, bool> value, SearchTypeEnum searchType)
+        public CarConditionSearch(object value, SearchEnum searchType)
         {
             this.Value = value;
             this.SearchType = searchType;

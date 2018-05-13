@@ -24,7 +24,7 @@ namespace NikiCars.Data.Search
             SqlParameter sqlParameter = new SqlParameter() { Value = value, SqlDbType = System.Data.SqlDbType.SmallDateTime, ParameterName = PARAMETER };
             switch (this.search.SearchType)
             {
-                case SearchTypeEnum.GreaterOrEquals:
+                case SearchEnum.GreaterOrEquals:
                     result += ($"Cars{DatabaseTableNames.CARS}.{CarColumns.DATE_CREATED} >= @{PARAMETER}");
                     break;
                 default:

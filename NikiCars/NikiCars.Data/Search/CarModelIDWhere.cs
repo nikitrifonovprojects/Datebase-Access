@@ -33,11 +33,11 @@ namespace NikiCars.Data.Search
                 SqlParameter sqlParameter = new SqlParameter() { Value = value[i], ParameterName = PARAMETER + this.ParameterName + i };
                 switch (this.search.SearchType)
                 {
-                    case SearchTypeEnum.Equals:
-                        result.Append($"{DatabaseTableNames.CARS}.{CarColumns.CARMODEL_ID} = @{PARAMETER + this.ParameterName + i}");
+                    case SearchEnum.Equals:
+                        result.Append($"{DatabaseTableNames.CARS}.{CarColumns.CAR_MODEL_ID} = @{PARAMETER + this.ParameterName + i}");
                         break;
-                    case SearchTypeEnum.NotEquals:
-                        result.Append($"{DatabaseTableNames.CARS}.{CarColumns.CARMODEL_ID} != @{PARAMETER + this.ParameterName + i}");
+                    case SearchEnum.NotEquals:
+                        result.Append($"{DatabaseTableNames.CARS}.{CarColumns.CAR_MODEL_ID} != @{PARAMETER + this.ParameterName + i}");
                         break;
                     default:
                         throw new NotSupportedException();

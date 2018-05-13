@@ -24,10 +24,10 @@ namespace NikiCars.Data.Search
             string result = string.Empty;
             switch (this.search.SearchType)
             {
-                case SearchTypeEnum.Equals:
+                case SearchEnum.Equals:
                     result = $"Name = @{PARAMETER_NAME}";
                     break;
-                case SearchTypeEnum.NotEquals:
+                case SearchEnum.NotEquals:
                     result = $"Name != @{PARAMETER_NAME}";
                     break;
                 default:

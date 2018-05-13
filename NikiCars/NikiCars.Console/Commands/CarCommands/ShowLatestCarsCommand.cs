@@ -34,7 +34,7 @@ namespace NikiCars.Console.Commands.CarCommands
         {
             List<Car> list;
             var date = new DateOrderBy(OrderByEnum.Descending);
-            var search = new List<IEntitySearch<Car>>() { new CarDateCreatedSearch(DateTime.Now.AddDays(-2), SearchTypeEnum.GreaterOrEquals) };
+            var search = new List<IEntitySearch<Car>>() { new CarDateCreatedSearch(DateTime.Now.AddDays(-2), SearchEnum.GreaterOrEquals) };
             var order = new List<IEntityOrderBy<Car>>();
             var includes = new List<CarIncludes>() { CarIncludes.Colour, CarIncludes.Extras, CarIncludes.FuelType, CarIncludes.GearboxType, CarIncludes.CarMake, CarIncludes.CarModel };
             order.Add(date);

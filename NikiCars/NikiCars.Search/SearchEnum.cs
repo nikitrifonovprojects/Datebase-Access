@@ -1,6 +1,6 @@
 ﻿namespace NikiCars.Search
 {
-    public enum SearchTypeEnum
+    public enum SearchEnum
     {
         GreaterThan,
         LessThan,

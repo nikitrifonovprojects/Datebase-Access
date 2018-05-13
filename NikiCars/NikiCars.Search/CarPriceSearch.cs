@@ -8,12 +8,18 @@ namespace NikiCars.Search
     {
         public object Value { get; private set; }
 
-        public SearchTypeEnum SearchType { get; private set; }
+        public SearchEnum SearchType { get; private set; }
 
-        public CarPriceSearch(decimal value, SearchTypeEnum searchType)
+        public CarPriceSearch(decimal value, SearchEnum searchType)
         {
             this.Value = value;
             this.SearchType = searchType;
+        }
+
+        public CarPriceSearch(decimal value) 
+            : this(value, SearchEnum.Equals)
+        {
+
         }
     }
 }

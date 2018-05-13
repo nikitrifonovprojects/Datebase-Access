@@ -8,12 +8,18 @@ namespace NikiCars.Search
     {
         public object Value { get; private set; }
 
-        public SearchTypeEnum SearchType { get; private set; }
+        public SearchEnum SearchType { get; private set; }
 
-        public CarExtrasSearch(List<int> value, SearchTypeEnum searchType)
+        public CarExtrasSearch(List<int> value, SearchEnum searchType)
         {
             this.Value = value;
             this.SearchType = searchType;
+        }
+
+        public CarExtrasSearch(List<int> value) 
+            : this(value, SearchEnum.Equals)
+        {
+
         }
     }
 }

@@ -6,9 +6,9 @@ namespace NikiCars.Models.CarModels
 {
     public class ShortSearchCarModel
     {
-        public List<int> CarMake { get; set; }
+        public int? CarMakeID { get; set; }
 
-        public List<int> CarModel { get; set; }
+        public int? CarModelID { get; set; }
 
         public decimal? CarPrice { get; set; }
 

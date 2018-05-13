@@ -24,10 +24,10 @@ namespace NikiCars.Data.Search
             SqlParameter sqlParameter = new SqlParameter() { Value = value, ParameterName = PARAMETER };
             switch (this.search.SearchType)
             {
-                case SearchTypeEnum.Equals:
+                case SearchEnum.Equals:
                     result += ($"{DatabaseTableNames.CARS}.{CarColumns.CAR_ID} = @{PARAMETER}");
                     break;
-                case SearchTypeEnum.NotEquals:
+                case SearchEnum.NotEquals:
                     result += ($"{DatabaseTableNames.CARS}.{CarColumns.CAR_ID} != @{PARAMETER}");
                     break;
                 default:

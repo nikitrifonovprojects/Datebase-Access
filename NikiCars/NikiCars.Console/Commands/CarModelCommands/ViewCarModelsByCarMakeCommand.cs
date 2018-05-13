@@ -30,7 +30,7 @@ namespace NikiCars.Console.Commands.CarModelCommands
 
         protected override ICommandResult ExecuteAction(ViewCarModelsByCarMakeModel item)
         {
-            IEntitySearch<CarModel> entitySearch = new CarMakeIDSearch(item.CarMakeID, SearchTypeEnum.Equals);
+            IEntitySearch<CarModel> entitySearch = new CarMakeIDSearch(item.CarMakeID, SearchEnum.Equals);
             var searchList = new List<IEntitySearch<CarModel>>();
             searchList.Add(entitySearch);
             List<CarModel> list = this.service.GetAll(searchList);
