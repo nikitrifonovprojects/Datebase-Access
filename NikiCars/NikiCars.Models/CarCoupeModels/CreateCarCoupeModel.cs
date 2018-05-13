@@ -8,6 +8,7 @@ namespace NikiCars.Models.CarCoupeModels
         [StringLength(15)]
         public string Name { get; set; }
 
+        [Range(1, int.MaxValue)]
         public int UserID { get; set; }
     }
 }

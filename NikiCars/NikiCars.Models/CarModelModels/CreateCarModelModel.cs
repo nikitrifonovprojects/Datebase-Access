@@ -8,10 +8,10 @@ namespace NikiCars.Models.CarModelModels
         [StringLength(20)]
         public string Name { get; set; }
 
-        [Required]
+        [Range(1, int.MaxValue)]
         public int CarMakeID { get; set; }
 
-        [Required]
+        [Range(1, int.MaxValue)]
         public int CarTypeID { get; set; }
     }
 }
