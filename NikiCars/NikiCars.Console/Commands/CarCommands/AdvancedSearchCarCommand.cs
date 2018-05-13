@@ -11,6 +11,7 @@ using NikiCars.Data.Models.Includes;
 using NikiCars.Models.CarModels;
 using NikiCars.Search;
 using NikiCars.Search.Interfaces;
+using NikiCars.Search.SearchModels;
 using NikiCars.Services.Interfaces;
 using NikiCars.Services.Mapping;
 
@@ -38,16 +39,9 @@ namespace NikiCars.Console.Commands.CarCommands
 
             var list = this.service.GetAll(search, order, item.Paging, includes);
 
-            if (list.Count > 0)
-            {
-                var cars = list.Select(c => this.mapping.Map<AdvancedSearchReturnModel>(c)).ToList();
+            var cars = list.Select(c => this.mapping.Map<AdvancedSearchReturnModel>(c)).ToList();
 
-                return this.Success(cars);
-            }
-            else
-            {
-                return this.Success(list);
-            }
+            return this.Success(cars);
         }
 
         private List<IEntityOrderBy<Car>> CreateOrderBy(AdvancedSearchCarModel item)
@@ -92,17 +86,17 @@ namespace NikiCars.Console.Commands.CarCommands
         {
             var entitySearches = new List<IEntitySearch<Car>>();
 
-            if (item.CarGearbox.HasValue)
+            if (item.CarGearboxID.HasValue)
             {
-                entitySearches.Add(new CarGearboxIDSearch(item.CarGearbox.Value, SearchEnum.Equals));
+                entitySearches.Add(new CarGearboxIDSearch(item.CarGearboxID.Value));
             }
             if (item.CarMakeIds != null)
             {
-                entitySearches.Add(new CarMakeIDSearch(item.CarMakeIds, SearchEnum.Equals));
+                entitySearches.Add(new CarMakeIDSearch(item.CarMakeIds));
             }
             if (item.CarModelIds != null)
             {
-                entitySearches.Add(new CarModelIDSearch(item.CarModelIds, SearchEnum.Equals));
+                entitySearches.Add(new CarModelIDSearch(item.CarModelIds));
             }
             if (item.FromCarPrice.HasValue)
             {
@@ -134,7 +128,7 @@ namespace NikiCars.Console.Commands.CarCommands
             }
             if (item.ColourID.HasValue)
             {
-                entitySearches.Add(new CarColourSearch(item.ColourID.Value, SearchEnum.Equals));
+                entitySearches.Add(new CarColourSearch(item.ColourID.Value));
             }
             if (item.IsForParts.HasValue || item.IsUsed.HasValue)
             {
@@ -143,15 +137,15 @@ namespace NikiCars.Console.Commands.CarCommands
                 condition.IsUsed = item.IsUsed;
                
 
-                entitySearches.Add(new CarConditionSearch(condition, SearchEnum.Equals));
+                entitySearches.Add(new CarConditionSearch(condition));
             }
-            if (item.ExcludedExtrasIds != null)
+            if (item.ExcludedExtraIds != null)
             {
-                entitySearches.Add(new CarExtrasSearch(item.ExcludedExtrasIds, SearchEnum.NotEquals));
+                entitySearches.Add(new CarExtrasSearch(item.ExcludedExtraIds, SearchEnum.NotEquals));
             }
-            if (item.IncludedExtrasIds != null)
+            if (item.IncludedExtraIds != null)
             {
-                entitySearches.Add(new CarExtrasSearch(item.IncludedExtrasIds, SearchEnum.Equals));
+                entitySearches.Add(new CarExtrasSearch(item.IncludedExtraIds));
             }
             if (item.OrderBy == CarOrderByEnum.Last2Days)
             {

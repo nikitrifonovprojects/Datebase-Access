@@ -1,4 +1,4 @@
-﻿namespace NikiCars.Models.CarModels
+﻿namespace NikiCars.Search.SearchModels
 {
     public class CarContitionModel
     {

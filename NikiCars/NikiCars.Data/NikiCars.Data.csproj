@@ -117,10 +117,6 @@
       <Project>{d28f0078-f301-4062-b405-45cd6d39fb2b}</Project>
       <Name>NikiCars.Data.Models</Name>
     </ProjectReference>
-    <ProjectReference Include="..\NikiCars.Models\NikiCars.Models.csproj">
-      <Project>{6AC0948E-2F50-4C45-AC2B-7FC490D951B6}</Project>
-      <Name>NikiCars.Models</Name>
-    </ProjectReference>
     <ProjectReference Include="..\NikiCars.Search\NikiCars.Search.csproj">
       <Project>{B6789A4B-17D1-4963-BBAB-93C4A10F0369}</Project>
       <Name>NikiCars.Search</Name>

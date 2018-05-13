@@ -68,6 +68,7 @@
     <Compile Include="Pagination.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SearchEnum.cs" />
+    <Compile Include="SearchModels\CarContitionModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NikiCars.Data.Models\NikiCars.Data.Models.csproj">

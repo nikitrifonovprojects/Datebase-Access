@@ -26,11 +26,11 @@ namespace NikiCars.Models.CarModels
 
         public int? ColourID { get; set; }
 
-        public int? CarGearbox { get; set; }
+        public int? CarGearboxID { get; set; }
 
-        public List<int> IncludedExtrasIds { get; set; }
+        public List<int> IncludedExtraIds { get; set; }
 
-        public List<int> ExcludedExtrasIds { get; set; }
+        public List<int> ExcludedExtraIds { get; set; }
 
         public bool? IsUsed { get; set; }
         

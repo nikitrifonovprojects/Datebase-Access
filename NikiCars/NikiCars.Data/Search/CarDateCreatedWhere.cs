@@ -25,7 +25,7 @@ namespace NikiCars.Data.Search
             switch (this.search.SearchType)
             {
                 case SearchEnum.GreaterOrEquals:
-                    result += ($"Cars{DatabaseTableNames.CARS}.{CarColumns.DATE_CREATED} >= @{PARAMETER}");
+                    result += ($"{DatabaseTableNames.CARS}.{CarColumns.DATE_CREATED} >= @{PARAMETER}");
                     break;
                 default:
                     throw new NotSupportedException();

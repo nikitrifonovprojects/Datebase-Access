@@ -45,7 +45,7 @@ namespace NikiCars.Console
 
             string command = "list AdvancedList";
             var input = new AdvancedSearchCarModel();
-            input.CarGearbox = 1;
+            input.CarGearboxID = 1;
             input.CarMakeIds = new List<int> { 2, 1, 3, 4 };
             input.CarModelIds = new List<int> { 2, 1 };
             input.FromCarPrice = 500;
@@ -53,7 +53,7 @@ namespace NikiCars.Console
             input.ColourID = 1;
             input.FromHorsePower = 90;
             input.Kilometers = 1000000;
-            input.IncludedExtrasIds = new List<int>() { 1 };
+            input.IncludedExtraIds = new List<int>() { 1 };
             input.IsUsed = true;
             input.IsForParts = false;
             input.OrderBy = CarOrderByEnum.Kilometers;

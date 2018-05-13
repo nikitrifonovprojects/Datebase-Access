@@ -122,7 +122,7 @@ namespace NikiCars.Data
                             car.CarMake = new CarMake() { Name = Convert.ToString(reader[$"{DatabaseTableNames.CAR_MAKES}.{CarMakesColumns.NAME}"]) };
                             break;
                         default:
-                            break;
+                            throw new NotSupportedException();
                     }
                 }
             }
@@ -245,7 +245,7 @@ namespace NikiCars.Data
                             innerJoins.Add($" INNER JOIN {DatabaseTableNames.CAR_MODELS} ON {DatabaseTableNames.CARS}.{CarColumns.CAR_MODEL_ID} = {DatabaseTableNames.CAR_MODELS}.{CarModelsColumns.CAR_MODEL_ID} ");
                             break;
                         default:
-                            break;
+                            throw new NotSupportedException();
                     }
                 }
             }
@@ -305,7 +305,7 @@ namespace NikiCars.Data
                 {
                     var res = WhereFactory.CreateWhereClause(item);
                     var join = res.GenerateJoin();
-                    if (join != string.Empty)
+                    if (!string.IsNullOrEmpty(join))
                     {
                         innerJoins.Add(join);
                     }
@@ -321,7 +321,7 @@ namespace NikiCars.Data
                     var res = OrderByFactory.CreateOrderByClause(item);
                     var join = res.GenerateInnerJoin();
                     orderByClauses.Add(res);
-                    if (join != string.Empty)
+                    if (!string.IsNullOrEmpty(join))
                     {
                         innerJoins.Add(join);
                     }
@@ -341,7 +341,7 @@ namespace NikiCars.Data
 
         public Car GetById(int id, List<CarIncludes> includes = null)
         {
-            var search = new CarIDSearch(id, SearchEnum.Equals);
+            var search = new CarIDSearch(id);
             var list = new List<IEntitySearch<Car>>() { search };
             return this.GetAll(list, null, null, includes).FirstOrDefault();
         }

@@ -10,6 +10,7 @@ using NikiCars.Data.Models.Includes;
 using NikiCars.Models.CarModels;
 using NikiCars.Search;
 using NikiCars.Search.Interfaces;
+using NikiCars.Search.SearchModels;
 using NikiCars.Services.Interfaces;
 using NikiCars.Services.Mapping;
 
@@ -36,16 +37,9 @@ namespace NikiCars.Console.Commands.CarCommands
 
             var list = this.service.GetAll(search, null, item.Paging, includes);
 
-            if (list.Count > 0)
-            {
-                var cars = list.Select(c => this.mapping.Map<AdvancedSearchReturnModel>(c)).ToList();
+            var cars = list.Select(c => this.mapping.Map<AdvancedSearchReturnModel>(c)).ToList();
 
-                return this.Success(cars);
-            }
-            else
-            {
-                return this.Success(list);
-            }
+            return this.Success(cars);
         }
 
         private List<IEntitySearch<Car>> CreateSearch(ShortSearchCarModel item)
@@ -54,19 +48,19 @@ namespace NikiCars.Console.Commands.CarCommands
 
             if (item.CarEngine.HasValue)
             {
-                entitySearches.Add(new CarEngineSearch(item.CarEngine.Value, SearchEnum.Equals));
+                entitySearches.Add(new CarEngineSearch(item.CarEngine.Value));
             }
             if (item.CarGearbox.HasValue)
             {
-                entitySearches.Add(new CarGearboxIDSearch(item.CarGearbox.Value, SearchEnum.Equals));
+                entitySearches.Add(new CarGearboxIDSearch(item.CarGearbox.Value));
             }
             if (item.CarMakeID.HasValue)
             {
-                entitySearches.Add(new CarMakeIDSearch(item.CarMakeID.Value, SearchEnum.Equals));
+                entitySearches.Add(new CarMakeIDSearch(item.CarMakeID.Value));
             }
             if (item.CarModelID.HasValue)
             {
-                entitySearches.Add(new CarModelIDSearch(item.CarModelID.Value, SearchEnum.Equals));
+                entitySearches.Add(new CarModelIDSearch(item.CarModelID.Value));
             }
             if (item.CarPrice.HasValue)
             {
@@ -83,7 +77,7 @@ namespace NikiCars.Console.Commands.CarCommands
                 condition.IsForParts = item.IsForParts;
                 condition.IsUsed = item.IsUsed;
 
-                entitySearches.Add(new CarConditionSearch(condition, SearchEnum.Equals));
+                entitySearches.Add(new CarConditionSearch(condition));
             }
 
             return entitySearches;

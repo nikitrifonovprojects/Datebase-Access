@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Text;
-using NikiCars.Models.CarModels;
+using NikiCars.Data.DataConstants;
 using NikiCars.Search;
+using NikiCars.Search.SearchModels;
 
 namespace NikiCars.Data.Search
 {
@@ -36,7 +37,7 @@ namespace NikiCars.Data.Search
                     list.Add(sqlParameter);
                 }
 
-                result.Append($"Cars.IsUsed = @{PARAMETER}");
+                result.Append($"{DatabaseTableNames.CARS}.{CarColumns.IS_USED} = @{PARAMETER}");
             }
             if (value.IsForParts.HasValue)
             {
@@ -53,11 +54,11 @@ namespace NikiCars.Data.Search
 
                 if (value.IsUsed == true)
                 {
-                    result.Append($" AND Cars.IsForParts = @{PARAMETER + 1}");
+                    result.Append($" AND {DatabaseTableNames.CARS}.{CarColumns.IS_FOR_PARTS} = @{PARAMETER + 1}");
                 }
                 else
                 {
-                    result.Append($"Cars.IsForParts = @{PARAMETER + 1}");
+                    result.Append($"{DatabaseTableNames.CARS}.{CarColumns.IS_FOR_PARTS} = @{PARAMETER + 1}");
                 }
             }
 
