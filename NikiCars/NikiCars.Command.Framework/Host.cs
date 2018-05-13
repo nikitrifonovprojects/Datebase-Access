@@ -49,10 +49,13 @@ namespace NikiCars.Command.Framework
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 using (var command = this.container.Resolve<ServerErrorCommand>(new DependencyObject(typeof(CommandContext), context)))
                 {
+                    var executionLogger = this.container.Resolve<ILogger>();
+                    executionLogger.LogError(ex.Message);
+
                     return command.Execute();
                 }
             }
