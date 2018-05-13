@@ -65,6 +65,7 @@
     <Compile Include="CarModels\ListShortCarModel.cs" />
     <Compile Include="CarModels\ShortSearchCarModel.cs" />
     <Compile Include="CarModels\ShowCarDetailsModel.cs" />
+    <Compile Include="CarModels\ShowLatestCarModel.cs" />
     <Compile Include="CarTypeModels\CreateCarTypeModel.cs" />
     <Compile Include="CarTypeModels\EditCarTypeModel.cs" />
     <Compile Include="LoginModels\LoginModel.cs" />

@@ -18,7 +18,7 @@ namespace NikiCars.Console.Commands.CarCommands
 {
     [Validate]
     [CommandRoute("list LatestCars")]
-    public class ShowLatestCarsCommand : BaseCommand<ListShortCarModel>
+    public class ShowLatestCarsCommand : BaseCommand<ShowLatestCarModel>
     {
         private ICarService service;
         private IMappingService mapping;
@@ -30,27 +30,22 @@ namespace NikiCars.Console.Commands.CarCommands
             this.mapping = mapping;
         }
 
-        protected override ICommandResult ExecuteAction(ListShortCarModel item)
+        protected override ICommandResult ExecuteAction(ShowLatestCarModel item)
         {
             List<Car> list;
+            var paging = new Pagination();
+            paging.PageNumber = 0;
+            paging.PageSize = item.Count;
             var date = new DateOrderBy(OrderByEnum.Descending);
-            var search = new List<IEntitySearch<Car>>() { new CarDateCreatedSearch(DateTime.Now.AddDays(-2), SearchEnum.GreaterOrEquals) };
             var order = new List<IEntityOrderBy<Car>>();
             var includes = new List<CarIncludes>() { CarIncludes.Colour, CarIncludes.Extras, CarIncludes.FuelType, CarIncludes.GearboxType, CarIncludes.CarMake, CarIncludes.CarModel };
             order.Add(date);
 
-            list = this.service.GetAll(search, order, item.Paging, includes);
+            list = this.service.GetAll(null, order, paging, includes);
 
-            if (list.Count > 0)
-            {
-                var cars = list.Select(c => this.mapping.Map<AdvancedSearchReturnModel>(c)).ToList();
+            var cars = list.Select(c => this.mapping.Map<AdvancedSearchReturnModel>(c)).ToList();
 
-                return this.Success(cars);
-            }
-            else
-            {
-                return this.Success(list);
-            }
+            return this.Success(cars);
         }
 
         public override void Dispose()
