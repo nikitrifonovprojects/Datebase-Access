@@ -11,22 +11,22 @@ namespace NikiCars.Data.Models
         
         public CarModel CarModel { get; set; }
 
-        [Required]
+        [Range(1, int.MaxValue)]
         public int CarModelID { get; set; }
 
         public CarMake CarMake { get; set; }
 
-        [Required]
+        [Range(1, int.MaxValue)]
         public int CarMakeID { get; set; }
 
         public CarCoupe CarCoupe { get; set; }
 
-        [Required]
+        [Range(1, int.MaxValue)]
         public int CarCoupeID { get; set; }
 
         public NumberOfDoors NumberOfDoors { get; set; }
 
-        [Required]
+        [Range(1, int.MaxValue)]
         public int NumberOfDoorsID { get; set; }
 
         public FuelType FuelType { get; set; }
@@ -77,7 +77,7 @@ namespace NikiCars.Data.Models
 
         public User User { get; set; }
 
-        [Required]
+        [Range(1, int.MaxValue)]
         public int UserID { get; set; }
     }
 }

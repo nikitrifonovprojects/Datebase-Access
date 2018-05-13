@@ -12,7 +12,7 @@ namespace NikiCars.Data.Models
 
         public Car Car { get; set; }
 
-        [Required]
+        [Range(1, int.MaxValue)]
         public int CarID { get; set; }
     }
 }

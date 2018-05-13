@@ -30,7 +30,7 @@ namespace NikiCars.Data.Models
 
         public City City { get; set; }
 
-        [Required]
+        [Range(1, int.MaxValue)]
         public int CityID { get; set; }
 
         public string Address { get; set; }

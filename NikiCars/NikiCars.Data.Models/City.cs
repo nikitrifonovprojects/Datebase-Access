@@ -11,7 +11,7 @@ namespace NikiCars.Data.Models
         [StringLength(20)]
         public string Name { get; set; }
 
-        [Required]
+        [Range(1, int.MaxValue)]
         public int CountyID { get; set; }
     }
 }
