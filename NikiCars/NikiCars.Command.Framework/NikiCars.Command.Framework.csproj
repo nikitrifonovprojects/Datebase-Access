@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Attributes\AuthorizationAttribute.cs" />
     <Compile Include="Attributes\BaseCommandAttribute.cs" />
+    <Compile Include="Attributes\LoggingAttribute.cs" />
     <Compile Include="Attributes\ValidateAttribute.cs" />
     <Compile Include="BaseCommand.cs" />
     <Compile Include="DefaultModelBinder.cs" />
@@ -60,6 +61,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Routing\CommandRouteAttribute.cs" />
     <Compile Include="ServerErrorCommand.cs" />
+    <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NikiCars.Command.Interfaces\NikiCars.Command.Interfaces.csproj">

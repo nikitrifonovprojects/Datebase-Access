@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using NikiCars.Command.Framework.Attributes;
 using NikiCars.Command.Framework.Output;
 using NikiCars.Command.Interfaces;
 using NikiCars.Command.Validation;
@@ -99,6 +100,9 @@ namespace NikiCars.Command.Framework
             actionPipeline.AddRange(actionExecuting);
             actionPipeline.Add(this.ExecuteOnActionExecuting);
 
+            var globalActionExecutingFilters = Startup.Filters.Select<BaseCommandAttribute, Action<CommandContext>>(c => c.OnActionExecuting);
+            actionPipeline.AddRange(globalActionExecutingFilters);
+
             actionPipeline.Add(this.ExecuteResponseResultAction);
 
             return actionPipeline;
@@ -116,6 +120,9 @@ namespace NikiCars.Command.Framework
             resultPipeline.AddRange(resultExecuting);
             resultPipeline.Add(this.ExecuteOnResultExecuting);
 
+            var globalResultExecutingFilters = Startup.Filters.Select<BaseCommandAttribute, Action<CommandContext>>(c => c.OnResultExecuting);
+            resultPipeline.AddRange(globalResultExecutingFilters);
+
             resultPipeline.Add(this.ExecuteResponseResult);
 
             var resultExecuted = attributes.Where(x => typeof(ICommandResultExecutedFilter).IsAssignableFrom(x.GetType()))
@@ -124,6 +131,9 @@ namespace NikiCars.Command.Framework
 
             resultPipeline.Add(this.ExecuteOnResultExecuted);
             resultPipeline.AddRange(resultExecuted);
+
+            var globalResultExecutedFilters = Startup.Filters.Select<BaseCommandAttribute, Action<CommandContext>>(c => c.OnResultExecuted);
+            resultPipeline.AddRange(globalResultExecutedFilters);
 
             return resultPipeline;
         }
@@ -140,6 +150,9 @@ namespace NikiCars.Command.Framework
             actionExecutedPipeline.Add(this.ExecuteOnActionExcuted);
             actionExecutedPipeline.AddRange(actionExecuted);
 
+            var globalActionExecutedFilters = Startup.Filters.Select<BaseCommandAttribute, Action<CommandContext>>(c => c.OnActionExecuted);
+            actionExecutedPipeline.AddRange(globalActionExecutedFilters);
+
             return actionExecutedPipeline;
         }
 
@@ -154,6 +167,9 @@ namespace NikiCars.Command.Framework
 
             exceptionPipeline.Add(this.OnException);
             exceptionPipeline.AddRange(onException);
+
+            var globalExceptionFilters = Startup.Filters.Select<BaseCommandAttribute, Action<ExceptionContext>>(c => c.OnException);
+            exceptionPipeline.AddRange(globalExceptionFilters);
 
             return exceptionPipeline;
         }

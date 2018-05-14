@@ -16,7 +16,7 @@ namespace NikiCars.Command.Framework.Attributes
 
         }
 
-        public void OnException(ExceptionContext context)
+        public virtual void OnException(ExceptionContext context)
         {
 
         }
